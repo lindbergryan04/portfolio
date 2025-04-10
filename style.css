@@ -37,17 +37,18 @@ nav a:hover {
   background-color: oklch(65% 0.3 280 / 0.25); 
 }
 
+form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+}
+
 label {
-  display: block;
-  margin-block: 1em;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
 }
 
-input,
-textarea,
 button {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  font: inherit;
+  grid-column: 1 / -1;
 }
-
