@@ -52,3 +52,19 @@ label {
 button {
   grid-column: 1 / -1;
 }
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
+}
+
+article {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+}
+
+article h2 {
+  margin: 0;
+}
