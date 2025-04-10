@@ -101,9 +101,9 @@ a[href^="mailto:"] {
   color: var(--color-accent);
 }
 
-body a.cv-desc[href^="https://github.com"] {
-  color: var(--color-accent);
-  word-break: break-all;
+a.cv-desc {
+  color: var(--color-accent) !important;
+  word-break: break-word;
 }
 
 strong {
