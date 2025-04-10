@@ -6,7 +6,7 @@
 body {
   font: 100% / 1.5 system-ui;
   display: block;
-  max-width: 50em;
+  max-width: 60em;
   margin-inline: auto;
   padding: 5em;
 }
@@ -67,4 +67,13 @@ article {
 
 article h2 {
   margin: 0;
+}
+
+h1 {
+  font-size: 400%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  text-wrap: balance;
 }
