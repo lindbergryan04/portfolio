@@ -99,11 +99,13 @@ ul li {
 a[href^="mailto:"] {
   word-break: break-all;
   color: var(--color-accent);
+  text-decoration: none;
 }
 
 a.cv-desc {
   color: var(--color-accent) !important;
   word-break: break-word;
+  text-decoration: none;
 }
 
 strong {
