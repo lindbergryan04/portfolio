@@ -1,6 +1,32 @@
 body {
-    /* Set line height to 1.5 times the font size
-         and use the OS’s UI font as the website font
-       */
-    font: 100%/1.5 system-ui;
-  }
+  /* Set line height to 1.5 times the font size
+     and use the OS’s UI font as the website font */
+  font: 100% / 1.5 system-ui;
+  display: block;
+  max-width: 50em;
+  margin-inline: auto;
+  padding: 5em;
+}
+
+nav {
+  display: flex;
+  border-bottom-width: 1px;
+  border-bottom-color: oklch(80% 3% 200);
+  border-bottom-style: solid;
+}
+
+nav a {
+  flex: 1;
+  text-align: center;
+  padding: 0.5em;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 5em;
+}
+
+nav a.current {
+  background-color: #eee;
+  font-weight: bold;
+  border-bottom-width: 0.4em;
+  padding-bottom: -0.4em;
+}
