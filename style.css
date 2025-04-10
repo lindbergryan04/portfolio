@@ -105,3 +105,9 @@ a[href^="https://github.com"] {
 strong {
   font-weight: 600;
 }
+
+main {
+  max-width: 65em;
+  margin-inline: auto;
+  padding: 5em;
+}
