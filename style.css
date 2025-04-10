@@ -6,7 +6,7 @@
 body {
   font: 100% / 1.5 system-ui;
   display: block;
-  max-width: 60em;
+  max-width: 65em;
   margin-inline: auto;
   padding: 5em;
 }
@@ -76,4 +76,32 @@ h1 {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   text-wrap: balance;
+}
+
+p {
+  max-width: 40em;
+  margin-block: 1em;
+}
+
+h2 {
+  margin-top: 2em;
+}
+
+ul {
+  padding-left: 1.25em;
+  margin-block: 0.5em 1.5em;
+}
+
+ul li {
+  margin-bottom: 0.5em;
+}
+
+a[href^="mailto:"],
+a[href^="https://github.com"] {
+  word-break: break-all;
+  color: var(--color-accent);
+}
+
+strong {
+  font-weight: 600;
 }
