@@ -96,10 +96,14 @@ ul li {
   margin-bottom: 0.5em;
 }
 
-a[href^="mailto:"],
-a.cv-desc[href^="https://github.com"] {
+a[href^="mailto:"] {
   word-break: break-all;
   color: var(--color-accent);
+}
+
+body a.cv-desc[href^="https://github.com"] {
+  color: var(--color-accent);
+  word-break: break-all;
 }
 
 strong {
