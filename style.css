@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
-p {
+.cv-page p {
   max-width: 40em;
   margin-block: 1em;
 }
@@ -97,7 +97,7 @@ ul li {
 }
 
 a[href^="mailto:"],
-a[href^="https://github.com"] {
+.cv-page a[href^="https://github.com"] {
   word-break: break-all;
   color: var(--color-accent);
 }
