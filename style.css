@@ -34,4 +34,20 @@ nav a.current {
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
   padding-bottom: 0.1em;
+  background-color: oklch(65% 0.3 280 / 0.25); 
 }
+
+label {
+  display: block;
+  margin-block: 1em;
+}
+
+input,
+textarea,
+button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+}
+
