@@ -54,11 +54,19 @@ document.body.insertAdjacentHTML(
   `
 );
 
-// Now define 'select' after it's in the DOM
+// Grab select element
 const select = document.querySelector('#theme-select');
 
-// Add event listener
+// On page load: set saved color scheme preference (if exists)
+if ("colorScheme" in localStorage) {
+const savedScheme = localStorage.colorScheme;
+document.documentElement.style.setProperty('color-scheme', savedScheme);
+select.value = savedScheme; // Update <select> to match
+}
+
+// event listener for color scheme switch
 select.addEventListener('input', function (event) {
   console.log('color scheme changed to', event.target.value);
+  localStorage.colorScheme = event.target.value;
   document.documentElement.style.setProperty('color-scheme', event.target.value);
 });
