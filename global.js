@@ -5,6 +5,22 @@ const BASE_PATH =
     ? "/portfolio/" // Local dev base path
     : "/portfolio/"; // GitHub Pages base path (adjust this if your repo name is different)
 
+// Apply saved or system theme ASAP (before rendering)
+function applyInitialTheme() {
+  const saved = localStorage.colorScheme;
+
+  if (saved === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+  } else if (saved === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+  } else {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+  }
+}
+
+applyInitialTheme();
+
 let pages = [
   { url: "", title: "Home" },
   { url: "projects/", title: "Projects" },
@@ -61,16 +77,16 @@ const select = document.querySelector('#theme-select');
 
 // On page load: set saved color scheme preference (if exists)
 if ("colorScheme" in localStorage) {
-    const savedScheme = localStorage.colorScheme;
-    select.value = savedScheme;
-  
-    if (savedScheme === "light dark") {
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
-    } else {
-      document.documentElement.setAttribute('data-theme', savedScheme);
-    }
+  const savedScheme = localStorage.colorScheme;
+  select.value = savedScheme;
+
+  if (savedScheme === "light dark") {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+  } else {
+    document.documentElement.setAttribute("data-theme", savedScheme);
   }
+}
 
 // event listener for color scheme switch
 select.addEventListener('input', function (event) {

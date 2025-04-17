@@ -8,7 +8,6 @@
   --input-text: black;
   --hover-bg: oklch(85% 0.1 280 / 0.25);
   accent-color: var(--color-accent);
-  color-scheme: light dark;
 }
  /* Dark theme styling */
 :root[data-theme="dark"] {
@@ -36,6 +35,10 @@ label.color-scheme {
   right: 1rem;
   font-size: 80%;
   font-family: inherit;
+}
+
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -90,6 +93,7 @@ input, textarea, button, select {
   border: 1px solid #ccc;
   border-radius: 0.3em;
   padding: 0.5em;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 label {
