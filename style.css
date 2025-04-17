@@ -127,19 +127,26 @@ strong {
 /* Dark mode styling: */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-dark: oklch(20% 0.05 270);
+    --background-dark: oklch(15% 0.04 260);
+    --accent-dark: oklch(70% 0.2 280);       
+    --hover-bg-dark: oklch(40% 0.05 280);    
   }
 
   body {
     background-color: var(--background-dark);
+    color: canvastext;
+  }
+
+  nav {
+    background-color: oklch(20% 0.05 260);
   }
 
   nav a.current {
-    border-bottom: 0.4em solid oklch(50% 10% 200 / 40%); 
+    border-bottom: 0.4em solid var(--accent-dark);
   }
-  
+
   nav a:hover {
-    border-bottom: 0.4em solid oklch(65% 0.3 280);
-    background-color: oklch(65% 0.3 280 / 0.40);
+    border-bottom: 0.4em solid var(--accent-dark);
+    background-color: var(--hover-bg-dark);
   }
 }
