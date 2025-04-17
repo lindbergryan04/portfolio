@@ -1,7 +1,25 @@
+/* style.css */
+
 :root {
   --color-accent: oklch(65% 0.3 280);
+  --background-color: white;
+  --text-color: black;
   accent-color: var(--color-accent);
-  color-scheme: dark;
+  color-scheme: light dark;
+}
+
+:root[data-theme="dark"] {
+  --background-color: oklch(15% 0.04 260);
+  --text-color: canvastext;
+  --color-accent: oklch(70% 0.2 280);
+  --hover-bg: oklch(40% 0.05 280);
+}
+
+:root[data-theme="light"] {
+  --background-color: white;
+  --text-color: black;
+  --color-accent: oklch(65% 0.3 280);
+  --hover-bg: oklch(85% 0.1 280 / 0.25);
 }
 
 label.color-scheme {
@@ -18,6 +36,8 @@ body {
   max-width: 65em;
   margin-inline: auto;
   padding: 5em;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 nav {
@@ -26,6 +46,7 @@ nav {
   border-bottom: 1px solid;
   border-bottom-color: var(--border-color);
   margin-bottom: 1.5em;
+  background-color: var(--background-color);
 }
 
 nav a {
@@ -38,14 +59,14 @@ nav a {
 
 nav a.current {
   font-weight: bold;
-  border-bottom: 0.4em solid oklch(50% 10% 200); 
+  border-bottom: 0.4em solid var(--color-accent);
   padding-bottom: 0.2em;
 }
 
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
   padding-bottom: 0.1em;
-  background-color: oklch(65% 0.3 280 / 0.25);
+  background-color: var(--hover-bg);
 }
 
 form {
@@ -121,32 +142,4 @@ a.cv-desc {
 
 strong {
   font-weight: 600;
-}
-
-
-/* Dark mode styling: */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-dark: oklch(15% 0.04 260);
-    --accent-dark: oklch(70% 0.2 280);       
-    --hover-bg-dark: oklch(40% 0.05 280);    
-  }
-
-  body {
-    background-color: var(--background-dark);
-    color: canvastext;
-  }
-
-  nav {
-    background-color: oklch(20% 0.05 260);
-  }
-
-  nav a.current {
-    border-bottom: 0.4em solid var(--accent-dark);
-  }
-
-  nav a:hover {
-    border-bottom: 0.4em solid var(--accent-dark);
-    background-color: var(--hover-bg-dark);
-  }
 }

@@ -1,3 +1,5 @@
+// global.js
+
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
     ? "/portfolio/" // Local dev base path
@@ -38,8 +40,8 @@ for (let p of pages) {
   }
 
   nav.appendChild(a);
-
 }
+
 document.body.insertAdjacentHTML(
   'afterbegin',
   `
@@ -59,35 +61,43 @@ const select = document.querySelector('#theme-select');
 
 // On page load: set saved color scheme preference (if exists)
 if ("colorScheme" in localStorage) {
-const savedScheme = localStorage.colorScheme;
-document.documentElement.style.setProperty('color-scheme', savedScheme);
-select.value = savedScheme; // Update <select> to match
+  const savedScheme = localStorage.colorScheme;
+  select.value = savedScheme;
+  if (savedScheme === "light" || savedScheme === "dark") {
+    document.documentElement.setAttribute('data-theme', savedScheme);
+  }
 }
 
 // event listener for color scheme switch
 select.addEventListener('input', function (event) {
-  console.log('color scheme changed to', event.target.value);
-  localStorage.colorScheme = event.target.value;
-  document.documentElement.style.setProperty('color-scheme', event.target.value);
+  const mode = event.target.value;
+  console.log('color scheme changed to', mode);
+  localStorage.colorScheme = mode;
+
+  if (mode === "light dark") {
+    document.documentElement.removeAttribute("data-theme");
+  } else {
+    document.documentElement.setAttribute("data-theme", mode);
+  }
 });
 
 function setupContactForm() {
-    const form = document.querySelector("form");
-    if (!form) return;
-  
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-  
-      const data = new FormData(form);
-      const params = [];
-  
-      for (let [name, value] of data) {
-        params.push(`${name}=${encodeURIComponent(value)}`);
-      }
-  
-      const url = `${form.action}?${params.join("&")}`;
-      location.href = url;
-    });
-  }
-  
-  setupContactForm();
+  const form = document.querySelector("form");
+  if (!form) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const data = new FormData(form);
+    const params = [];
+
+    for (let [name, value] of data) {
+      params.push(`${name}=${encodeURIComponent(value)}`);
+    }
+
+    const url = `${form.action}?${params.join("&")}`;
+    location.href = url;
+  });
+}
+
+setupContactForm();
