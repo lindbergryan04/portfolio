@@ -1,6 +1,7 @@
 :root {
   --color-accent: oklch(65% 0.3 280);
   accent-color: var(--color-accent);
+  color-scheme: dark;
 }
 
 body {
@@ -13,7 +14,9 @@ body {
 
 nav {
   display: flex;
-  border-bottom: 1px solid oklch(80% 3% 200);
+  --border-color: oklch(50% 10% 200 / 40%);
+  border-bottom: 1px solid;
+  border-bottom-color: var(--border-color);
   margin-bottom: 1.5em;
 }
 
@@ -34,7 +37,7 @@ nav a.current {
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
   padding-bottom: 0.1em;
-  background-color: oklch(65% 0.3 280 / 0.25); 
+  background-color: color-mix(in oklch, oklch(65% 0.3 280 / 0.25), canvas 85%);
 }
 
 form {
