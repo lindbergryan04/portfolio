@@ -4,6 +4,9 @@
   --color-accent: oklch(65% 0.3 280);
   --background-color: white;
   --text-color: black;
+  --input-bg: white;
+  --input-text: black;
+  --hover-bg: oklch(85% 0.1 280 / 0.25);
   accent-color: var(--color-accent);
   color-scheme: light dark;
 }
