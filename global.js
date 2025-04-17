@@ -35,10 +35,7 @@ for (let p of pages) {
 
   // Adjust internal URLs using BASE_PATH
   url = !url.startsWith("http") ? BASE_PATH + url : url;
-  // Insert a element
-  nav.insertAdjacentHTML('beforeend', `<a href="${url}">${title}</a>`);
 
-/*
   // Create <a> element
   let a = document.createElement("a");
   a.href = url;
@@ -56,5 +53,5 @@ for (let p of pages) {
   }
 
   nav.appendChild(a);
-  */
+
 }
