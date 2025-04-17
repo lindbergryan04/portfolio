@@ -7,19 +7,24 @@
   accent-color: var(--color-accent);
   color-scheme: light dark;
 }
-
+ /* Dark theme styling */
 :root[data-theme="dark"] {
   --background-color: oklch(15% 0.04 260);
   --text-color: canvastext;
   --color-accent: oklch(70% 0.2 280);
   --hover-bg: oklch(40% 0.05 280);
+  --input-bg: oklch(30% 0.05 260);
+  --input-text: white;
 }
 
+/* Light theme styling */
 :root[data-theme="light"] {
   --background-color: white;
   --text-color: black;
   --color-accent: oklch(65% 0.3 280);
   --hover-bg: oklch(85% 0.1 280 / 0.25);
+  --input-bg: white;
+  --input-text: black;
 }
 
 label.color-scheme {
@@ -73,6 +78,15 @@ form {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 1em;
+}
+
+input, textarea, button, select {
+  background-color: var(--input-bg, white);
+  color: var(--input-text, black);
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 0.3em;
+  padding: 0.5em;
 }
 
 label {
