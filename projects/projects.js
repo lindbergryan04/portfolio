@@ -11,6 +11,6 @@ const projectTitle = document.querySelector('projects-title');
 const projectArticles = document.querySelectorAll('.projects article');
 const projectsAmount = projectArticles.length;
 
-projectTitle.insertBefore$('$(projectsAmount) ')
+projectTitle.textContent = `${count} Projects`;
 
 projectTitle.textContent = `${projectsAmount} Projects`;
