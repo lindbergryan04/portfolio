@@ -124,3 +124,71 @@ function setupContactForm() {
 }
 
 setupContactForm();
+
+// Project page:
+
+// Fetch JSON data from a URL
+export async function fetchJSON(url) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch projects: ${response.statusText}`);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching or parsing JSON data:', error);
+    }
+  }
+  
+  // Render projects into the container
+  export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+    if (!Array.isArray(projects)) {
+      console.error('Projects must be an array');
+      return;
+    }
+  
+    if (!(containerElement instanceof Element)) {
+      console.error('Invalid container element');
+      return;
+    }
+  
+    containerElement.innerHTML = '';
+  
+    projects.forEach(project => {
+      const article = document.createElement('article');
+  
+      const title = project.title || 'Untitled Project';
+      const image = project.image || '';
+      const description = project.description || 'No description available.';
+  
+      article.innerHTML = `
+        <${headingLevel}>${title}</${headingLevel}>
+        ${image ? `<img src="${image}" alt="${title}">` : ''}
+        <p>${description}</p>
+      `;
+  
+      containerElement.appendChild(article);
+    });
+  }
+  
+  
+
+
+
+  export function renderProjects(project, containerElement) {
+
+    containerElement.innerHTML = '';
+
+    const article = document.createElement('article');
+
+    article.innerHTML = `
+    <h3>${project.title}</h3>
+    <img src="${project.image}" alt="${project.title}">
+    <p>${project.description}</p>
+    `;
+    
+    containerElement.appendChild(article);
+
+  }
+  
