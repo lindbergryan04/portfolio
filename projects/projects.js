@@ -6,7 +6,7 @@ const projectsContainer = document.querySelector('.projects');
 
 renderProjects(projects, projectsContainer, 'h2');
 
-const projectTitle = document.querySelector('projects-title');
+const projectTitle = document.querySelector('.projects-title');
 
 const projectArticles = document.querySelectorAll('.projects article');
 const projectsAmount = projectArticles.length;
