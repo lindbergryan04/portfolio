@@ -18,6 +18,8 @@
   --hover-bg: oklch(40% 0.05 280);
   --input-bg: oklch(30% 0.05 260);
   --input-text: white;
+  --shadow-color: oklch(22% 0.04 260 / 0.5);
+  
 }
 
 /* Light theme styling */
@@ -28,6 +30,8 @@
   --hover-bg: oklch(85% 0.1 280 / 0.25);
   --input-bg: white;
   --input-text: black;
+  --background-color: oklch(85% 0.05 260); 
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 label.color-scheme {
@@ -167,9 +171,9 @@ strong {
 #profile-stats {
   margin-top: 1rem;
   padding: 1rem;
-  background-color: #f5f5f5;
+  background-color: var(--background-color);
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px var(--shadow-color);
   max-width: 600px;
 }
 
@@ -183,6 +187,7 @@ strong {
 
 .stats-grid dt {
   font-weight: bold;
+  color: var(--text-color);
   grid-row: 1;
 }
 
@@ -191,5 +196,5 @@ strong {
   grid-row: 2;
   font-size: 1.25rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--color-accent);
 }
