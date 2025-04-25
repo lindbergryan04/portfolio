@@ -18,19 +18,18 @@
   --hover-bg: oklch(40% 0.05 280);
   --input-bg: oklch(30% 0.05 260);
   --input-text: white;
-  --shadow-color: oklch(22% 0.04 260 / 0.5);
+  --shadow-color: oklch(35% 0.04 260 / 0.5);
   
 }
 
 /* Light theme styling */
 :root[data-theme="light"] {
-  --background-color: white;
+  --background-color: oklch(95% 0.05 260); 
   --text-color: black;
   --color-accent: oklch(65% 0.3 280);
   --hover-bg: oklch(85% 0.1 280 / 0.25);
   --input-bg: white;
   --input-text: black;
-  --background-color: oklch(85% 0.05 260); 
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
