@@ -200,8 +200,8 @@ strong {
 
 /* project photos */
 .project-img {
-  width: 350px;
-  height: 180px;
+  width: 316px;
+  height: 161px;
   object-fit: cover;
   display: block;
   margin: 0 auto;
