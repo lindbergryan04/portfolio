@@ -108,7 +108,9 @@ button {
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-  gap: 1em;
+  gap: 2em;
+  padding: 0.5em;        
+  box-sizing: border-box; 
 }
 
 article {
