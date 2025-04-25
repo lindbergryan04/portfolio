@@ -23,7 +23,7 @@
     {
       "title": "Apple Quality Prediction Model",
       "image": "/portfolio/images/appleprediction.png",
-      "description": "Using and exploring basic models to predict apple quality.",
+      "description": "Explored various basic SKLearn models, predicted apple quality using Kaggle Dataset.",
       "year": "2022",
       "link": "https://github.com/lindbergryan04/apple-prediction-models/blob/main/ApplePredictionModel.ipynb"
     },

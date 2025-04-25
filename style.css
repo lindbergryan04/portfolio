@@ -18,7 +18,7 @@
   --hover-bg: oklch(40% 0.05 280);
   --input-bg: oklch(30% 0.05 260);
   --input-text: white;
-  --shadow-color: oklch(35% 0.04 260 / 0.5);
+  --shadow-color: oklch(50% 0.02 280 / 0.5);
   
 }
 
