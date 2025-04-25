@@ -197,3 +197,12 @@ strong {
   font-weight: 600;
   color: var(--color-accent);
 }
+
+/* project photos */
+.project-img {
+  width: 350px;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}

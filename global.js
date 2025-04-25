@@ -166,18 +166,19 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     const year = project.year || '';
     const link = project.link || '';
 
-  article.innerHTML = `
-      <${headingLevel}>${title}</${headingLevel}>
-      ${image ? 
-        link ? 
-          `<a href="${link}" target="_blank"><img src="${image}" alt="${title}"></a>` : 
-          `<img src="${image}" alt="${title}">` 
-        : ''
-      }
-      <p>${description}</p>
-      ${year ? `<p><strong>Year:</strong> ${year}</p>` : ''}
-      ${link ? `<p><a href="${link}" target="_blank">View Project</a></p>` : ''}
-    `;
+    article.innerHTML = `
+        <${headingLevel}>${title}</${headingLevel}>
+        ${image ? 
+            link ? 
+            `<a href="${link}" target="_blank"><img class="project-img" src="${image}" alt="${title}"></a>` : 
+            `<img class="project-img" src="${image}" alt="${title}">` : 
+            ''
+        }
+        <p>${description}</p>
+        ${year ? `<p><strong>Year:</strong> ${year}</p>` : ''}
+        ${link ? `<p><a href="${link}" target="_blank">View Project</a></p>` : ''}
+        `;
+
 
     containerElement.appendChild(article);
   });
