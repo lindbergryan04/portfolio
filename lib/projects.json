@@ -1,21 +1,21 @@
 [
     {
       "title": "Recipe Rater",
-      "image": "/images/reciperater.png",
+      "image": "../images/reciperater.png",
       "description": "Analyzed a dataset of 234,429 recipe reviews from Food.com with 15 features and built a machine learning model to predict how highly a recipe will be rated (out of 5 stars). This project utilizes EDA, feature engineering, statistical hypothesis testing, and machine learning to develop a practical tool for smarter recipe selection.",
       "year": "2024",
       "link": "https://github.com/lindbergryan04/RecipeRater/tree/main"
     },
     {
       "title": "Recipe Rater Report",
-      "image": "/images/reciperaterreport.png",
+      "image": "../images/reciperater.png",
       "description": "In depth report of Recipe Rater project.",
       "year": "2024",
       "link": "https://lindbergryan04.github.io/RecipeRater_report/"
     },
     {
       "title": "Amazon Inflation Analysis",
-      "image": "/images/amazoninflationanalysis.png",
+      "image": "../images/amazoninflationanalysis.png",
       "description": "Analyzed Amazon price trends from 2021–2024 and compared them with Consumer Price Index (CPI) data to evaluate how closely Amazon’s pricing aligns with inflation. Leveraged Keepa and BLS data using statistical testing and data visualization to uncover sector-specific patterns and pricing behaviors.",
       "year": "2024",
       "link": "https://github.com/lindbergryan04/AmazonInflationAnalysis/blob/master/FinalProject_Group031_WI25.ipynb"
