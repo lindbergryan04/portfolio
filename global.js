@@ -163,11 +163,20 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     const title = project.title || 'Untitled Project';
     const image = project.image || '';
     const description = project.description || 'No description available.';
+    const year = project.year || '';
+    const link = project.link || '';
 
-    article.innerHTML = `
+  article.innerHTML = `
       <${headingLevel}>${title}</${headingLevel}>
-      ${image ? `<img src="${image}" alt="${title}">` : ''}
+      ${image ? 
+        link ? 
+          `<a href="${link}" target="_blank"><img src="${image}" alt="${title}"></a>` : 
+          `<img src="${image}" alt="${title}">` 
+        : ''
+      }
       <p>${description}</p>
+      ${year ? `<p><strong>Year:</strong> ${year}</p>` : ''}
+      ${link ? `<p><a href="${link}" target="_blank">View Project</a></p>` : ''}
     `;
 
     containerElement.appendChild(article);
@@ -176,10 +185,9 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
 
 
 // Fetching GitHub data:
-
 export async function fetchGitHubData(username) {
     return fetchJSON(`https://api.github.com/users/${username}`);
-  }
+}
 
 
 

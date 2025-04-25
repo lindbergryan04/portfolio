@@ -24,11 +24,11 @@
 
 /* Light theme styling */
 :root[data-theme="light"] {
-  --background-color: oklch(97% 0.015 260)
+  --background-color: oklch(96% 0.025 260)
   --text-color: black;
   --color-accent: oklch(65% 0.3 280);
   --hover-bg: oklch(85% 0.1 280 / 0.25);
-  --input-bg: white;
+  --input-bg: var(--background-color);
   --input-text: black;
   --shadow-color: rgba(0, 0, 0, 0.1);
 }

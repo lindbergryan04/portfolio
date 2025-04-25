@@ -1,62 +1,87 @@
 [
     {
-        "title": "Lorem ipsum dolor sit.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat odio porro ea ducimus quasi, voluptate quas voluptas vero iusto laudantium, eius iste fugit impedit ullam quibusdam, nostrum veniam? Non, voluptas?"
+      "title": "Recipe Rater",
+      "image": "/images/reciperater.png",
+      "description": "Analyzed a dataset of 234,429 recipe reviews from Food.com with 15 features and built a machine learning model to predict how highly a recipe will be rated (out of 5 stars). This project utilizes EDA, feature engineering, statistical hypothesis testing, and machine learning to develop a practical tool for smarter recipe selection.",
+      "year": "2024",
+      "link": "https://github.com/lindbergryan04/RecipeRater/tree/main"
     },
     {
-        "title": "Accusantium exercitationem amet quam!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Esse blanditiis ipsa sit repudiandae voluptas consequuntur quo rem asperiores harum ratione ipsum eius dolores sint, beatae dignissimos eligendi itaque illo rerum! Reprehenderit tempore laborum debitis quod architecto perspiciatis maxime."
+      "title": "Recipe Rater Report",
+      "image": "/images/reciperaterreport.png",
+      "description": "In depth report of Recipe Rater project.",
+      "year": "2024",
+      "link": "https://lindbergryan04.github.io/RecipeRater_report/"
     },
     {
-        "title": "Soluta, at recusandae. Iusto!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Reprehenderit ab ea facilis saepe voluptatum tempore, praesentium eveniet odio est ratione impedit. Voluptatum porro error vitae quasi tempore dolores impedit sequi quae ipsa enim fugit eum, laudantium, corrupti reprehenderit!"
+      "title": "Amazon Inflation Analysis",
+      "image": "/images/amazoninflationanalysis.png",
+      "description": "Analyzed Amazon price trends from 2021–2024 and compared them with Consumer Price Index (CPI) data to evaluate how closely Amazon’s pricing aligns with inflation. Leveraged Keepa and BLS data using statistical testing and data visualization to uncover sector-specific patterns and pricing behaviors.",
+      "year": "2024",
+      "link": "https://github.com/lindbergryan04/AmazonInflationAnalysis/blob/master/FinalProject_Group031_WI25.ipynb"
     },
     {
-        "title": "Velit dolore omnis consectetur!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Deleniti repellendus voluptas doloribus numquam omnis sequi, porro nihil corrupti dolorem. Repellat animi odio, ab tempore veniam maxime ratione placeat exercitationem suscipit beatae ducimus sed. Labore quos reprehenderit laboriosam qui."
+      "title": "Velit dolore omnis consectetur!",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Deleniti repellendus voluptas doloribus numquam omnis sequi, porro nihil corrupti dolorem. Repellat animi odio, ab tempore veniam maxime ratione placeat exercitationem suscipit beatae ducimus sed. Labore quos reprehenderit laboriosam qui.",
+      "year": "",
+      "link": ""
     },
     {
-        "title": "Adipisci incidunt dolores non.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Totam accusamus vero pariatur. Nemo, nesciunt facere tenetur omnis possimus expedita debitis iste vero perspiciatis dolorem saepe? Ducimus, harum assumenda expedita corporis beatae praesentium et dolor fugiat, distinctio, ab rerum."
+      "title": "Adipisci incidunt dolores non.",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Totam accusamus vero pariatur. Nemo, nesciunt facere tenetur omnis possimus expedita debitis iste vero perspiciatis dolorem saepe? Ducimus, harum assumenda expedita corporis beatae praesentium et dolor fugiat, distinctio, ab rerum.",
+      "year": "",
+      "link": ""
     },
     {
-        "title": "Quibusdam excepturi error vero?",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Aspernatur, itaque. Repellendus ipsum sed harum, quia a, quisquam possimus sapiente porro sequi, eos accusamus quo eligendi. Eveniet doloremque id consequuntur in quis, a sequi possimus mollitia rerum labore. Saepe."
+      "title": "Quibusdam excepturi error vero?",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Aspernatur, itaque. Repellendus ipsum sed harum, quia a, quisquam possimus sapiente porro sequi, eos accusamus quo eligendi. Eveniet doloremque id consequuntur in quis, a sequi possimus mollitia rerum labore. Saepe.",
+      "year": "",
+      "link": ""
     },
     {
-        "title": "Sapiente praesentium eaque quam.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Delectus fugiat ullam adipisci, obcaecati odio reiciendis autem nulla exercitationem ratione officia facilis suscipit corrupti necessitatibus aperiam totam deserunt beatae maxime quod eligendi soluta quisquam temporibus ad. Laboriosam, perspiciatis architecto."
+      "title": "Sapiente praesentium eaque quam.",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Delectus fugiat ullam adipisci, obcaecati odio reiciendis autem nulla exercitationem ratione officia facilis suscipit corrupti necessitatibus aperiam totam deserunt beatae maxime quod eligendi soluta quisquam temporibus ad. Laboriosam, perspiciatis architecto.",
+      "year": "",
+      "link": ""
     },
     {
-        "title": "Distinctio qui pariatur temporibus.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Autem beatae neque eligendi deserunt id! Earum quo a nam doloremque qui eius enim debitis animi atque repudiandae corporis, in exercitationem ipsum. Cumque quibusdam quos numquam quas dolorum! Enim, illum."
+      "title": "Distinctio qui pariatur temporibus.",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Autem beatae neque eligendi deserunt id! Earum quo a nam doloremque qui eius enim debitis animi atque repudiandae corporis, in exercitationem ipsum. Cumque quibusdam quos numquam quas dolorum! Enim, illum.",
+      "year": "",
+      "link": ""
     },
     {
-        "title": "Saepe doloribus sint voluptates?",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Ipsam ea, in cupiditate a alias labore dignissimos exercitationem tenetur eos similique optio quae ullam laboriosam voluptates porro qui voluptatem culpa recusandae? Excepturi sint, expedita rerum cumque tempore suscipit delectus!"
+      "title": "Saepe doloribus sint voluptates?",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Ipsam ea, in cupiditate a alias labore dignissimos exercitationem tenetur eos similique optio quae ullam laboriosam voluptates porro qui voluptatem culpa recusandae? Excepturi sint, expedita rerum cumque tempore suscipit delectus!",
+      "year": "",
+      "link": ""
     },
     {
-        "title": "Itaque dolor quis ipsa!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Impedit alias architecto reiciendis totam molestiae. Impedit nulla dolore nemo optio, officia a quam vel blanditiis quia natus nisi ullam ipsum sequi quis quaerat? Soluta dolor officia voluptas inventore id!"
+      "title": "Itaque dolor quis ipsa!",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Impedit alias architecto reiciendis totam molestiae. Impedit nulla dolore nemo optio, officia a quam vel blanditiis quia natus nisi ullam ipsum sequi quis quaerat? Soluta dolor officia voluptas inventore id!",
+      "year": "",
+      "link": ""
     },
     {
-        "title": "Natus totam laudantium exercitationem?",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Nobis, cupiditate amet aliquam numquam nesciunt fugiat nihil quasi illo quo deserunt ipsum quia excepturi quis voluptas sunt at accusantium dolores explicabo expedita molestiae dolor, reprehenderit, mollitia incidunt! Commodi, odio."
+      "title": "Natus totam laudantium exercitationem?",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Nobis, cupiditate amet aliquam numquam nesciunt fugiat nihil quasi illo quo deserunt ipsum quia excepturi quis voluptas sunt at accusantium dolores explicabo expedita molestiae dolor, reprehenderit, mollitia incidunt! Commodi, odio.",
+      "year": "",
+      "link": ""
     },
     {
-        "title": "Nesciunt esse iusto tempora!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Quas atque vitae provident qui, voluptatum esse itaque corporis. At doloribus doloremque qui beatae debitis quas ea, voluptas enim dicta quae laboriosam illo, eveniet voluptatem velit expedita repellendus ut maiores."
+      "title": "Nesciunt esse iusto tempora!",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Quas atque vitae provident qui, voluptatum esse itaque corporis. At doloribus doloremque qui beatae debitis quas ea, voluptas enim dicta quae laboriosam illo, eveniet voluptatem velit expedita repellendus ut maiores.",
+      "year": "",
+      "link": ""
     }
-]
+  ]
+  
