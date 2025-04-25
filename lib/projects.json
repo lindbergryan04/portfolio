@@ -18,7 +18,7 @@
       "image": "/portfolio/images/amazoninflationanalysis.png",
       "description": "Analyzed Amazon price trends from 2021–2024 and compared them with Consumer Price Index (CPI) data to evaluate how closely Amazon’s pricing aligns with inflation. Leveraged Keepa and BLS data using statistical testing and data visualization to uncover sector-specific patterns and pricing behaviors.",
       "year": "2024",
-      "link": "https://github.com/lindbergryan04/AmazonInflationAnalysis/blob/master/FinalProject_Group031_WI25.ipynb"
+      "link": "https://github.com/lindbergryan04/AmazonInflationAnalysisPublic/blob/main/AmazonAnalysis.ipynb"
     },
     {
       "title": "Apple Quality Prediction Model",
