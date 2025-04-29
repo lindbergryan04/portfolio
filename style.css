@@ -19,13 +19,12 @@
   --input-bg: oklch(30% 0.05 260);
   --input-text: white;
   --shadow-color: oklch(50% 0.02 280 / 0.5);
-  
+
 }
 
 /* Light theme styling */
 :root[data-theme="light"] {
-  --background-color: oklch(96% 0.025 260)
-  --text-color: black;
+  --background-color: oklch(96% 0.025 260) --text-color: black;
   --color-accent: oklch(65% 0.3 280);
   --hover-bg: oklch(85% 0.1 280 / 0.25);
   --input-bg: var(--background-color);
@@ -86,7 +85,10 @@ form {
   gap: 1em;
 }
 
-input, textarea, button, select {
+input,
+textarea,
+button,
+select {
   background-color: var(--input-bg, white);
   color: var(--input-text, black);
   font-family: inherit;
@@ -125,7 +127,12 @@ h1 {
   font-size: 400%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   line-height: 1.1;
   text-wrap: balance;
 }
@@ -235,9 +242,11 @@ strong {
 
 .swatch {
   width: 1em;
-  aspect-ratio: 1 / 1; /* Perfect square */
+  aspect-ratio: 1 / 1;
+  /* Perfect square */
   background-color: var(--color);
-  border-radius: 0.2em; /* Rounded square; set to 50% for circle */
+  border-radius: 0.2em;
+  /* Rounded square; set to 50% for circle */
   display: inline-block;
 }
 
