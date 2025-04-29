@@ -16,25 +16,17 @@ if (projectTitle) {
 }
 
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-
-let data = [1, 2];
-let total = d3.sum(data);
-let angle = 0;
-let arcData = [];
-
-for (let d of data) {
-  let endAngle = angle + (d / total) * 2 * Math.PI;
-  arcData.push({ startAngle: angle, endAngle });
-  angle = endAngle;
-}
-
+let data = [1, 2, 3, 4, 5, 5];
+let sliceGenerator = d3.pie();
+let arcData = sliceGenerator(data);
 let arcs = arcData.map((d) => arcGenerator(d));
-let colors = ['gold', 'purple'];
+let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
 let svg = d3.select('#projects-pie-plot')
 
 arcs.forEach((arc, i) => {
     svg.append('path')
     .attr('d',arc)
-    .attr('fill', colors[i]);
+    .attr('fill', colors(i));
   });
+
