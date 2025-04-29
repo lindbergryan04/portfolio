@@ -278,6 +278,12 @@ path {
   display: inline-block;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
 .searchBar {
   width: 100%; 
   padding: 0.5em 1em; 
