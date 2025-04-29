@@ -222,6 +222,34 @@ strong {
   overflow: visible;
 }
 
+/* target pie wedge on hover */
+&:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+.selected {
+  --color: oklch(70% 0.2 280) !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
+}
+
+.legend-item.selected {
+  color: var(--color);
+  border-radius: 0.5em;
+  padding: 0.2em 0.5em;
+}
+
+/**/
+
 .legend {
   display: grid;
   gap: 1em;
@@ -239,6 +267,8 @@ strong {
   align-items: center;
   gap: 0.5em;
 }
+
+
 
 .swatch {
   width: 1em;

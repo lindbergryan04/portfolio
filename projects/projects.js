@@ -43,16 +43,43 @@ function renderPieChart(projectsGiven) {
     let sliceGenerator = d3.pie().value((d) => d.value);
     let arcData = sliceGenerator(data);
     let arcs = arcData.map((d) => arcGenerator(d));
-    let colors = d3.scaleOrdinal(d3.schemeTableau10);
+    let colors = d3.scaleOrdinal(d3.schemeObservable10);
 
     // select and clear svg 
     let svg = d3.select('#projects-pie-plot');
     svg.selectAll('path').remove();
 
+    let selectedIndex = -1; // track which slice/legend is selected
+
     arcs.forEach((arc, idx) => {
         svg.append('path')
             .attr('d', arc)
-            .attr('fill', colors(idx));
+            .attr('fill', colors(idx))
+            .on('click', () => {
+                selectedIndex = selectedIndex === idx ? -1 : idx; // toggle selection
+
+                svg
+                    .selectAll('path')
+                    .attr('class', (_, i) => (
+                        i === selectedIndex ? 'selected' : null // highlight selected pie slice
+                    ));
+
+                legend
+                    .selectAll('li')
+                    .attr('class', (_, i) => (
+                        i === selectedIndex ? 'legend-item selected' : 'legend-item' // highlight selected legend item
+                    ));
+
+                if (selectedIndex === -1) {
+                    // No slice selected, show all projects
+                    renderProjects(projects, projectsContainer, 'h2');
+                } else {
+                    // Only show projects matching the selected year
+                    let selectedYear = data[selectedIndex].label;
+                    let filteredByYear = projects.filter(project => project.year == selectedYear);
+                    renderProjects(filteredByYear, projectsContainer, 'h2');
+                }
+            });
     });
 
     // select and clear legend
@@ -79,3 +106,6 @@ searchInput.addEventListener('input', (event) => {
     renderProjects(filteredProjects, projectsContainer, 'h2');
     renderPieChart(filteredProjects);
 });
+
+
+
