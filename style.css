@@ -206,3 +206,12 @@ strong {
   display: block;
   margin: 0 auto;
 }
+
+/* svg on projects page */
+
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+
+  overflow: visible;
+}
