@@ -31,10 +31,10 @@ for (let d of data) {
 let arcs = arcData.map((d) => arcGenerator(d));
 let colors = ['gold', 'purple'];
 
+let svg = d3.select('#projects-pie-plot')
+
 arcs.forEach((arc, i) => {
-    d3.select('svg')
-    .append('path')
+    svg.append('path')
     .attr('d',arc)
     .attr('fill', colors[i]);
   });
-  
