@@ -13,6 +13,7 @@ if (projectTitle) {
 }
 
 let query = '';
+let selectedIndex = -1; // track which slice/legend is selected
 
 function filterProjects() {
     return projects.filter((project) => {
@@ -43,18 +44,21 @@ function renderPieChart(projectsGiven) {
     let sliceGenerator = d3.pie().value((d) => d.value);
     let arcData = sliceGenerator(data);
     let arcs = arcData.map((d) => arcGenerator(d));
-    let colors = d3.scaleOrdinal(d3.schemeObservable10);
+    let colors = d3.scaleOrdinal(["#0d0887", "#5302a3", "#8b0aa5", "#b83289", "#db5c68"]); // custom colors here
 
     // select and clear svg 
     let svg = d3.select('#projects-pie-plot');
     svg.selectAll('path').remove();
 
-    let selectedIndex = -1; // track which slice/legend is selected
+    // select and clear legend
+    let legend = d3.select('.legend');
+    legend.selectAll('li').remove();
 
     arcs.forEach((arc, idx) => {
         svg.append('path')
             .attr('d', arc)
             .attr('fill', colors(idx))
+            .attr('class', idx === selectedIndex ? 'selected' : null) // handle initial render
             .on('click', () => {
                 selectedIndex = selectedIndex === idx ? -1 : idx; // toggle selection
 
@@ -82,15 +86,11 @@ function renderPieChart(projectsGiven) {
             });
     });
 
-    // select and clear legend
-    let legend = d3.select('.legend');
-    legend.selectAll('li').remove();
-
     // populate legend
     data.forEach((d, idx) => {
         legend.append('li')
             .attr('style', `--color:${colors(idx)}`)
-            .attr('class', 'legend-item')
+            .attr('class', idx === selectedIndex ? 'legend-item selected' : 'legend-item')
             .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
     });
 }
@@ -106,6 +106,3 @@ searchInput.addEventListener('input', (event) => {
     renderProjects(filteredProjects, projectsContainer, 'h2');
     renderPieChart(filteredProjects);
 });
-
-
-
