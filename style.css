@@ -217,7 +217,7 @@ strong {
 /* svg on projects page */
 
 #projects-pie-plot {
-  max-width: 20em;
+  max-width: 17.5em;
   margin-block: 2em;
   overflow: visible;
 }
@@ -257,7 +257,7 @@ path {
   list-style: none;
   border: 0.15em solid var(--shadow-color);
   border-radius: 0.5em;
-  padding: 1em;
+  padding: 0.75em;
   margin: 1em;
   flex: 1;
 }
@@ -266,6 +266,7 @@ path {
   display: flex;
   align-items: center;
   gap: 0.5em;
+  justify-content: center;
 }
 
 .swatch {
@@ -282,10 +283,13 @@ path {
   display: flex;
   align-items: center;
   gap: 1em;
+  justify-content: center;
 }
 
 .searchBar {
-  width: 100%; 
-  padding: 0.5em 1em; 
-  font-size: 1rem; 
+  width: 66%;
+  padding: 0.8em 1em;
+  margin-bottom: 1.75em;
+  margin-top: 2em;
+  font-size: 1rem;
 }

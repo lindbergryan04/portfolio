@@ -17,10 +17,19 @@ let selectedIndex = -1; // track which slice/legend is selected
 
 function filterProjects() {
     return projects.filter((project) => {
-        let values = Object.values(project).join('\n').toLowerCase();
-        return values.includes(query.toLowerCase());
+      const projectText = Object.values(project).join('\n').toLowerCase();
+      const matchesQuery = projectText.includes(query.toLowerCase());
+  
+      if (selectedIndex === -1) {
+        return matchesQuery; // only query filter
+      } else {
+        const selectedYear = data[selectedIndex].label;
+        const matchesYear = project.year == selectedYear;
+        return matchesQuery && matchesYear; // both query and pie slice selection filters
+      }
     });
-}
+  }
+  
 
 // pie chart and legend rendering
 function renderPieChart(projectsGiven) {
@@ -44,7 +53,7 @@ function renderPieChart(projectsGiven) {
     let sliceGenerator = d3.pie().value((d) => d.value);
     let arcData = sliceGenerator(data);
     let arcs = arcData.map((d) => arcGenerator(d));
-    let colors = d3.scaleOrdinal(["#0d0887", "#5302a3", "#8b0aa5", "#b83289", "#db5c68"]); // custom colors here
+    let colors = d3.scaleOrdinal(["#0d0887", "#5302a3", "#8b0aa5", "#b83289", "#db5c68"]); // custom colors 
 
     // select and clear svg 
     let svg = d3.select('#projects-pie-plot');
@@ -74,15 +83,10 @@ function renderPieChart(projectsGiven) {
                         i === selectedIndex ? 'legend-item selected' : 'legend-item' // highlight selected legend item
                     ));
 
-                if (selectedIndex === -1) {
-                    // No slice selected, show all projects
-                    renderProjects(projects, projectsContainer, 'h2');
-                } else {
-                    // Only show projects matching the selected year
-                    let selectedYear = data[selectedIndex].label;
-                    let filteredByYear = projects.filter(project => project.year == selectedYear);
-                    renderProjects(filteredByYear, projectsContainer, 'h2');
-                }
+                    // on click, filter projects to year of pie slice
+                    let filtered = filterProjects();
+                    renderProjects(filtered, projectsContainer, 'h2');
+                    renderPieChart(filtered);
             });
     });
 
@@ -102,7 +106,8 @@ renderPieChart(projects);
 // input listener
 searchInput.addEventListener('input', (event) => {
     query = event.target.value;
-    let filteredProjects = filterProjects();
-    renderProjects(filteredProjects, projectsContainer, 'h2');
-    renderPieChart(filteredProjects);
-});
+    let filtered = filterProjects();
+    renderProjects(filtered, projectsContainer, 'h2');
+    renderPieChart(filtered);
+  });
+  
