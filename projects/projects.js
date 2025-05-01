@@ -14,8 +14,9 @@ if (projectTitle) {
 
 let query = '';
 let selectedIndex = -1; // track which slice/legend is selected
+let pieData = []; // holds year-wise pie chart data for filterProjects()
 
-function filterProjects() {
+  function filterProjects() {
     return projects.filter((project) => {
       const projectText = Object.values(project).join('\n').toLowerCase();
       const matchesQuery = projectText.includes(query.toLowerCase());
@@ -23,7 +24,7 @@ function filterProjects() {
       if (selectedIndex === -1) {
         return matchesQuery; // only query filter
       } else {
-        const selectedYear = data[selectedIndex].label;
+        const selectedYear = pieData[selectedIndex]?.label;
         const matchesYear = project.year == selectedYear;
         return matchesQuery && matchesYear; // both query and pie slice selection filters
       }
@@ -45,6 +46,8 @@ function renderPieChart(projectsGiven) {
         value: count,
         label: year,
     }));
+
+    pieData = data;
 
     // only render if there's data
     if (data.length === 0) return;
