@@ -48,6 +48,7 @@ function renderPieChart(projectsGiven) {
     }));
 
     pieData = data;
+    let selectedYear = pieData[selectedIndex]?.label;
 
     // only render if there's data
     if (data.length === 0) return;
@@ -70,27 +71,16 @@ function renderPieChart(projectsGiven) {
         svg.append('path')
             .attr('d', arc)
             .attr('fill', colors(idx))
-            .attr('class', idx === selectedIndex ? 'selected' : null) // handle initial render
+            .attr('class', data[idx].label === selectedYear ? 'selected' : null) // handle initial render
             .on('click', () => {
-                selectedIndex = selectedIndex === idx ? -1 : idx; // toggle selection
-
-                svg
-                    .selectAll('path')
-                    .attr('class', (_, i) => (
-                        i === selectedIndex ? 'selected' : null // highlight selected pie slice
-                    ));
-
-                legend
-                    .selectAll('li')
-                    .attr('class', (_, i) => (
-                        i === selectedIndex ? 'legend-item selected' : 'legend-item' // highlight selected legend item
-                    ));
-
-                    // on click, filter projects to year of pie slice
-                    let filtered = filterProjects();
-                    renderProjects(filtered, projectsContainer, 'h2');
-                    renderPieChart(filtered);
-            });
+                const clickedYear = data[idx].label;
+                const wasSelected = clickedYear === pieData[selectedIndex]?.label;
+                selectedIndex = wasSelected ? -1 : pieData.findIndex(p => p.label === clickedYear);
+              
+                let filtered = filterProjects();
+                renderProjects(filtered, projectsContainer, 'h2');
+                renderPieChart(projects); // full dataset for full pie
+              });
     });
 
     // populate legend
@@ -111,6 +101,6 @@ searchInput.addEventListener('input', (event) => {
     query = event.target.value;
     let filtered = filterProjects();
     renderProjects(filtered, projectsContainer, 'h2');
-    renderPieChart(filtered);
+    renderPieChart(projects);
   });
   
