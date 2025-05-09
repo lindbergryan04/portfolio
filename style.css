@@ -18,6 +18,7 @@
   --input-bg: oklch(30% 0.05 260);
   --input-text: white;
   --shadow-color: oklch(50% 0.02 280 / 0.5);
+  --gridline-color: oklch(50% 0.02 280 / 0.5);
 
 }
 
@@ -29,6 +30,7 @@
   --input-bg: var(--background-color);
   --input-text: black;
   --shadow-color: rgba(0, 0, 0, 0.1);
+  --gridline-color: oklch(50% 0.02 280 / 0.2);
 }
 
 label.color-scheme {
@@ -322,7 +324,7 @@ path {
 }
 
 .gridlines {
-  stroke: var(--shadow-color);
+  stroke: var(--gridline-color);
   stroke-width: 0.5;
 }
 
@@ -358,12 +360,15 @@ dl.info dd {
     top: 1em;
     left: 1em;
     pointer-events: none;
-    opacity: 0;
     transition: opacity 200ms;
 }
 
-.tooltip.visible {
+.tooltip:not([hidden]) {
     opacity: 1;
+}
+
+.tooltip[hidden] {
+    opacity: 0;
 }
 
 /* Dot hover effects */
