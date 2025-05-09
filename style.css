@@ -321,3 +321,63 @@ path {
   color: var(--color-accent);
 }
 
+.gridlines {
+  stroke: var(--shadow-color);
+  stroke-width: 0.5;
+}
+
+/* Tooltip styles */
+dl.info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5em 1em;
+    background-color: var(--background-color);
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--shadow-color);
+    transition-duration: 500ms;
+    transition-property: opacity, visibility;
+}
+
+dl.info dt {
+    margin: 0;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+dl.info dd {
+    margin: 0;
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.tooltip {
+    position: fixed;
+    top: 1em;
+    left: 1em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 200ms;
+}
+
+.tooltip.visible {
+    opacity: 1;
+}
+
+/* Dot hover effects */
+circle {
+    transition: 200ms;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+circle:hover {
+    transform: scale(1.5);
+}
+
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}

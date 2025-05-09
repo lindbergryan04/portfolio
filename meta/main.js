@@ -61,7 +61,38 @@ function processCommits(data) {
         });
 }
 
-// Commit scatter plot
+// Tooltip visibility
+function updateTooltipVisibility(isVisible) {
+    const tooltip = document.getElementById('commit-tooltip');
+    tooltip.hidden = !isVisible;
+}
+
+// Tooltip position
+function updateTooltipPosition(event) {
+    const tooltip = document.getElementById('commit-tooltip');
+    tooltip.style.left = `${event.clientX}px`;
+    tooltip.style.top = `${event.clientY}px`;
+  }
+
+// Scatter plot of commits by time of day
+
+/**
+ * Renders a scatter plot visualization of commit times
+ * @param {Array} data - Array of line-level git log data
+ * @param {Array} commits - Array of processed commit objects
+ * 
+ * Creates a scatter plot where:
+ * - X-axis: Date of commits (aligned to noon to avoid timezone issues)
+ * - Y-axis: Time of day (0-24 hours)
+ * - Dots: Individual commits, colored using the theme's accent color
+ * - Gridlines: Horizontal lines for time reference
+ * 
+ * The plot includes:
+ * - Margins for proper spacing
+ * - Gridlines for better readability
+ * - Formatted time axis (HH:00 format)
+ * - Date axis with proper scaling
+ */
 const width = 1000;
 const height = 600;
 function renderScatterPlot(data, commits) {
@@ -113,7 +144,24 @@ function renderScatterPlot(data, commits) {
         })
         .attr('cy', (d) => yScale(d.hourFrac))
         .attr('r', 5)
-        .attr('fill', 'var(--color-accent)');
+        .attr('fill', 'var(--color-accent)')
+        .on('mouseenter', (event, commit) => {
+            renderTooltipContent(commit);
+            updateTooltipVisibility(true);
+            updateTooltipPosition(event);
+        })
+        .on('mouseleave', () => {
+            updateTooltipVisibility(false);
+        });
+
+    // Add gridlines BEFORE the axes
+    const gridlines = svg
+        .append('g')
+        .attr('class', 'gridlines')
+        .attr('transform', `translate(${usableArea.left}, 0)`);
+
+    // Create gridlines as an axis with no labels and full-width ticks
+    gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 
     // Create the axes
     const xAxis = d3.axisBottom(xScale);
@@ -137,6 +185,25 @@ function renderScatterPlot(data, commits) {
 
 
 // Commit info stats
+/**
+ * Renders statistics about the repository's commits and code
+ * @param {Array} data - Array of line-level git log data
+ * @param {Array} commits - Array of processed commit objects
+ * 
+ * Creates a statistics display showing:
+ * - Total number of commits
+ * - Total lines of code
+ * - Maximum lines in a single file
+ * - Average lines of code per file
+ * - Total number of unique files
+ * - Number of unique days worked
+ * - Most common time of day for commits
+ * 
+ * Statistics are displayed in a grid layout with:
+ * - Labels (dt elements) for each statistic
+ * - Values (dd elements) formatted appropriately
+ * - Accent-colored values for emphasis
+ */
 function renderCommitInfo(data, commits) {
     // Create the dl element
     const dl = d3.select('#stats').append('dl').attr('class', 'stats');
@@ -184,12 +251,12 @@ function renderCommitInfo(data, commits) {
     );
 
     const maxPeriod = d3.greatest(workByPeriod, (d) => d[1])?.[0];
-    const formattedTime = maxPeriod ? 
+    const formattedTime = maxPeriod ?
         new Date(2000, 0, 1, Math.floor(maxPeriod), Math.round((maxPeriod % 1) * 60))
-            .toLocaleTimeString('en-US', { 
-                hour: 'numeric', 
+            .toLocaleTimeString('en-US', {
+                hour: 'numeric',
                 minute: '2-digit',
-                hour12: true 
+                hour12: true
             }) : '';
 
     //Most common work time
@@ -197,7 +264,25 @@ function renderCommitInfo(data, commits) {
     dl.append('dd').text(formattedTime);
 }
 
+// Add tooltip functionality
+function renderTooltipContent(commit) {
+    const link = document.getElementById('commit-link');
+    const date = document.getElementById('commit-date');
+    const time = document.getElementById('commit-time');
+    const author = document.getElementById('commit-author');
+    const lines = document.getElementById('commit-lines');
 
+    if (Object.keys(commit).length === 0) return;
+
+    link.href = commit.url;
+    link.textContent = commit.id;
+    date.textContent = commit.datetime?.toLocaleString('en', {
+        dateStyle: 'full',
+    });
+    time.textContent = commit.time;
+    author.textContent = commit.author;
+    lines.textContent = commit.totalLines;
+}
 let data = await loadData();
 let commits = processCommits(data);
 
