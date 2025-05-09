@@ -17,7 +17,10 @@
 /* Dark theme styling */
 :root[data-theme="dark"] {
   --background-color: oklch(0.19 0.0617 260);
+  --background-color-dark: #1f1f1f;
   --text-color: white;
+  --text-color-light: #a0a0a0;
+  --text-color-med: #dcdcdc;
   --color-accent: oklch(70% 0.2 280);
   --color-accent-opp: oklch(65% 0.3 280);
   --hover-bg: oklch(40% 0.05 280);
@@ -29,7 +32,11 @@
 
 /* Light theme styling */
 :root[data-theme="light"] {
-  --background-color: oklch(96% 0.025 260) --text-color: black;
+  --background-color: oklch(96% 0.025 260); 
+  --background-color-dark: #afafaf;
+  --text-color: black;
+  --text-color-light: #373737;
+  --text-color-med: #676767;
   --color-accent: oklch(65% 0.3 280);
   --color-accent-opp: oklch(70% 0.2 280);
   --hover-bg: oklch(85% 0.1 280 / 0.25);
@@ -467,7 +474,7 @@ circle.selected {
 #selection-count {
   font-weight: 600;
   font-size: 1.1rem;
-  color: #f0f0f0;
+  color: var(--text-color);
   margin-bottom: 1rem;
 }
 
@@ -476,12 +483,12 @@ circle.selected {
   grid-template-columns: auto 1fr;
   gap: 0.4rem 1.5rem;
   max-width: 300px;
-  background-color: #1f1f1f;
+  background-color: var(--background-color-dark);
   padding: 1rem 1.25rem;
   border-radius: 0.5rem;
   font-size: 0.95rem;
-  color: #e0e0e0;
-  border: 1px solid #333;
+  color: var(--text-color);
+  border: 2px solid var(--shadow-color);
 }
 
 #language-breakdown[hidden] {
@@ -492,12 +499,12 @@ circle.selected {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #a0a0a0;
+  color: var(--text-color-light);
 }
 
 #language-breakdown dd {
   margin: 0;
   text-align: right;
   font-family: monospace;
-  color: #dcdcdc;
+  color: var(--text-color-med);
 }
