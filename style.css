@@ -411,5 +411,5 @@ dl.info[hidden]:not(:hover, :focus-within) {
 }
 
 circle.selected {
-  fill: var(--color-accent-dark-accent);
+  fill: var(--color-accent-dark);
 }
