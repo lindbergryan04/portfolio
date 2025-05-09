@@ -482,6 +482,10 @@ circle.selected {
   border: 1px solid #333;
 }
 
+#language-breakdown[hidden] {
+  display: none;
+}
+
 #language-breakdown dt {
   font-weight: 500;
   text-transform: uppercase;
