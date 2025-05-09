@@ -18,7 +18,7 @@
 :root[data-theme="dark"] {
   --background-color: oklch(0.19 0.0617 260);
   --background-color-dark: #1f1f1f;
-  --text-color: white;
+  --text-color: oklch(0.92 0 0);
   --text-color-light: #a0a0a0;
   --text-color-med: #dcdcdc;
   --color-accent: oklch(70% 0.2 280);
