@@ -35,11 +35,11 @@
       "link": "https://github.com/lindbergryan04/apple-prediction-models/blob/main/ApplePredictionModel.ipynb"
     },
     {
-      "title": "Quibusdam excepturi error vero?",
+      "title": "Address Book in C",
       "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Aspernatur, itaque. Repellendus ipsum sed harum, quia a, quisquam possimus sapiente porro sequi, eos accusamus quo eligendi. Eveniet doloremque id consequuntur in quis, a sequi possimus mollitia rerum labore. Saepe.",
-      "year": "",
-      "link": ""
+      "description": "A command-line address book written in C, this project showcases core concepts like dynamic memory allocation, linked lists, and file I/O. Users can add, edit, delete, sort, and persist contacts in a clean, CSV-based format.",
+      "year": "2023",
+      "link": "https://github.com/lindbergryan04/address-book"
     },
     {
       "title": "Sapiente praesentium eaque quam.",
