@@ -28,6 +28,13 @@
         "link": "https://lindbergryan04.github.io/opposing-data-vis/"
     },
     {
+      "title": "Address Book in C",
+      "image": "/portfolio/images/addressbook.png",
+      "description": "A command-line address book written in C, this project showcases core concepts like dynamic memory allocation, linked lists, and file I/O. Users can add, edit, delete, sort, and persist contacts in a clean, CSV-based format.",
+      "year": "2023",
+      "link": "https://github.com/lindbergryan04/address-book"
+    },
+    {
       "title": "Apple Quality Prediction Model",
       "image": "/portfolio/images/appleprediction.png",
       "description": "Explored various basic SKLearn models, predicted apple quality using Kaggle Dataset.",
@@ -35,53 +42,11 @@
       "link": "https://github.com/lindbergryan04/apple-prediction-models/blob/main/ApplePredictionModel.ipynb"
     },
     {
-      "title": "Address Book in C",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "A command-line address book written in C, this project showcases core concepts like dynamic memory allocation, linked lists, and file I/O. Users can add, edit, delete, sort, and persist contacts in a clean, CSV-based format.",
-      "year": "2023",
-      "link": "https://github.com/lindbergryan04/address-book"
-    },
-    {
-      "title": "Sapiente praesentium eaque quam.",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Delectus fugiat ullam adipisci, obcaecati odio reiciendis autem nulla exercitationem ratione officia facilis suscipit corrupti necessitatibus aperiam totam deserunt beatae maxime quod eligendi soluta quisquam temporibus ad. Laboriosam, perspiciatis architecto.",
-      "year": "",
-      "link": ""
-    },
-    {
-      "title": "Distinctio qui pariatur temporibus.",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Autem beatae neque eligendi deserunt id! Earum quo a nam doloremque qui eius enim debitis animi atque repudiandae corporis, in exercitationem ipsum. Cumque quibusdam quos numquam quas dolorum! Enim, illum.",
-      "year": "",
-      "link": ""
-    },
-    {
-      "title": "Saepe doloribus sint voluptates?",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Ipsam ea, in cupiditate a alias labore dignissimos exercitationem tenetur eos similique optio quae ullam laboriosam voluptates porro qui voluptatem culpa recusandae? Excepturi sint, expedita rerum cumque tempore suscipit delectus!",
-      "year": "",
-      "link": ""
-    },
-    {
-      "title": "Itaque dolor quis ipsa!",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Impedit alias architecto reiciendis totam molestiae. Impedit nulla dolore nemo optio, officia a quam vel blanditiis quia natus nisi ullam ipsum sequi quis quaerat? Soluta dolor officia voluptas inventore id!",
-      "year": "",
-      "link": ""
-    },
-    {
-      "title": "Natus totam laudantium exercitationem?",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Nobis, cupiditate amet aliquam numquam nesciunt fugiat nihil quasi illo quo deserunt ipsum quia excepturi quis voluptas sunt at accusantium dolores explicabo expedita molestiae dolor, reprehenderit, mollitia incidunt! Commodi, odio.",
-      "year": "",
-      "link": ""
-    },
-    {
-      "title": "Nesciunt esse iusto tempora!",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Quas atque vitae provident qui, voluptatum esse itaque corporis. At doloribus doloremque qui beatae debitis quas ea, voluptas enim dicta quae laboriosam illo, eveniet voluptatem velit expedita repellendus ut maiores.",
-      "year": "",
-      "link": ""
+      "title": "Cipher Suite",
+      "image": "/portfolio/images/cipher.png",
+      "description": "A classic cipher tool built in Python that lets you encrypt and decrypt messages using Caesar and Vigenère ciphers. Originally created in 2022 for my AP Computer Science Principles class.",
+      "year": "2022",
+      "link": "https://github.com/lindbergryan04/text-ciphers"
     }
   ]
   
