@@ -1,7 +1,7 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
 // Meta Page js
-// Run npx elocuent -d . -o meta/loc.csv --spaces 2 in terminalto refresh the loc.csv file
+// Run npx elocuent -d . -o meta/loc.csv --spaces 2 in terminal to refresh the loc.csv file
 
 async function loadData() {
     const data = await d3.csv('loc.csv', (row) => ({
