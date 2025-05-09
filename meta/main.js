@@ -395,5 +395,6 @@ let commits = processCommits(data);
 renderScatterPlot(data, commits);
 renderCommitInfo(data, commits);
 createBrushSelector(d3.select('#chart svg'));
+renderLanguageBreakdown(null); // Initialize with no selection
 
 
