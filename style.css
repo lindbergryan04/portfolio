@@ -299,4 +299,26 @@ path {
   background-color: var(--background-color);
   border-radius: 8px;
   box-shadow: 0 2px 6px var(--shadow-color);
+  max-width: 600px;
 }
+
+#stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 0.5rem;
+  column-gap: 1rem;
+  text-align: center
+}
+
+#stats dl dt {
+  font-weight: bold;
+}
+
+#stats dl dd {
+  margin: 0;
+  grid-row: 2;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
