@@ -147,7 +147,7 @@ function renderScatterPlot(data, commits) {
     const rScale = d3
         .scaleSqrt()
         .domain([minLines, maxLines])
-        .range([4, 12]); // set dot size based on lines edited
+        .range([5, 12]); // set dot size based on lines edited
 
     // Sort commits by total lines in descending order (so smaller dots are on top and can be hovered over)
     const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
@@ -201,8 +201,13 @@ function renderScatterPlot(data, commits) {
 }
 // Brush selector
 function createBrushSelector(svg) {
+    // Create a group element for the brush
+    const brushGroup = svg.append('g')
+        .attr('class', 'brush');
+
     // Create brush
-    d3.select(svg).call(d3.brush().on('start brush end', brushed));
+    brushGroup.call(d3.brush().on('start brush end', brushed));
+
     // Raise dots and everything after overlay
     svg.selectAll('.dots, .overlay ~ *').raise();
 }
@@ -229,6 +234,9 @@ function createBrushSelector(svg) {
  * - Accent-colored values for emphasis
  */
 function renderCommitInfo(data, commits) {
+    // Clear existing content
+    d3.select('#stats').html('');
+
     // Create the dl element
     const dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
@@ -307,6 +315,17 @@ function renderTooltipContent(commit) {
     author.textContent = commit.author;
     lines.textContent = commit.totalLines;
 }
+
+// Brush selector functionality
+function brushed(event) {
+    const selection = event.selection;
+    d3.selectAll('circle').classed('selected', (d) =>
+        isCommitSelected(selection, d),
+    );
+    renderSelectionCount(selection);
+    renderLanguageBreakdown(selection);
+}
+
 // Selection count with brush selector
 function renderSelectionCount(selection) {
     const selectedCommits = selection
@@ -318,16 +337,6 @@ function renderSelectionCount(selection) {
         } commits selected`;
 
     return selectedCommits;
-}
-
-// Brush selector functionality
-function brushed(event) {
-    const selection = event.selection;
-    d3.selectAll('circle').classed('selected', (d) =>
-        isCommitSelected(selection, d),
-    );
-    renderSelectionCount(selection);
-    renderLanguageBreakdown(selection);
 }
 
 // Detect if commit is selected by brush selector
@@ -344,44 +353,44 @@ function isCommitSelected(selection, commit) {
 // Language breakdown with brush selector
 function renderLanguageBreakdown(selection) {
     const selectedCommits = selection
-      ? commits.filter((d) => isCommitSelected(selection, d))
-      : [];
+        ? commits.filter((d) => isCommitSelected(selection, d))
+        : [];
     const container = document.getElementById('language-breakdown');
-  
+
     if (selectedCommits.length === 0) {
-      container.innerHTML = '';
-      return;
+        container.innerHTML = '';
+        return;
     }
     const requiredCommits = selectedCommits.length ? selectedCommits : commits;
     const lines = requiredCommits.flatMap((d) => d.lines);
-  
+
     // Use d3.rollup to count lines per language
     const breakdown = d3.rollup(
-      lines,
-      (v) => v.length,
-      (d) => d.type,
+        lines,
+        (v) => v.length,
+        (d) => d.type,
     );
-  
+
     // Update DOM with breakdown
     container.innerHTML = '';
-  
+
     for (const [language, count] of breakdown) {
-      const proportion = count / lines.length;
-      const formatted = d3.format('.1~%')(proportion);
-  
-      container.innerHTML += `
+        const proportion = count / lines.length;
+        const formatted = d3.format('.1~%')(proportion);
+
+        container.innerHTML += `
               <dt>${language}</dt>
               <dd>${count} lines (${formatted})</dd>
           `;
     }
-  }
+}
 
 
 let data = await loadData();
 let commits = processCommits(data);
 
 renderScatterPlot(data, commits);
-createBrushSelector(d3.select('#chart svg'));
 renderCommitInfo(data, commits);
+createBrushSelector(d3.select('#chart svg'));
 
 
