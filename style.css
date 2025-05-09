@@ -1,5 +1,4 @@
 /* style.css */
-
 :root {
   --color-accent: oklch(65% 0.3 280);
   --background-color: white;
@@ -215,7 +214,6 @@ strong {
 }
 
 /* svg on projects page */
-
 #projects-pie-plot {
   max-width: 17.5em;
   margin-block: 2em;
@@ -293,3 +291,12 @@ path {
   margin-top: 2em;
   font-size: 1rem;
 } 
+
+/* Meta Page */
+#stats {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px var(--shadow-color);
+}
