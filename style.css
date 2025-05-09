@@ -458,6 +458,40 @@ dl.info[hidden]:not(:hover, :focus-within) {
 }
 
 circle.selected {
-  fill: var(--color-accent-dark);
+  fill: var(--color-accent-opp);
 }
 
+/* Brush selector output styles (language breakdown and selection count) */
+#selection-count {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #f0f0f0;
+  margin-bottom: 1rem;
+}
+
+#language-breakdown {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1.5rem;
+  max-width: 300px;
+  background-color: #1f1f1f;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  border: 1px solid #333;
+}
+
+#language-breakdown dt {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a0a0a0;
+}
+
+#language-breakdown dd {
+  margin: 0;
+  text-align: right;
+  font-family: monospace;
+  color: #dcdcdc;
+}
