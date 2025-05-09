@@ -160,11 +160,11 @@ function renderCommitInfo(data, commits) {
 
     // Add total files
     dl.append('dt').text('Files');
-    dl.append('dd').text(commits.map(c => c.lines.length).reduce((a, b) => a + b, 0));
+    dl.append('dd').text(new Set(data.map(d => d.file)).size);
 
     //Number of days worked on site
     dl.append('dt').text('Days worked on site');
-    dl.append('dd').text(commits.map(c => c.date).reduce((a, b) => Math.max(a, b), 0));
+    dl.append('dd').text(new Set(commits.map(c => c.date.toISOString().split('T')[0])).size);
 
     const workByPeriod = d3.rollups(
         data,
@@ -183,6 +183,7 @@ function renderCommitInfo(data, commits) {
 let data = await loadData();
 let commits = processCommits(data);
 
+renderScatterPlot(data, commits);
 renderCommitInfo(data, commits);
 
 
