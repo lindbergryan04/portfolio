@@ -6,11 +6,7 @@ const projectsContainer = document.querySelector('.projects');
 const searchInput = document.querySelector('.searchBar');
 const projectTitle = document.querySelector('.projects-title');
 const projectArticles = document.querySelectorAll('.projects article');
-const projectsAmount = projectArticles.length;
 
-if (projectTitle) {
-    projectTitle.textContent = `${projectsAmount} Projects`;
-}
 
 let query = '';
 let selectedIndex = -1; // track which slice/legend is selected
@@ -94,6 +90,13 @@ function renderPieChart(projectsGiven) {
 
 // initial render
 renderProjects(projects, projectsContainer, 'h2');
+
+const projectsAmount = projectArticles.length;
+
+if (projectTitle) {
+    projectTitle.textContent = `${projectsAmount} Projects`;
+}
+
 renderPieChart(projects);
 
 // input listener
