@@ -86,7 +86,7 @@ nav a:hover {
   background-color: var(--hover-bg);
 }
 
-#bio {
+.bio {
   max-width: 80ch;
   line-height: 1.6;
   color: #cfcfcf;
@@ -106,13 +106,24 @@ nav a:hover {
   margin: 0 auto;
 }
 
-.caption {
+#caption {
   text-align: center;
   font-style: italic;
   color: var(--text-color);
   opacity: 0.8;
   margin-top: 0.5rem;
   font-size: 0.9rem;
+}
+
+.home {
+  text-align: center;
+  margin: 2rem auto;
+}
+
+#name {
+  font-family: 'Monocraft', monospace;
+  font-size: 3.5rem;
+  letter-spacing: 0.05em;
 }
 
 /* Form Styling */
@@ -450,13 +461,3 @@ circle.selected {
   fill: var(--color-accent-dark);
 }
 
-.home {
-  text-align: center;
-  margin: 2rem auto;
-}
-
-#name {
-  font-family: 'Monocraft', monospace;
-  font-size: 3.5rem;
-  letter-spacing: 0.05em;
-}
