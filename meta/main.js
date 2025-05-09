@@ -74,25 +74,6 @@ function renderScatterPlot(data, commits) {
         .attr('viewBox', [0, 0, width, height])
         .style('overflow', 'visible');
 
-    const xScale = d3
-        .scaleTime()
-        .domain(d3.extent(commits, (d) => d.datetime))
-        .range([0, width])
-        .nice();
-
-    const yScale = d3.scaleLinear().domain([0, 24]).range([height, 0]);
-
-    const dots = svg.append('g').attr('class', 'dots');
-
-    dots
-        .selectAll('circle')
-        .data(commits)
-        .join('circle')
-        .attr('cx', (d) => xScale(d.datetime))
-        .attr('cy', (d) => yScale(d.hourFrac))
-        .attr('r', 5)
-        .attr('fill', 'steelblue');
-
     const margin = { top: 10, right: 10, bottom: 30, left: 20 };
     const usableArea = {
         top: margin.top,
@@ -103,15 +84,42 @@ function renderScatterPlot(data, commits) {
         height: height - margin.top - margin.bottom,
     };
 
-    // Update scales with new ranges
-    xScale.range([usableArea.left, usableArea.right]);
-    yScale.range([usableArea.bottom, usableArea.top]);
+    const xScale = d3
+        .scaleTime()
+        .domain(d3.extent(commits, (d) => {
+            // Create a new date with just the date part (time set to noon to avoid timezone issues)
+            const date = new Date(d.datetime);
+            date.setHours(12, 0, 0, 0);
+            return date;
+        }))
+        .range([usableArea.left, usableArea.right])
+        .nice();
+
+    const yScale = d3
+        .scaleLinear()
+        .domain([0, 24])
+        .range([usableArea.bottom, usableArea.top]);
+
+    const dots = svg.append('g').attr('class', 'dots');
+
+    dots
+        .selectAll('circle')
+        .data(commits)
+        .join('circle')
+        .attr('cx', (d) => {
+            const date = new Date(d.datetime);
+            date.setHours(12, 0, 0, 0);
+            return xScale(date);
+        })
+        .attr('cy', (d) => yScale(d.hourFrac))
+        .attr('r', 5)
+        .attr('fill', 'var(--color-accent)');
 
     // Create the axes
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3
-    .axisLeft(yScale)
-    .tickFormat((d) => String(d % 24).padStart(2, '0') + ':00');
+        .axisLeft(yScale)
+        .tickFormat((d) => String(d % 24).padStart(2, '0') + ':00');
 
     // Add X axis
     svg
@@ -138,7 +146,7 @@ function renderCommitInfo(data, commits) {
     dl.append('dd').text(commits.length);
 
     // Add total LOC
-    dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
+    dl.append('dt').html('Lines of code');
     dl.append('dd').text(data.length);
 
     const fileLengths = d3.rollups(
@@ -169,14 +177,24 @@ function renderCommitInfo(data, commits) {
     const workByPeriod = d3.rollups(
         data,
         (v) => v.length,
-        (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' }),
+        (d) => {
+            const date = new Date(d.datetime);
+            return date.getHours() + date.getMinutes() / 60;
+        }
     );
 
     const maxPeriod = d3.greatest(workByPeriod, (d) => d[1])?.[0];
+    const formattedTime = maxPeriod ? 
+        new Date(2000, 0, 1, Math.floor(maxPeriod), Math.round((maxPeriod % 1) * 60))
+            .toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit',
+                hour12: true 
+            }) : '';
 
-    //Max period worked on site
-    dl.append('dt').text('Max period worked on site');
-    dl.append('dd').text(maxPeriod);
+    //Most common work time
+    dl.append('dt').text('Most common work time');
+    dl.append('dd').text(formattedTime);
 }
 
 
