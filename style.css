@@ -1,4 +1,9 @@
 /* style.css */
+@font-face {
+  font-family: 'Monocraft';
+  src: url('fonts/Monocraft.ttf') format('truetype');
+}
+
 :root {
   --color-accent: oklch(65% 0.3 280);
   --background-color: white;
@@ -443,4 +448,15 @@ dl.info[hidden]:not(:hover, :focus-within) {
 
 circle.selected {
   fill: var(--color-accent-dark);
+}
+
+.home {
+  text-align: center;
+  margin: 2rem auto;
+}
+
+#name {
+  font-family: 'Monocraft', monospace;
+  font-size: 3.5rem;
+  letter-spacing: 0.05em;
 }
