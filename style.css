@@ -14,7 +14,7 @@
   --background-color: oklch(15% 0.04 260);
   --text-color: white;
   --color-accent: oklch(70% 0.2 280);
-  --color-accent-dark: oklch(0.59 0.2 280);
+  --color-accent-opp: oklch(65% 0.3 280);
   --hover-bg: oklch(40% 0.05 280);
   --input-bg: oklch(30% 0.05 260);
   --input-text: white;
@@ -26,7 +26,7 @@
 :root[data-theme="light"] {
   --background-color: oklch(96% 0.025 260) --text-color: black;
   --color-accent: oklch(65% 0.3 280);
-  --color-accent-dark: oklch(0.59 0.3 280);
+  --color-accent-opp: oklch(70% 0.2 280);
   --hover-bg: oklch(85% 0.1 280 / 0.25);
   --input-bg: var(--background-color);
   --input-text: black;
