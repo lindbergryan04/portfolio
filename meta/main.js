@@ -140,11 +140,21 @@ function renderScatterPlot(data, commits) {
     // Create gridlines as an axis with no labels and full-width ticks
     gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 
+    // Scale dots based on lines edited
+    const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+    const rScale = d3
+    .scaleSqrt() 
+    .domain([minLines, maxLines])
+    .range([5, 15]);
+
+    // Sort commits by total lines in descending order (so smaller dots are on top and can be hovered over)
+  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+
     const dots = svg.append('g').attr('class', 'dots');
 
     dots
         .selectAll('circle')
-        .data(commits)
+        .data(sortedCommits)
         .join('circle')
         .attr('cx', (d) => {
             const date = new Date(d.datetime);
@@ -152,8 +162,9 @@ function renderScatterPlot(data, commits) {
             return xScale(date);
         })
         .attr('cy', (d) => yScale(d.hourFrac))
-        .attr('r', 5)
+        .attr('r', (d) => rScale(d.totalLines))
         .attr('fill', 'var(--color-accent)')
+        .style('fill-opacity', 0.7) // transparency for overlapping dots
         .on('mouseenter', (event, commit) => {
             renderTooltipContent(commit);
             updateTooltipVisibility(true);
