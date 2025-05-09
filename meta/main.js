@@ -165,6 +165,7 @@ function renderScatterPlot(data, commits) {
         .attr('r', (d) => rScale(d.totalLines))
         .attr('fill', 'var(--color-accent)')
         .style('fill-opacity', 0.7) // transparency for overlapping dots
+        .style('cursor', 'pointer') // show pointer cursor on hover
         .on('mouseenter', (event, commit) => {
             renderTooltipContent(commit);
             updateTooltipVisibility(true);
@@ -172,6 +173,9 @@ function renderScatterPlot(data, commits) {
         })
         .on('mouseleave', () => {
             updateTooltipVisibility(false);
+        })
+        .on('click', (event, commit) => {
+            window.open(commit.url, '_blank');
         });
 
     // Create the axes
@@ -192,6 +196,13 @@ function renderScatterPlot(data, commits) {
         .attr('transform', `translate(${usableArea.left}, 0)`)
         .call(yAxis);
 
+}
+// Brush selector
+function createBrushSelector(svg) {
+    // Create brush
+    svg.call(d3.brush());
+    // Raise dots and everything after overlay
+    svg.selectAll('.dots, .overlay ~ *').raise();
 }
 
 
@@ -298,6 +309,7 @@ let data = await loadData();
 let commits = processCommits(data);
 
 renderScatterPlot(data, commits);
+createBrushSelector(d3.select('#chart svg'));
 renderCommitInfo(data, commits);
 
 

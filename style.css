@@ -371,6 +371,12 @@ dl.info dd {
     opacity: 0;
 }
 
+.tooltip a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
 /* Dot hover effects */
 circle {
     transition: 200ms;
@@ -386,3 +392,4 @@ dl.info[hidden]:not(:hover, :focus-within) {
   opacity: 0;
   visibility: hidden;
 }
+
