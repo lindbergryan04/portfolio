@@ -19,7 +19,6 @@
   --input-text: white;
   --shadow-color: oklch(50% 0.02 280 / 0.5);
   --gridline-color: oklch(50% 0.02 280 / 0.5);
-
 }
 
 /* Light theme styling */
@@ -30,7 +29,7 @@
   --input-bg: var(--background-color);
   --input-text: black;
   --shadow-color: rgba(0, 0, 0, 0.1);
-  --gridline-color: oklch(50% 0.02 280 / 0.2);
+  --gridline-color: oklch(50% 0.02 280 / 0.4);
 }
 
 label.color-scheme {
@@ -326,6 +325,7 @@ path {
 .gridlines {
   stroke: var(--gridline-color);
   stroke-width: 0.5;
+  color: var(--gridline-color);
 }
 
 /* Tooltip styles */

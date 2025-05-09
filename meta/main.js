@@ -126,10 +126,6 @@ function renderScatterPlot(data, commits) {
         .range([usableArea.left, usableArea.right])
         .nice();
 
-    // Get the tick values from the scale
-    const xTicks = xScale.ticks();
-    const xTickMap = new Map(xTicks.map(tick => [tick.toISOString().split('T')[0], tick]));
-
     const yScale = d3
         .scaleLinear()
         .domain([0, 24])
@@ -152,28 +148,8 @@ function renderScatterPlot(data, commits) {
         .join('circle')
         .attr('cx', (d) => {
             const date = new Date(d.datetime);
-            const dateStr = date.toISOString().split('T')[0];
-            const tickDate = xTickMap.get(dateStr);
-            
-            if (tickDate) {
-                // If there's a tick for this date, use it
-                return xScale(tickDate);
-            } else {
-                // If no tick, find the nearest tick and interpolate
-                const nextTick = xTicks.find(tick => tick > date);
-                const prevTick = [...xTicks].reverse().find(tick => tick < date);
-                
-                if (nextTick && prevTick) {
-                    // Interpolate between ticks
-                    const total = nextTick - prevTick;
-                    const progress = (date - prevTick) / total;
-                    return xScale(prevTick) + (xScale(nextTick) - xScale(prevTick)) * progress;
-                }
-                
-                // Fallback to noon if no ticks found
-                date.setHours(12, 0, 0, 0);
-                return xScale(date);
-            }
+            date.setHours(12, 0, 0, 0);
+            return xScale(date);
         })
         .attr('cy', (d) => yScale(d.hourFrac))
         .attr('r', 5)
