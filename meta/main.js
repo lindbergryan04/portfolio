@@ -126,10 +126,23 @@ function renderScatterPlot(data, commits) {
         .range([usableArea.left, usableArea.right])
         .nice();
 
+    // Get the tick values from the scale
+    const xTicks = xScale.ticks();
+    const xTickMap = new Map(xTicks.map(tick => [tick.toISOString().split('T')[0], tick]));
+
     const yScale = d3
         .scaleLinear()
         .domain([0, 24])
         .range([usableArea.bottom, usableArea.top]);
+
+    // Add gridlines BEFORE the axes
+    const gridlines = svg
+        .append('g')
+        .attr('class', 'gridlines')
+        .attr('transform', `translate(${usableArea.left}, 0)`);
+
+    // Create gridlines as an axis with no labels and full-width ticks
+    gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 
     const dots = svg.append('g').attr('class', 'dots');
 
@@ -139,8 +152,28 @@ function renderScatterPlot(data, commits) {
         .join('circle')
         .attr('cx', (d) => {
             const date = new Date(d.datetime);
-            date.setHours(12, 0, 0, 0);
-            return xScale(date);
+            const dateStr = date.toISOString().split('T')[0];
+            const tickDate = xTickMap.get(dateStr);
+            
+            if (tickDate) {
+                // If there's a tick for this date, use it
+                return xScale(tickDate);
+            } else {
+                // If no tick, find the nearest tick and interpolate
+                const nextTick = xTicks.find(tick => tick > date);
+                const prevTick = [...xTicks].reverse().find(tick => tick < date);
+                
+                if (nextTick && prevTick) {
+                    // Interpolate between ticks
+                    const total = nextTick - prevTick;
+                    const progress = (date - prevTick) / total;
+                    return xScale(prevTick) + (xScale(nextTick) - xScale(prevTick)) * progress;
+                }
+                
+                // Fallback to noon if no ticks found
+                date.setHours(12, 0, 0, 0);
+                return xScale(date);
+            }
         })
         .attr('cy', (d) => yScale(d.hourFrac))
         .attr('r', 5)
@@ -153,15 +186,6 @@ function renderScatterPlot(data, commits) {
         .on('mouseleave', () => {
             updateTooltipVisibility(false);
         });
-
-    // Add gridlines BEFORE the axes
-    const gridlines = svg
-        .append('g')
-        .attr('class', 'gridlines')
-        .attr('transform', `translate(${usableArea.left}, 0)`);
-
-    // Create gridlines as an axis with no labels and full-width ticks
-    gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 
     // Create the axes
     const xAxis = d3.axisBottom(xScale);
