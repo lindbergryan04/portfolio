@@ -359,8 +359,11 @@ function renderLanguageBreakdown(selection) {
 
     if (selectedCommits.length === 0) {
         container.innerHTML = '';
+        container.hidden = true;
         return;
     }
+    
+    container.hidden = false;
     const requiredCommits = selectedCommits.length ? selectedCommits : commits;
     const lines = requiredCommits.flatMap((d) => d.lines);
 
