@@ -4,8 +4,7 @@ import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 const projects = await fetchJSON('../lib/projects.json');
 const projectsContainer = document.querySelector('.projects');
 const searchInput = document.querySelector('.searchBar');
-const projectTitle = document.querySelector('.projects-title');
-const projectArticles = document.querySelectorAll('.projects article');
+
 
 
 let query = '';
@@ -76,6 +75,7 @@ function renderPieChart(projectsGiven) {
                 let filtered = filterProjects();
                 renderProjects(filtered, projectsContainer, 'h2');
                 renderPieChart(projects); // full dataset for full pie
+                updateProjectCount();
               });
     });
 
@@ -88,22 +88,28 @@ function renderPieChart(projectsGiven) {
     });
 }
 
+function updateProjectCount() {
+    const projectTitle = document.querySelector('.projects-title');
+    const projectArticles = document.querySelectorAll('.projects article');
+    const projectsAmount = projectArticles.length;
+    if (projectTitle) {
+        projectTitle.textContent = `${projectsAmount} Projects`;
+    }
+}
+
 // initial render
 renderProjects(projects, projectsContainer, 'h2');
-
-const projectsAmount = projectArticles.length;
-
-if (projectTitle) {
-    projectTitle.textContent = `${projectsAmount} Projects`;
-}
+updateProjectCount();
 
 renderPieChart(projects);
 
-// input listener
+// input listener for search bar
 searchInput.addEventListener('input', (event) => {
     query = event.target.value;
     let filtered = filterProjects();
     renderProjects(filtered, projectsContainer, 'h2');
     renderPieChart(projects);
+    updateProjectCount();
+
   });
   
