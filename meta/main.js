@@ -362,7 +362,7 @@ function renderLanguageBreakdown(selection) {
         container.hidden = true;
         return;
     }
-    
+
     container.hidden = false;
     const requiredCommits = selectedCommits.length ? selectedCommits : commits;
     const lines = requiredCommits.flatMap((d) => d.lines);
@@ -389,8 +389,33 @@ function renderLanguageBreakdown(selection) {
 }
 
 
+//slider logic
 let data = await loadData();
 let commits = processCommits(data);
+
+// Create the commitProgress variable
+let commitProgress = 100;
+
+// Create the time scale
+let timeScale = d3.scaleTime(
+    [d3.min(commits, (d) => d.datetime), d3.max(commits, (d) => d.datetime)],
+    [0, 100],
+);
+let commitMaxTime = timeScale.invert(commitProgress);
+
+// Make the time string present
+const selectedTime = d3.select('#selectedTime');
+selectedTime.text(timeScale.invert(commitProgress).toLocaleString('en-US', {
+    dateStyle: 'long',
+    timeStyle: 'short'
+}));
+
+// Add slider event listener
+const slider = document.getElementById('commit-slider');
+slider.addEventListener('input', (e) => {
+    const progress = parseInt(e.target.value);
+    selectedTime.text(timeScale.invert(progress).toLocaleString('en-US', {dateStyle: 'long', timeStyle: 'short'}));
+});
 
 renderScatterPlot(data, commits);
 renderCommitInfo(data, commits);

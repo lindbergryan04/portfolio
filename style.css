@@ -508,3 +508,14 @@ circle.selected {
   font-family: monospace;
   color: var(--text-color-med);
 }
+
+/* Slider */
+#slider-container {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+}
+
+#slider-container time {
+  margin-left: auto;
+} 
