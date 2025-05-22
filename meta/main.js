@@ -97,7 +97,9 @@ const width = 1000;
 const height = 600;
 let xScale;
 let yScale;
-function renderScatterPlot(data, commits) {
+function updateScatterPlot(data, currentCommits) {
+
+    d3.select('#chart svg').remove(); // Clear existing SVG
 
     const svg = d3
         .select('#chart')
@@ -119,7 +121,7 @@ function renderScatterPlot(data, commits) {
 
     xScale = d3
         .scaleTime()
-        .domain(d3.extent(commits, (d) => {
+        .domain(d3.extent(currentCommits, (d) => {
             // Create a new date with just the date part (time set to noon to avoid timezone issues)
             const date = new Date(d.datetime);
             date.setHours(12, 0, 0, 0);
@@ -143,14 +145,14 @@ function renderScatterPlot(data, commits) {
     gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 
     // Scale dots based on lines edited
-    const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+    const [minLines, maxLines] = d3.extent(currentCommits, (d) => d.totalLines);
     const rScale = d3
         .scaleSqrt()
-        .domain([minLines, maxLines])
+        .domain([minLines !== undefined ? minLines : 0, maxLines !== undefined ? maxLines : 1])
         .range([5, 12]); // set dot size based on lines edited
 
     // Sort commits by total lines in descending order (so smaller dots are on top and can be hovered over)
-    const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+    const sortedCommits = d3.sort(currentCommits, (d) => -d.totalLines);
 
     const dots = svg.append('g').attr('class', 'dots');
 
@@ -217,7 +219,7 @@ function createBrushSelector(svg) {
 /**
  * Renders statistics about the repository's commits and code
  * @param {Array} data - Array of line-level git log data
- * @param {Array} commits - Array of processed commit objects
+ * @param {Array} currentCommits - Array of processed (and potentially filtered) commit objects
  * 
  * Creates a statistics display showing:
  * - Total number of commits
@@ -233,7 +235,7 @@ function createBrushSelector(svg) {
  * - Values (dd elements) formatted appropriately
  * - Accent-colored values for emphasis
  */
-function renderCommitInfo(data, commits) {
+function updateCommitInfo(data, currentCommits) {
     // Clear existing content
     d3.select('#stats').html('');
 
@@ -242,7 +244,7 @@ function renderCommitInfo(data, commits) {
 
     // Add total commits
     dl.append('dt').text('Commits');
-    dl.append('dd').text(commits.length);
+    dl.append('dd').text(currentCommits.length);
 
     // Add total LOC
     dl.append('dt').html('Lines of code');
@@ -271,10 +273,10 @@ function renderCommitInfo(data, commits) {
 
     //Number of days worked on site
     dl.append('dt').text('Days worked on site');
-    dl.append('dd').text(new Set(commits.map(c => c.date.toISOString().split('T')[0])).size);
+    dl.append('dd').text(new Set(currentCommits.map(c => c.date.toISOString().split('T')[0])).size);
 
     const workByPeriod = d3.rollups(
-        data,
+        currentCommits.flatMap(c => c.lines),
         (v) => v.length,
         (d) => {
             const date = new Date(d.datetime);
@@ -319,17 +321,20 @@ function renderTooltipContent(commit) {
 // Brush selector functionality
 function brushed(event) {
     const selection = event.selection;
+
+    const currentDisplayCommits = d3.selectAll('circle').data();
+
     d3.selectAll('circle').classed('selected', (d) =>
         isCommitSelected(selection, d),
     );
-    renderSelectionCount(selection);
-    renderLanguageBreakdown(selection);
+    renderSelectionCount(selection, currentDisplayCommits); 
+    updateLanguageBreakdown(selection, currentDisplayCommits); 
 }
 
 // Selection count with brush selector
-function renderSelectionCount(selection) {
+function renderSelectionCount(selection, currentCommitsToConsider) { 
     const selectedCommits = selection
-        ? commits.filter((d) => isCommitSelected(selection, d))
+        ? currentCommitsToConsider.filter((d) => isCommitSelected(selection, d))
         : [];
 
     const countElement = document.querySelector('#selection-count');
@@ -351,9 +356,9 @@ function isCommitSelected(selection, commit) {
     return x >= x0 && x <= x1 && y >= y0 && y <= y1;
 }
 // Language breakdown with brush selector
-function renderLanguageBreakdown(selection) {
+function updateLanguageBreakdown(selection, currentCommitsToConsider) { 
     const selectedCommits = selection
-        ? commits.filter((d) => isCommitSelected(selection, d))
+        ? currentCommitsToConsider.filter((d) => isCommitSelected(selection, d)) 
         : [];
     const container = document.getElementById('language-breakdown');
 
@@ -364,8 +369,9 @@ function renderLanguageBreakdown(selection) {
     }
 
     container.hidden = false;
-    const requiredCommits = selectedCommits.length ? selectedCommits : commits;
-    const lines = requiredCommits.flatMap((d) => d.lines);
+    // If there are selected commits, use them; otherwise, use all currentCommitsToConsider for the breakdown
+    const commitsForBreakdown = selectedCommits.length > 0 ? selectedCommits : currentCommitsToConsider;
+    const lines = commitsForBreakdown.flatMap((d) => d.lines);
 
     // Use d3.rollup to count lines per language
     const breakdown = d3.rollup(
@@ -403,6 +409,14 @@ let timeScale = d3.scaleTime(
 );
 let commitMaxTime = timeScale.invert(commitProgress);
 
+let filteredCommits = []; // Initialize filteredCommits
+
+// Function to filter commits by commitMaxTime
+function filterCommitsByTime() {
+    commitMaxTime = timeScale.invert(commitProgress);
+    filteredCommits = commits.filter(commit => commit.datetime < commitMaxTime);
+}
+
 // Make the time string present
 const selectedTime = d3.select('#selectedTime');
 selectedTime.text(timeScale.invert(commitProgress).toLocaleString('en-US', {
@@ -413,13 +427,29 @@ selectedTime.text(timeScale.invert(commitProgress).toLocaleString('en-US', {
 // Add slider event listener
 const slider = document.getElementById('commit-slider');
 slider.addEventListener('input', (e) => {
-    const progress = parseInt(e.target.value);
-    selectedTime.text(timeScale.invert(progress).toLocaleString('en-US', {dateStyle: 'long', timeStyle: 'short'}));
+    commitProgress = parseInt(e.target.value); // Update commitProgress
+    selectedTime.text(timeScale.invert(commitProgress).toLocaleString('en-US', {dateStyle: 'long', timeStyle: 'short'}));
+    
+    filterCommitsByTime(); // Filter commits based on the new commitMaxTime
+    updateScatterPlot(data, filteredCommits); // Update scatter plot with filtered data 
+    
+    // Re-create the brush on the new SVG
+    createBrushSelector(d3.select('#chart svg')); 
+
+    updateCommitInfo(data, filteredCommits); // Update commit info stats with filtered data
+    
+    const brushNode = d3.select('#chart svg .brush').node(); 
+    const currentSelection = brushNode ? d3.brushSelection(brushNode) : null;
+
+    updateLanguageBreakdown(currentSelection, filteredCommits);
+    renderSelectionCount(currentSelection, filteredCommits);
 });
 
-renderScatterPlot(data, commits);
-renderCommitInfo(data, commits);
+// Initial setup
+filterCommitsByTime(); // Perform initial filtering
+updateScatterPlot(data, filteredCommits);
+updateCommitInfo(data, filteredCommits);
 createBrushSelector(d3.select('#chart svg'));
-renderLanguageBreakdown(null); // Initialize with no selection
+updateLanguageBreakdown(null, filteredCommits); // Initialize with no selection
 
 

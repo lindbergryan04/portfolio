@@ -511,11 +511,33 @@ circle.selected {
 
 /* Slider */
 #slider-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 0.5em;
+  align-items: start;
   flex: 1;
-  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+#slider-container label {
+  grid-column: 1;
+  grid-row: 1;
+  width: 10rem;
+  font-size: 12px;
+  align-self: center;
 }
 
 #slider-container time {
-  margin-left: auto;
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  margin-left: 0;
 } 
+
+#commit-slider {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  align-self: center;
+}
