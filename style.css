@@ -32,7 +32,7 @@
 
 /* Light theme styling */
 :root[data-theme="light"] {
-  --background-color: oklch(96% 0.025 260); 
+  --background-color: oklch(96% 0.025 260);
   --background-color-dark: #afafaf;
   --text-color: black;
   --text-color-light: #373737;
@@ -125,7 +125,7 @@ nav a:hover {
 .home {
   text-align: center;
   margin: 2rem auto;
-  margin-top:3.5rem;
+  margin-top: 3.5rem;
 }
 
 #name {
@@ -349,7 +349,7 @@ path {
   margin-bottom: 1.75em;
   margin-top: 2em;
   font-size: 1rem;
-} 
+}
 
 /* Meta Page */
 #stats {
@@ -388,45 +388,45 @@ path {
 
 /* Tooltip styles */
 dl.info {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.5em 1em;
-    background-color: var(--background-color);
-    padding: 1em;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px var(--shadow-color);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--shadow-color);
-    transition-duration: 500ms;
-    transition-property: opacity, visibility;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5em 1em;
+  background-color: var(--background-color);
+  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--shadow-color);
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
 }
 
 dl.info dt {
-    margin: 0;
-    color: var(--text-color);
-    opacity: 0.7;
+  margin: 0;
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
 dl.info dd {
-    margin: 0;
-    color: var(--color-accent);
-    font-weight: 600;
+  margin: 0;
+  color: var(--color-accent);
+  font-weight: 600;
 }
 
 .tooltip {
-    position: fixed;
-    top: 1em;
-    left: 1em;
-    pointer-events: none;
-    transition: opacity 200ms;
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  pointer-events: none;
+  transition: opacity 200ms;
 }
 
 .tooltip:not([hidden]) {
-    opacity: 1;
+  opacity: 1;
 }
 
 .tooltip[hidden] {
-    opacity: 0;
+  opacity: 0;
 }
 
 .tooltip a {
@@ -437,13 +437,17 @@ dl.info dd {
 
 /* Dot hover effects */
 circle {
-    transition: 200ms;
-    transform-origin: center;
-    transform-box: fill-box;
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+
+  @starting-style {
+    r: 0;
+  }
 }
 
 circle:hover {
-    transform: scale(1.5);
+  transform: scale(1.5);
 }
 
 dl.info[hidden]:not(:hover, :focus-within) {
@@ -454,7 +458,8 @@ dl.info[hidden]:not(:hover, :focus-within) {
 /* Brush selector effects*/
 @keyframes marching-ants {
   to {
-    stroke-dashoffset: -8; /* 5 + 3 */
+    stroke-dashoffset: -8;
+    /* 5 + 3 */
   }
 }
 
@@ -533,7 +538,7 @@ circle.selected {
   grid-row: 2;
   justify-self: end;
   margin-left: 0;
-} 
+}
 
 #commit-slider {
   grid-column: 2;

@@ -4,6 +4,7 @@ import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 // Run npx elocuent -d . -o meta/loc.csv --spaces 2 in terminal to refresh the loc.csv file
 
 async function loadData() {
+    // Loads and parses line-level git log data from loc.csv
     const data = await d3.csv('loc.csv', (row) => ({
         ...row,
         line: Number(row.line), // or just +row.line
@@ -16,19 +17,11 @@ async function loadData() {
     return data;
 }
 /**
- * Groups data by commit and calculates commit-level statistics
- * @param {Array} data - Array of line-level git log data
- * @returns {Array} Array of commit objects with metadata and statistics
- * Each commit object contains:
- * - id: Commit hash
- * - url: GitHub commit URL 
- * - author: Commit author
- * - date: Commit date
- * - time: Commit time
- * - timezone: Commit timezone
- * - datetime: JavaScript Date object
- * - hourFrac: Hour of day as decimal (e.g. 14.5 = 2:30 PM)
- * - totalLines: Number of lines modified in commit
+ * Groups data by commit and calculates commit-level statistics.
+ * @param {Array} data - Array of line-level git log data from loadData().
+ * @returns {Array} Array of commit objects with aggregated data.
+ * Each commit includes metadata, hourFrac for time analysis, totalLines,
+ * and a non-enumerable 'lines' property holding the raw line data for that commit.
  */
 function processCommits(data) {
     return d3
@@ -63,12 +56,14 @@ function processCommits(data) {
 
 // Tooltip visibility
 function updateTooltipVisibility(isVisible) {
+    // Shows or hides the commit tooltip.
     const tooltip = document.getElementById('commit-tooltip');
     tooltip.hidden = !isVisible;
 }
 
 // Tooltip position
 function updateTooltipPosition(event) {
+    // Positions the tooltip near the mouse cursor.
     const tooltip = document.getElementById('commit-tooltip');
     tooltip.style.left = `${event.clientX}px`;
     tooltip.style.top = `${event.clientY}px`;
@@ -77,52 +72,57 @@ function updateTooltipPosition(event) {
 // Scatter plot of commits by time of day
 
 /**
- * Renders a scatter plot visualization of commit times
- * @param {Array} data - Array of line-level git log data
- * @param {Array} commits - Array of processed commit objects
+ * Renders or updates the scatter plot of commits.
+ * @param {Array} data - Original line-level git log data (used by other functions).
+ * @param {Array} currentCommits - Array of processed commit objects to display.
  * 
- * Creates a scatter plot where:
- * - X-axis: Date of commits (aligned to noon to avoid timezone issues)
- * - Y-axis: Time of day (0-24 hours)
- * - Dots: Individual commits, colored using the theme's accent color
- * - Gridlines: Horizontal lines for time reference
- * 
- * The plot includes:
- * - Margins for proper spacing
- * - Gridlines for better readability
- * - Formatted time axis (HH:00 format)
- * - Date axis with proper scaling
+ * Plot details:
+ * - X-axis: Date of commit (time set to noon to avoid timezone issues).
+ * - Y-axis: Time of day (0-24 hours).
+ * - Dots: Represent individual commits. Size based on lines changed.
+ *         Color uses theme's accent color.
+ * - Transitions: Dots, axes, and gridlines transition smoothly on updates.
+ *   Dot radius transitions at a speed proportional to its change in size.
  */
 const width = 1000;
 const height = 600;
-let xScale;
-let yScale;
+const margin = { top: 10, right: 10, bottom: 30, left: 20 };
+const usableArea = {
+    top: margin.top,
+    right: width - margin.right,
+    bottom: height - margin.bottom,
+    left: margin.left,
+    width: width - margin.left - margin.right,
+    height: height - margin.top - margin.bottom,
+};
+let xScale; // Keep as global, updated by updateScatterPlot
+let yScale; // Keep as global, updated by updateScatterPlot
+const TRANSITION_DURATION = 300; // Duration for all transitions
+
 function updateScatterPlot(data, currentCommits) {
+    let svg = d3.select('#chart').select('svg');
 
-    d3.select('#chart svg').remove(); // Clear existing SVG
+    // Initialize SVG and persistent groups if this is the first render.
+    if (svg.empty()) {
+        svg = d3.select('#chart')
+            .attr('width', width)
+            .attr('height', height)
+            .append('svg')
+            .attr('viewBox', [0, 0, width, height])
+            .style('overflow', 'visible');
 
-    const svg = d3
-        .select('#chart')
-        .attr('width', width)
-        .attr('height', height)
-        .append('svg')
-        .attr('viewBox', [0, 0, width, height])
-        .style('overflow', 'visible');
+        svg.append('g').attr('class', 'gridlines');
+        svg.append('g').attr('class', 'x-axis axis') // Add class 'axis' for common styling if any
+            .attr('transform', `translate(0, ${usableArea.bottom})`);
+        svg.append('g').attr('class', 'y-axis axis') // Add class 'axis'
+            .attr('transform', `translate(${usableArea.left}, 0)`);
+        svg.append('g').attr('class', 'dots'); // Dots group should be appended last or raised
+    }
 
-    const margin = { top: 10, right: 10, bottom: 30, left: 20 };
-    const usableArea = {
-        top: margin.top,
-        right: width - margin.right,
-        bottom: height - margin.bottom,
-        left: margin.left,
-        width: width - margin.left - margin.right,
-        height: height - margin.top - margin.bottom,
-    };
-
+    // X-axis scale: Time-based, mapping commit dates to horizontal position.
     xScale = d3
         .scaleTime()
         .domain(d3.extent(currentCommits, (d) => {
-            // Create a new date with just the date part (time set to noon to avoid timezone issues)
             const date = new Date(d.datetime);
             date.setHours(12, 0, 0, 0);
             return date;
@@ -130,110 +130,127 @@ function updateScatterPlot(data, currentCommits) {
         .range([usableArea.left, usableArea.right])
         .nice();
 
+    // Y-axis scale: Linear, mapping hour of day (0-24) to vertical position.
     yScale = d3
         .scaleLinear()
         .domain([0, 24])
         .range([usableArea.bottom, usableArea.top]);
 
-    // Add gridlines BEFORE the axes
-    const gridlines = svg
-        .append('g')
-        .attr('class', 'gridlines')
+    // Update gridlines with transition.
+    const gridlinesGroup = svg.select('g.gridlines')
         .attr('transform', `translate(${usableArea.left}, 0)`);
 
-    // Create gridlines as an axis with no labels and full-width ticks
-    gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
+    gridlinesGroup.transition().duration(TRANSITION_DURATION)
+        .call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 
-    // Scale dots based on lines edited
+    // Radius scale for dots: Square root scale based on total lines in commit.
     const [minLines, maxLines] = d3.extent(currentCommits, (d) => d.totalLines);
     const rScale = d3
         .scaleSqrt()
         .domain([minLines !== undefined ? minLines : 0, maxLines !== undefined ? maxLines : 1])
-        .range([5, 12]); // set dot size based on lines edited
+        .range([5, 15]);
 
-    // Sort commits by total lines in descending order (so smaller dots are on top and can be hovered over)
+    // Sort commits by total lines (desc) so smaller dots render on top of larger ones.
     const sortedCommits = d3.sort(currentCommits, (d) => -d.totalLines);
 
-    const dots = svg.append('g').attr('class', 'dots');
+    const dotsGroup = svg.select('g.dots');
+    const radiusTransitionMultiplier = 30; // ms per pixel for radius transition speed.
 
-    dots
+    dotsGroup
         .selectAll('circle')
-        .data(sortedCommits)
-        .join('circle')
-        .attr('cx', (d) => {
-            const date = new Date(d.datetime);
-            date.setHours(12, 0, 0, 0);
-            return xScale(date);
-        })
-        .attr('cy', (d) => yScale(d.hourFrac))
-        .attr('r', (d) => rScale(d.totalLines))
-        .attr('fill', 'var(--color-accent)')
-        .style('fill-opacity', 0.8) // transparency for overlapping dots
-        .style('cursor', 'pointer') // show pointer cursor on hover
-        .on('mouseenter', (event, commit) => {
-            renderTooltipContent(commit);
-            updateTooltipVisibility(true);
-            updateTooltipPosition(event);
-        })
-        .on('mouseleave', () => {
-            updateTooltipVisibility(false);
-        })
-        .on('click', (_, commit) => {
-            window.open(commit.url, '_blank');
-        });
+        .data(sortedCommits, d => d.id) // Key by commit ID for object constancy.
+        .join(
+            enter => enter.append('circle')
+                .attr('cx', (d) => { // Initial horizontal position.
+                    const date = new Date(d.datetime);
+                    date.setHours(12, 0, 0, 0);
+                    return xScale(date);
+                })
+                .attr('cy', (d) => yScale(d.hourFrac)) // Initial vertical position.
+                .attr('r', 0) 
+                .style('--r', '0px') // Initial CSS variable for radius animation.
+                .attr('fill', 'var(--color-accent)')
+                .style('fill-opacity', 0)
+                .style('cursor', 'pointer')
+                // CSS transition: fixed for cx, cy, opacity; dynamic for radius via var(--r).
+                .style('transition', `cx ${TRANSITION_DURATION}ms, cy ${TRANSITION_DURATION}ms, fill-opacity ${TRANSITION_DURATION}ms, r calc(var(--r) * ${radiusTransitionMultiplier}ms)`)
+                .on('mouseenter', (event, commit) => { // Tooltip and hover effects.
+                    renderTooltipContent(commit);
+                    updateTooltipVisibility(true);
+                    updateTooltipPosition(event);
+                    window.open(commit.url, '_blank');
+                })
+                .call(sel => sel.transition() // D3 transition to set final styles for enter.
+                    .duration(TRANSITION_DURATION) 
+                    .style('fill-opacity', 0.8)
+                    // Set target CSS variable --r and SVG attribute r for CSS transition.
+                    .style('--r', (d) => rScale(d.totalLines) + 'px') 
+                    .attr('r', (d) => rScale(d.totalLines)) 
+                ),
+            update => update // Update existing circles.
+                .call(sel => sel.transition().duration(TRANSITION_DURATION)
+                    .attr('cx', (d) => {
+                        const date = new Date(d.datetime);
+                        date.setHours(12, 0, 0, 0);
+                        return xScale(date);
+                    })
+                    .attr('cy', (d) => yScale(d.hourFrac))
+                    .style('fill-opacity', 0.8) 
+                    // Update target CSS variable and SVG attribute for radius transition.
+                    .style('--r', (d) => rScale(d.totalLines) + 'px')
+                    .attr('r', (d) => rScale(d.totalLines))
+                ),
+            exit => exit // Remove circles that are no longer in the data.
+                .call(sel => sel.transition().duration(TRANSITION_DURATION) 
+                    .style('fill-opacity', 0)
+                    .style('--r', '0px') // Trigger CSS shrink animation for radius.
+                    .attr('r', 0)      
+                    .remove())
+        );
 
-    // Create the axes
+    // Define X and Y axes.
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3
         .axisLeft(yScale)
         .tickFormat((d) => String(d % 24).padStart(2, '0') + ':00');
 
-    // Add X axis
-    svg
-        .append('g')
-        .attr('transform', `translate(0, ${usableArea.bottom})`)
+    // Add/update X axis with transition.
+    svg.select('g.x-axis')
+        .transition().duration(TRANSITION_DURATION)
         .call(xAxis);
 
-    // Add Y axis
-    svg
-        .append('g')
-        .attr('transform', `translate(${usableArea.left}, 0)`)
+    // Add/update Y axis with transition.
+    svg.select('g.y-axis')
+        .transition().duration(TRANSITION_DURATION)
         .call(yAxis);
 
+    dotsGroup.raise(); // Ensure dots are rendered on top of axes and gridlines.
 }
-// Brush selector
-function createBrushSelector(svg) {
-    // Create a group element for the brush
-    const brushGroup = svg.append('g')
-        .attr('class', 'brush');
 
-    // Create brush
-    brushGroup.call(d3.brush().on('start brush end', brushed));
+// Initializes or updates the brush selector on the scatter plot.
+function createBrushSelector(svg) { // svg parameter is the d3 selection of the main svg
+    let brushGroup = svg.select('g.brush');
+    if (brushGroup.empty()) {
+        brushGroup = svg.append('g').attr('class', 'brush');
+    }
 
-    // Raise dots and everything after overlay
-    svg.selectAll('.dots, .overlay ~ *').raise();
+    const brush = d3.brush()
+        .extent([[usableArea.left, usableArea.top], [usableArea.right, usableArea.bottom]]) // Define brushable area.
+        .on('start brush end', brushed); // Event listener for brush actions.
+
+    brushGroup.call(brush);
+    // Ensure the brush overlay is on top of dots for interaction.
+    brushGroup.raise(); 
 }
 
 
 // Commit info stats
 /**
- * Renders statistics about the repository's commits and code
- * @param {Array} data - Array of line-level git log data
- * @param {Array} currentCommits - Array of processed (and potentially filtered) commit objects
+ * Updates the statistics display about the repository and commits.
+ * @param {Array} data - Original line-level git log data.
+ * @param {Array} currentCommits - Currently displayed/filtered commit objects.
  * 
- * Creates a statistics display showing:
- * - Total number of commits
- * - Total lines of code
- * - Maximum lines in a single file
- * - Average lines of code per file
- * - Total number of unique files
- * - Number of unique days worked
- * - Most common time of day for commits
- * 
- * Statistics are displayed in a grid layout with:
- * - Labels (dt elements) for each statistic
- * - Values (dd elements) formatted appropriately
- * - Accent-colored values for emphasis
+ * Shows stats like total commits, LOC, file stats, days worked, common work time.
  */
 function updateCommitInfo(data, currentCommits) {
     // Clear existing content
@@ -298,7 +315,7 @@ function updateCommitInfo(data, currentCommits) {
     dl.append('dd').text(formattedTime);
 }
 
-// Add tooltip functionality
+// Populates the tooltip with details of a given commit.
 function renderTooltipContent(commit) {
     const link = document.getElementById('commit-link');
     const date = document.getElementById('commit-date');
@@ -318,20 +335,22 @@ function renderTooltipContent(commit) {
     lines.textContent = commit.totalLines;
 }
 
-// Brush selector functionality
+// Callback for brush events ('start', 'brush', 'end').
 function brushed(event) {
-    const selection = event.selection;
+    const selection = event.selection; // Coordinates of the brush selection rectangle.
 
-    const currentDisplayCommits = d3.selectAll('circle').data();
+    const currentDisplayCommits = d3.selectAll('#chart svg .dots circle').data(); // Get data from currently rendered circles.
 
-    d3.selectAll('circle').classed('selected', (d) =>
+    // Highlight selected circles.
+    d3.selectAll('#chart svg .dots circle').classed('selected', (d) =>
         isCommitSelected(selection, d),
     );
+    // Update UI elements based on the brush selection.
     renderSelectionCount(selection, currentDisplayCommits); 
     updateLanguageBreakdown(selection, currentDisplayCommits); 
 }
 
-// Selection count with brush selector
+// Updates the text displaying the number of selected commits.
 function renderSelectionCount(selection, currentCommitsToConsider) { 
     const selectedCommits = selection
         ? currentCommitsToConsider.filter((d) => isCommitSelected(selection, d))
@@ -344,18 +363,25 @@ function renderSelectionCount(selection, currentCommitsToConsider) {
     return selectedCommits;
 }
 
-// Detect if commit is selected by brush selector
+// Checks if a commit dot is within the brush selection area.
 function isCommitSelected(selection, commit) {
     if (!selection) {
-        return false;
+        return false; // No active brush selection.
     }
+    // selection provides [[x0,y0], [x1,y1]] in screen coordinates.
+    // xScale and yScale map data values to screen coordinates.
     const [x0, x1] = selection.map((d) => d[0]);
     const [y0, y1] = selection.map((d) => d[1]);
-    const x = xScale(commit.datetime);
+    // Create a date object for xScale, ensuring time is set to noon like in the plot.
+    const commitDateForScale = new Date(commit.datetime);
+    commitDateForScale.setHours(12,0,0,0);
+
+    const x = xScale(commitDateForScale); // Use the consistent date for scaling.
     const y = yScale(commit.hourFrac);
     return x >= x0 && x <= x1 && y >= y0 && y <= y1;
 }
-// Language breakdown with brush selector
+
+// Updates the language breakdown display based on selected commits.
 function updateLanguageBreakdown(selection, currentCommitsToConsider) { 
     const selectedCommits = selection
         ? currentCommitsToConsider.filter((d) => isCommitSelected(selection, d)) 
@@ -395,61 +421,62 @@ function updateLanguageBreakdown(selection, currentCommitsToConsider) {
 }
 
 
-//slider logic
+// Slider logic: Filters commits by date and updates the visualization.
 let data = await loadData();
 let commits = processCommits(data);
 
-// Create the commitProgress variable
+// commitProgress: Percentage representing the point in time on the slider (0-100).
 let commitProgress = 100;
 
-// Create the time scale
+// timeScale: Maps commit datetimes to slider progress (0-100) and vice-versa.
 let timeScale = d3.scaleTime(
     [d3.min(commits, (d) => d.datetime), d3.max(commits, (d) => d.datetime)],
     [0, 100],
 );
-let commitMaxTime = timeScale.invert(commitProgress);
+let commitMaxTime = timeScale.invert(commitProgress); // The latest commit time to display.
 
-let filteredCommits = []; // Initialize filteredCommits
+let filteredCommits = []; // Stores commits that are earlier than commitMaxTime.
 
-// Function to filter commits by commitMaxTime
+// Filters the global 'commits' array based on the current 'commitMaxTime'.
 function filterCommitsByTime() {
     commitMaxTime = timeScale.invert(commitProgress);
     filteredCommits = commits.filter(commit => commit.datetime < commitMaxTime);
 }
 
-// Make the time string present
+// Display the selected time from the slider.
 const selectedTime = d3.select('#selectedTime');
 selectedTime.text(timeScale.invert(commitProgress).toLocaleString('en-US', {
     dateStyle: 'long',
     timeStyle: 'short'
 }));
 
-// Add slider event listener
+// Event listener for the commit time slider.
 const slider = document.getElementById('commit-slider');
 slider.addEventListener('input', (e) => {
-    commitProgress = parseInt(e.target.value); // Update commitProgress
+    commitProgress = parseInt(e.target.value); 
     selectedTime.text(timeScale.invert(commitProgress).toLocaleString('en-US', {dateStyle: 'long', timeStyle: 'short'}));
     
-    filterCommitsByTime(); // Filter commits based on the new commitMaxTime
-    updateScatterPlot(data, filteredCommits); // Update scatter plot with filtered data 
+    filterCommitsByTime(); 
+    updateScatterPlot(data, filteredCommits); 
     
-    // Re-create the brush on the new SVG
-    createBrushSelector(d3.select('#chart svg')); 
+    // Clear any existing brush selection when the time range changes.
+    const brushGroup = d3.select('#chart svg g.brush');
+    if (!brushGroup.empty()) {
+        d3.brush().move(brushGroup, null);
+    }
 
-    updateCommitInfo(data, filteredCommits); // Update commit info stats with filtered data
+    updateCommitInfo(data, filteredCommits); 
     
-    const brushNode = d3.select('#chart svg .brush').node(); 
-    const currentSelection = brushNode ? d3.brushSelection(brushNode) : null;
-
-    updateLanguageBreakdown(currentSelection, filteredCommits);
-    renderSelectionCount(currentSelection, filteredCommits);
+    // Update language breakdown and selection count for the new (cleared) brush state.
+    updateLanguageBreakdown(null, filteredCommits);
+    renderSelectionCount(null, filteredCommits);
 });
 
-// Initial setup
-filterCommitsByTime(); // Perform initial filtering
-updateScatterPlot(data, filteredCommits);
-updateCommitInfo(data, filteredCommits);
-createBrushSelector(d3.select('#chart svg'));
-updateLanguageBreakdown(null, filteredCommits); // Initialize with no selection
+// Initial setup when the script loads.
+filterCommitsByTime(); // Perform initial filtering based on default slider position.
+updateScatterPlot(data, filteredCommits); // Render initial scatter plot.
+updateCommitInfo(data, filteredCommits);   // Render initial commit stats.
+createBrushSelector(d3.select('#chart svg')); // Initialize the brush selector.
+updateLanguageBreakdown(null, filteredCommits); // Initialize language breakdown (no selection).
 
 
