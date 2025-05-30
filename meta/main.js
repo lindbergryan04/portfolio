@@ -167,7 +167,7 @@ function updateScatterPlot(data, currentCommits) {
                     return xScale(date);
                 })
                 .attr('cy', (d) => yScale(d.hourFrac)) // Initial vertical position.
-                .attr('r', 0) 
+                .attr('r', 0)
                 .style('--r', '0px') // Initial CSS variable for radius animation.
                 .attr('fill', 'var(--color-accent)')
                 .style('fill-opacity', 0)
@@ -181,11 +181,11 @@ function updateScatterPlot(data, currentCommits) {
                     window.open(commit.url, '_blank');
                 })
                 .call(sel => sel.transition() // D3 transition to set final styles for enter.
-                    .duration(TRANSITION_DURATION) 
+                    .duration(TRANSITION_DURATION)
                     .style('fill-opacity', 0.8)
                     // Set target CSS variable --r and SVG attribute r for CSS transition.
-                    .style('--r', (d) => rScale(d.totalLines) + 'px') 
-                    .attr('r', (d) => rScale(d.totalLines)) 
+                    .style('--r', (d) => rScale(d.totalLines) + 'px')
+                    .attr('r', (d) => rScale(d.totalLines))
                 ),
             update => update // Update existing circles.
                 .call(sel => sel.transition().duration(TRANSITION_DURATION)
@@ -195,16 +195,16 @@ function updateScatterPlot(data, currentCommits) {
                         return xScale(date);
                     })
                     .attr('cy', (d) => yScale(d.hourFrac))
-                    .style('fill-opacity', 0.8) 
+                    .style('fill-opacity', 0.8)
                     // Update target CSS variable and SVG attribute for radius transition.
                     .style('--r', (d) => rScale(d.totalLines) + 'px')
                     .attr('r', (d) => rScale(d.totalLines))
                 ),
             exit => exit // Remove circles that are no longer in the data.
-                .call(sel => sel.transition().duration(TRANSITION_DURATION) 
+                .call(sel => sel.transition().duration(TRANSITION_DURATION)
                     .style('fill-opacity', 0)
                     .style('--r', '0px') // Trigger CSS shrink animation for radius.
-                    .attr('r', 0)      
+                    .attr('r', 0)
                     .remove())
         );
 
@@ -240,7 +240,7 @@ function createBrushSelector(svg) { // svg parameter is the d3 selection of the 
 
     brushGroup.call(brush);
     // Ensure the brush overlay is on top of dots for interaction.
-    brushGroup.raise(); 
+    brushGroup.raise();
 }
 
 
@@ -346,12 +346,12 @@ function brushed(event) {
         isCommitSelected(selection, d),
     );
     // Update UI elements based on the brush selection.
-    renderSelectionCount(selection, currentDisplayCommits); 
-    updateLanguageBreakdown(selection, currentDisplayCommits); 
+    renderSelectionCount(selection, currentDisplayCommits);
+    updateLanguageBreakdown(selection, currentDisplayCommits);
 }
 
 // Updates the text displaying the number of selected commits.
-function renderSelectionCount(selection, currentCommitsToConsider) { 
+function renderSelectionCount(selection, currentCommitsToConsider) {
     const selectedCommits = selection
         ? currentCommitsToConsider.filter((d) => isCommitSelected(selection, d))
         : [];
@@ -374,7 +374,7 @@ function isCommitSelected(selection, commit) {
     const [y0, y1] = selection.map((d) => d[1]);
     // Create a date object for xScale, ensuring time is set to noon like in the plot.
     const commitDateForScale = new Date(commit.datetime);
-    commitDateForScale.setHours(12,0,0,0);
+    commitDateForScale.setHours(12, 0, 0, 0);
 
     const x = xScale(commitDateForScale); // Use the consistent date for scaling.
     const y = yScale(commit.hourFrac);
@@ -382,9 +382,9 @@ function isCommitSelected(selection, commit) {
 }
 
 // Updates the language breakdown display based on selected commits.
-function updateLanguageBreakdown(selection, currentCommitsToConsider) { 
+function updateLanguageBreakdown(selection, currentCommitsToConsider) {
     const selectedCommits = selection
-        ? currentCommitsToConsider.filter((d) => isCommitSelected(selection, d)) 
+        ? currentCommitsToConsider.filter((d) => isCommitSelected(selection, d))
         : [];
     const container = document.getElementById('language-breakdown');
 
@@ -453,24 +453,69 @@ selectedTime.text(timeScale.invert(commitProgress).toLocaleString('en-US', {
 // Event listener for the commit time slider.
 const slider = document.getElementById('commit-slider');
 slider.addEventListener('input', (e) => {
-    commitProgress = parseInt(e.target.value); 
-    selectedTime.text(timeScale.invert(commitProgress).toLocaleString('en-US', {dateStyle: 'long', timeStyle: 'short'}));
-    
-    filterCommitsByTime(); 
-    updateScatterPlot(data, filteredCommits); 
-    
+    commitProgress = parseInt(e.target.value);
+    selectedTime.text(timeScale.invert(commitProgress).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' }));
+
+    filterCommitsByTime();
+    updateScatterPlot(data, filteredCommits);
+
     // Clear any existing brush selection when the time range changes.
     const brushGroup = d3.select('#chart svg g.brush');
     if (!brushGroup.empty()) {
         d3.brush().move(brushGroup, null);
     }
 
-    updateCommitInfo(data, filteredCommits); 
-    
+    updateCommitInfo(data, filteredCommits);
+
     // Update language breakdown and selection count for the new (cleared) brush state.
     updateLanguageBreakdown(null, filteredCommits);
     renderSelectionCount(null, filteredCommits);
+    updateFileDisplay(filteredCommits); // Update the file display
 });
+
+// Function to update the file display based on filtered commits
+function updateFileDisplay(currentFilteredCommits) {
+    // Get all lines from the currently filtered commits
+    let lines = currentFilteredCommits.flatMap((d) => d.lines);
+
+    // Group lines by file name and count lines per file
+    let files = d3
+        .groups(lines, (d) => d.file)
+        .map(([name, fileLines]) => { 
+            return { name, lines: fileLines }; 
+        });
+
+    // Create or update the container for the files using D3's join pattern
+    let filesContainer = d3
+        .select('#files')
+        .selectAll('div.file-entry') 
+        .data(files, (d) => d.name) 
+        .join(
+            (enter) =>
+                enter.append('div')
+                    .attr('class', 'file-entry') // Add class for the main div container of dt and dd
+                    .call((div) => {
+                        const dt = div.append('dt');
+                        dt.append('code'); 
+                        dt.append('small'); // Add small for line count text
+                        div.append('dd'); 
+                    }),
+        );
+
+    // Update the filename and line count text in <dt>
+    filesContainer.select('dt > code').html((d) => d.name);
+    filesContainer.select('dt > small').html((d) => `${d.lines.length} lines`);
+
+    // For each file, create/update the unit visualization in <dd>
+    filesContainer.select('dd')
+        .each(function(d) { // 'd' here is a file object { name, lines: [...] }
+            d3.select(this) // 'this' is the <dd> element
+                .selectAll('div.loc')
+                .data(d.lines) // Bind to the lines of the current file
+                .join('div')
+                .attr('class', 'loc');
+        });
+}
 
 // Initial setup when the script loads.
 filterCommitsByTime(); // Perform initial filtering based on default slider position.
@@ -478,5 +523,6 @@ updateScatterPlot(data, filteredCommits); // Render initial scatter plot.
 updateCommitInfo(data, filteredCommits);   // Render initial commit stats.
 createBrushSelector(d3.select('#chart svg')); // Initialize the brush selector.
 updateLanguageBreakdown(null, filteredCommits); // Initialize language breakdown (no selection).
+updateFileDisplay(filteredCommits); // Initial file display
 
 

@@ -12,10 +12,20 @@
     <h1>Meta Statistics</h1>
     <h2>Website Commits by Time of Day</h2>
     <div id="slider-container">
-      <label>Show commits until:</label>
-      <input type="range" min="0" max="100" value="100" id="commit-slider" class="slider"/>
-      <time id="selectedTime"></time>
+        <label>Show commits until:</label>
+        <input type="range" min="0" max="100" value="100" id="commit-slider" class="slider" />
+        <time id="selectedTime"></time>
     </div>
+    <dl id="files">
+        <!-- we want the following structure for each file:
+        <div>
+          <dt>
+            <code>{file.name}</code>
+          </dt>
+          <dd>{file.lines.length} lines</dd>
+        </div>
+        -->
+    </dl>
     <div id="chart"></div>
 
     <p id="selection-count">No commits selected</p>

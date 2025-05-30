@@ -17,12 +17,12 @@
 /* Dark theme styling */
 :root[data-theme="dark"] {
   --background-color: oklch(0.19 0.0617 260);
-  --background-color-dark: #1f1f1f;
+  --background-color-dark: #1f1f1f; /* Used for elements like language breakdown bg */
   --text-color: oklch(0.92 0 0);
-  --text-color-light: #a0a0a0;
-  --text-color-med: #dcdcdc;
+  --text-color-light: #a0a0a0; /* For less prominent text */
+  --text-color-med: #dcdcdc;   /* For medium emphasis text */
   --color-accent: oklch(70% 0.2 280);
-  --color-accent-opp: oklch(65% 0.3 280);
+  --color-accent-opp: oklch(65% 0.3 280); /* Accent for selected items, e.g., circles */
   --hover-bg: oklch(40% 0.05 280);
   --input-bg: oklch(30% 0.05 260);
   --input-text: white;
@@ -33,7 +33,7 @@
 /* Light theme styling */
 :root[data-theme="light"] {
   --background-color: oklch(96% 0.025 260);
-  --background-color-dark: #afafaf;
+  --background-color-dark: #afafaf; /* Used for elements like language breakdown bg */
   --text-color: black;
   --text-color-light: #373737;
   --text-color-med: #676767;
@@ -67,8 +67,7 @@ body {
 nav {
   display: flex;
   --border-color: oklch(50% 10% 200 / 40%);
-  border-bottom: 1px solid;
-  border-bottom-color: var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   margin-bottom: 1.5em;
   background-color: var(--background-color);
 }
@@ -230,7 +229,6 @@ strong {
 
 
 /* Github Stats on Homepage */
-
 #profile-stats {
   margin-top: 1rem;
   padding: 1rem;
@@ -279,11 +277,9 @@ strong {
   overflow: visible;
 }
 
-/* target pie wedge on hover */
-&:has(path:hover) {
-  path:not(:hover) {
-    opacity: 0.5;
-  }
+/* Target pie wedge on hover: reduce opacity of non-hovered wedges */
+#projects-pie-plot:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
 }
 
 path {
@@ -292,11 +288,11 @@ path {
 }
 
 .selected {
-  --color: oklch(70% 0.2 280) !important;
+  --color: oklch(70% 0.2 280) !important; /* Ensure selection color override */
+}
 
-  &:is(path) {
-    fill: var(--color);
-  }
+.selected:is(path) {
+  fill: var(--color);
 }
 
 .legend-item.selected {
@@ -304,8 +300,6 @@ path {
   border-radius: 0.5em;
   padding: 0.2em 0.5em;
 }
-
-/**/
 
 .legend {
   display: grid;
@@ -329,10 +323,8 @@ path {
 .swatch {
   width: 1em;
   aspect-ratio: 1 / 1;
-  /* Perfect square */
   background-color: var(--color);
   border-radius: 0.2em;
-  /* Rounded square; set to 50% for circle */
   display: inline-block;
 }
 
@@ -351,7 +343,9 @@ path {
   font-size: 1rem;
 }
 
-/* Meta Page */
+/* Meta Page Specific Styles */
+
+/* Statistics block (total commits, LOC, etc.) */
 #stats {
   margin-top: 1rem;
   padding: 1rem;
@@ -365,7 +359,7 @@ path {
   grid-template-columns: repeat(4, 1fr);
   row-gap: 0.5rem;
   column-gap: 2rem;
-  text-align: center
+  text-align: center;
 }
 
 #stats dl dt {
@@ -380,13 +374,14 @@ path {
   color: var(--color-accent);
 }
 
+/* Scatter plot gridlines */
 .gridlines {
   stroke: var(--gridline-color);
   stroke-width: 0.5;
-  color: var(--gridline-color);
+  color: var(--gridline-color); /* Fallback, though stroke is primary for SVG lines */
 }
 
-/* Tooltip styles */
+/* Commit tooltip styles */
 dl.info {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -397,8 +392,7 @@ dl.info {
   box-shadow: 0 2px 8px var(--shadow-color);
   backdrop-filter: blur(8px);
   border: 1px solid var(--shadow-color);
-  transition-duration: 500ms;
-  transition-property: opacity, visibility;
+  /* transition-duration and property are for visibility, handled by .tooltip */
 }
 
 dl.info dt {
@@ -413,21 +407,21 @@ dl.info dd {
   font-weight: 600;
 }
 
+/* General tooltip container for positioning and visibility */
 .tooltip {
   position: fixed;
   top: 1em;
   left: 1em;
-  pointer-events: none;
+  pointer-events: none; /* Allows clicks to pass through to elements underneath */
   transition: opacity 200ms;
+  opacity: 0; /* Hidden by default, shown by adding class or removing [hidden] */
 }
 
 .tooltip:not([hidden]) {
   opacity: 1;
 }
 
-.tooltip[hidden] {
-  opacity: 0;
-}
+/* .tooltip[hidden] is default state, opacity 0 is already set */
 
 .tooltip a {
   color: var(--color-accent);
@@ -435,35 +429,34 @@ dl.info dd {
   font-weight: 600;
 }
 
-/* Dot hover effects */
+/* Scatter plot dot hover effects */
 circle {
-  transition: 200ms;
+  transition: transform 200ms; /* Only transition transform for hover */
+  /* r transition is handled by JS/CSS for dynamic duration */
   transform-origin: center;
   transform-box: fill-box;
 
-  @starting-style {
-    r: 0;
-  }
+  /* @starting-style for r is effectively handled by D3 join and initial attributes */
 }
 
 circle:hover {
   transform: scale(1.5);
 }
 
-dl.info[hidden]:not(:hover, :focus-within) {
+/* Redundant: .tooltip[hidden] already makes it not visible */
+/* dl.info[hidden]:not(:hover, :focus-within) {
   opacity: 0;
   visibility: hidden;
-}
+} */
 
-/* Brush selector effects*/
+/* Brush selector effects */
 @keyframes marching-ants {
   to {
-    stroke-dashoffset: -8;
-    /* 5 + 3 */
+    stroke-dashoffset: -8; /* Animates the dashed line */
   }
 }
 
-.selection {
+.selection { /* The brush selection rectangle */
   fill-opacity: 0.1;
   stroke: var(--gridline-color);
   stroke-opacity: 0.7;
@@ -471,11 +464,12 @@ dl.info[hidden]:not(:hover, :focus-within) {
   animation: marching-ants 2s linear infinite;
 }
 
+/* Style for dots selected by the brush */
 circle.selected {
   fill: var(--color-accent-opp);
 }
 
-/* Brush selector output styles (language breakdown and selection count) */
+/* Language breakdown and selection count (output from brush) */
 #selection-count {
   font-weight: 600;
   font-size: 1.1rem;
@@ -514,7 +508,7 @@ circle.selected {
   color: var(--text-color-med);
 }
 
-/* Slider */
+/* Commit time slider */
 #slider-container {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -545,4 +539,58 @@ circle.selected {
   grid-row: 1;
   width: 100%;
   align-self: center;
+}
+
+/* Files display on Meta Page (Unit Visualization) */
+#files {
+  display: grid;
+  grid-template-columns: 1fr 4fr; /* Filename | Unit viz */
+  margin-top: 2rem;
+  gap: 0.25em 1em;
+}
+
+#files > div.file-entry { /* Each file row */
+  grid-column: 1 / -1; /* Span both columns of the parent grid */
+  display: grid;
+  grid-template-columns: subgrid; /* Inherit column definition from #files */
+  padding: 0.25em 0;
+  border-bottom: 1px solid var(--gridline-color);
+}
+
+#files > div.file-entry:last-child {
+  border-bottom: none;
+}
+
+#files dt { /* Filename and line count container */
+  grid-column: 1;
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#files dt > small { /* Line count text */
+  display: block;
+  font-size: 0.75em;
+  opacity: 0.7;
+  margin-top: 0.15em;
+}
+
+#files dd { /* Unit visualization container */
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 0.15em;
+  padding-top: 0.4em;
+  margin-left: 0;
+}
+
+.loc { /* Individual line of code dot */
+  display: inline-block;
+  width: 0.5em;
+  aspect-ratio: 1;
+  background: var(--color-accent);
+  border-radius: 50%;
 }
