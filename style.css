@@ -6,6 +6,7 @@
 
 :root {
   --color-accent: oklch(65% 0.3 280);
+  --color-accent-opp: oklch(70% 0.2 280); /* Default for selected state */
   --background-color: white;
   --text-color: black;
   --input-bg: white;
@@ -591,6 +592,6 @@ circle.selected {
   display: inline-block;
   width: 0.5em;
   aspect-ratio: 1;
-  background: var(--color-accent);
+  background: var(--color);
   border-radius: 50%;
 }

@@ -178,6 +178,12 @@ function updateScatterPlot(data, currentCommits) {
                     renderTooltipContent(commit);
                     updateTooltipVisibility(true);
                     updateTooltipPosition(event);
+                })
+                .on('mouseleave', () => { // Hide tooltip.
+                    console.log('Mouse left dot (circle mouseleave event)'); // Diagnostic log
+                    updateTooltipVisibility(false);
+                })
+                .on('click', (_, commit) => { // Open commit URL on click.
                     window.open(commit.url, '_blank');
                 })
                 .call(sel => sel.transition() // D3 transition to set final styles for enter.
@@ -433,7 +439,9 @@ let timeScale = d3.scaleTime(
     [d3.min(commits, (d) => d.datetime), d3.max(commits, (d) => d.datetime)],
     [0, 100],
 );
-let commitMaxTime = timeScale.invert(commitProgress); // The latest commit time to display.
+// Use d3.scaleOrdinal to map line types to the specified array of colors.
+let colors = d3.scaleOrdinal(["#51127c","#b73779","#fc8961","#fcfdbf"]); 
+let commitMaxTime = timeScale.invert(commitProgress); // The latest commit datetime to include.
 
 let filteredCommits = []; // Stores commits that are earlier than commitMaxTime.
 
@@ -479,41 +487,44 @@ function updateFileDisplay(currentFilteredCommits) {
     let lines = currentFilteredCommits.flatMap((d) => d.lines);
 
     // Group lines by file name and count lines per file
+
     let files = d3
         .groups(lines, (d) => d.file)
         .map(([name, fileLines]) => { 
             return { name, lines: fileLines }; 
-        });
+        })
+        .sort((a, b) => b.lines.length - a.lines.length);
 
-    // Create or update the container for the files using D3's join pattern
+    // D3 join to create/update divs for each file in the #files container.
     let filesContainer = d3
         .select('#files')
-        .selectAll('div.file-entry') 
-        .data(files, (d) => d.name) 
+        .selectAll('div.file-entry')
+        .data(files, (d) => d.name)
         .join(
             (enter) =>
                 enter.append('div')
-                    .attr('class', 'file-entry') // Add class for the main div container of dt and dd
+                    .attr('class', 'file-entry')
                     .call((div) => {
                         const dt = div.append('dt');
-                        dt.append('code'); 
+                        dt.append('code');
                         dt.append('small'); // Add small for line count text
-                        div.append('dd'); 
+                        div.append('dd');
                     }),
         );
 
-    // Update the filename and line count text in <dt>
+    // Update filename and line count text for all file entries.
     filesContainer.select('dt > code').html((d) => d.name);
     filesContainer.select('dt > small').html((d) => `${d.lines.length} lines`);
 
-    // For each file, create/update the unit visualization in <dd>
+    // For each file entry, create/update the unit visualization dots in its <dd>.
     filesContainer.select('dd')
-        .each(function(d) { // 'd' here is a file object { name, lines: [...] }
-            d3.select(this) // 'this' is the <dd> element
-                .selectAll('div.loc')
-                .data(d.lines) // Bind to the lines of the current file
-                .join('div')
-                .attr('class', 'loc');
+        .each(function(dFile) { // dFile is a file object: { name, lines: [...] }
+            d3.select(this) // 'this' is the <dd> element for the current file.
+                .selectAll('div.loc') 
+                .data(dFile.lines) 
+                .join('div') 
+                .attr('class', 'loc')
+                .attr('style', (dLine) => `--color: ${colors(dLine.type)}`); // Set CSS custom property for color based on line type.
         });
 }
 
@@ -522,7 +533,10 @@ filterCommitsByTime(); // Perform initial filtering based on default slider posi
 updateScatterPlot(data, filteredCommits); // Render initial scatter plot.
 updateCommitInfo(data, filteredCommits);   // Render initial commit stats.
 createBrushSelector(d3.select('#chart svg')); // Initialize the brush selector.
-updateLanguageBreakdown(null, filteredCommits); // Initialize language breakdown (no selection).
+d3.select('#chart svg g.dots').raise(); // Ensure dots are on top of the brush overlay after initial setup
+
+// Initialize brush-dependent UI elements (no selection initially).
+updateLanguageBreakdown(null, filteredCommits);
 updateFileDisplay(filteredCommits); // Initial file display
 
 
