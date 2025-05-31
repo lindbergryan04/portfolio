@@ -1,4 +1,6 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+import scrollama from 'https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm';
+
 
 // Meta Page js
 // Run npx elocuent -d . -o meta/loc.csv --spaces 2 in terminal to refresh the loc.csv file
@@ -51,7 +53,8 @@ function processCommits(data) {
             });
 
             return ret;
-        });
+        })
+        .sort((a, b) => a.datetime - b.datetime); // Sort commits chronologically
 }
 
 // Tooltip visibility
@@ -440,7 +443,7 @@ let timeScale = d3.scaleTime(
     [0, 100],
 );
 // Use d3.scaleOrdinal to map line types to the specified array of colors.
-let colors = d3.scaleOrdinal(["#51127c","#b73779","#fc8961","#fcfdbf"]); 
+let colors = d3.scaleOrdinal(["#51127c", "#b73779", "#fc8961", "#fcfdbf"]);
 let commitMaxTime = timeScale.invert(commitProgress); // The latest commit datetime to include.
 
 let filteredCommits = []; // Stores commits that are earlier than commitMaxTime.
@@ -490,8 +493,8 @@ function updateFileDisplay(currentFilteredCommits) {
 
     let files = d3
         .groups(lines, (d) => d.file)
-        .map(([name, fileLines]) => { 
-            return { name, lines: fileLines }; 
+        .map(([name, fileLines]) => {
+            return { name, lines: fileLines };
         })
         .sort((a, b) => b.lines.length - a.lines.length);
 
@@ -518,11 +521,11 @@ function updateFileDisplay(currentFilteredCommits) {
 
     // For each file entry, create/update the unit visualization dots in its <dd>.
     filesContainer.select('dd')
-        .each(function(dFile) { // dFile is a file object: { name, lines: [...] }
+        .each(function (dFile) { // dFile is a file object: { name, lines: [...] }
             d3.select(this) // 'this' is the <dd> element for the current file.
-                .selectAll('div.loc') 
-                .data(dFile.lines) 
-                .join('div') 
+                .selectAll('div.loc')
+                .data(dFile.lines)
+                .join('div')
                 .attr('class', 'loc')
                 .attr('style', (dLine) => `--color: ${colors(dLine.type)}`); // Set CSS custom property for color based on line type.
         });
@@ -539,4 +542,79 @@ d3.select('#chart svg g.dots').raise(); // Ensure dots are on top of the brush o
 updateLanguageBreakdown(null, filteredCommits);
 updateFileDisplay(filteredCommits); // Initial file display
 
+// Generate filler text for scrollytelling steps
+d3.select('#scatter-story')
+    .selectAll('.step')
+    .data(commits)
+    .join('div')
+    .attr('class', 'step')
+    .html(
+        (d, i) => `
+		On ${d.datetime.toLocaleString('en', {
+            dateStyle: 'full',
+            timeStyle: 'short',
+        })},
+		I made <a href="${d.url}" target="_blank">${i > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'
+            }</a>.
+		I edited ${d.totalLines} lines across ${d3.rollups(
+                d.lines,
+                (D) => D.length,
+                (d) => d.file,
+            ).length
+            } files.
+		Then I looked over all I had made, and I saw that it was very good.
+	`,
+    );
+
+function onStepEnter(response) {
+  // response.element is the DOM element of the step that was entered
+  // response.index is the index of the step
+  // response.direction is the direction of scroll ('up' or 'down')
+
+  const stepCommitData = response.element.__data__;
+  if (!stepCommitData) {
+    console.warn('No data found for step element:', response.element);
+    return;
+  }
+
+  const stepCommitDatetime = stepCommitData.datetime;
+  // console.log('Step entered, commit datetime:', stepCommitDatetime);
+
+  commitProgress = timeScale(stepCommitDatetime);
+
+  // Update slider to reflect the current commit's time
+  const slider = document.getElementById('commit-slider'); // Ensure slider is accessible
+  if (slider) {
+    slider.value = commitProgress;
+  }
+
+  // Update time display
+  const selectedTime = d3.select('#selectedTime'); // Ensure selectedTime is accessible
+  selectedTime.text(stepCommitDatetime.toLocaleString('en-US', {
+    dateStyle: 'long',
+    timeStyle: 'short'
+  }));
+
+  filterCommitsByTime(); // This uses global commitProgress to set filteredCommits
+  updateScatterPlot(data, filteredCommits);
+
+  // Clear any existing brush selection as the time context changes
+  const brushGroup = d3.select('#chart svg g.brush');
+  if (!brushGroup.empty() && d3.brushSelection(brushGroup.node())) { // Check if brush is active
+    brushGroup.call(d3.brush().move, null);
+  }
+
+  updateCommitInfo(data, filteredCommits);
+  updateLanguageBreakdown(null, filteredCommits); // Pass null for selection to reset
+  renderSelectionCount(null, filteredCommits);   // Pass null for selection to reset
+  updateFileDisplay(filteredCommits);
+}
+
+const scroller = scrollama();
+scroller
+    .setup({
+        container: '#scrolly-1',
+        step: '#scrolly-1 .step',
+    })
+    .onStepEnter(onStepEnter);
 
