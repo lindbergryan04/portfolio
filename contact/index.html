@@ -17,10 +17,12 @@
             Message:
             <textarea name="message" required></textarea>
         </label>
+        <!-- Honeypot: -->
+        <input type="text" name="website" style="display:none">
         <input type="hidden" name="redirect" value="https://web3forms.com/success">
         <button type="submit" id="submit-button">Submit Form</button>
     </form>
-    
+
     <script type="module" src="../global.js"></script>
 
 </body>
