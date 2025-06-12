@@ -105,27 +105,6 @@ select.addEventListener('input', function (event) {
     }
 });
 
-function setupContactForm() {
-    const form = document.querySelector("form");
-    if (!form) return;
-
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        const data = new FormData(form);
-        const params = [];
-
-        for (let [name, value] of data) {
-            params.push(`${name}=${encodeURIComponent(value)}`);
-        }
-
-        const url = `${form.action}?${params.join("&")}`;
-        location.href = url;
-    });
-}
-
-setupContactForm();
-
 // Project page:
 
 // Fetch JSON data from a URL
