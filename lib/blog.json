@@ -1,0 +1,18 @@
+[
+    {
+      "title": "Example Blog Post",
+      "summary": "Write a summary of the blog post here.",
+      "genres": ["Data Science", "Machine Learning", "Data Visualization"],
+      "created": "2024-01-02",
+      "updated": "2024-01-02",
+      "link": "https://github.com/lindbergryan04/RecipeRater/tree/main"
+    },
+    {
+      "title": "Example Blog Post",
+      "summary": "Write a summary of the blog post here.",
+      "genres": ["Data Science", "Machine Learning", "Data Visualization"],
+      "created": "2024-01-02",
+      "updated": "2024-01-02",
+      "link": "https://github.com/lindbergryan04/RecipeRater/tree/main"
+    }
+]
