@@ -4,6 +4,8 @@ import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 const blog = await fetchJSON('../lib/blog.json');
 const blogContainer = document.querySelector('.blog-posts');
 
+let activeFilters = new Set();
+
 function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -13,10 +15,28 @@ function formatDate(dateString) {
     });
 }
 
-function renderBlogPosts() {
+function filterPosts() {
+    const filteredPosts = activeFilters.size === 0 
+        ? blog 
+        : blog.filter(post => 
+            post.genres.some(genre => activeFilters.has(genre))
+        );
+    
+    renderBlogPosts(filteredPosts);
+}
+
+function renderBlogPosts(postsToRender = blog) {
     blogContainer.innerHTML = '';
 
-    blog.forEach(post => {
+    if (postsToRender.length === 0) {
+        const noPostsMessage = document.createElement('div');
+        noPostsMessage.classList.add('no-posts');
+        noPostsMessage.textContent = 'No posts found for the selected categories.';
+        blogContainer.appendChild(noPostsMessage);
+        return;
+    }
+
+    postsToRender.forEach(post => {
         const postElement = document.createElement('article');
         postElement.classList.add('blog-post');
 
@@ -59,6 +79,28 @@ function renderBlogPosts() {
 
         blogContainer.appendChild(postElement);
     });
-}   
+}
 
-renderBlogPosts();  
+function setupFilterChips() {
+    const filterChips = document.querySelectorAll('.chip');
+    
+    filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const category = chip.textContent;
+            
+            if (activeFilters.has(category)) {
+                activeFilters.delete(category);
+                chip.classList.remove('active');
+            } else {
+                activeFilters.add(category);
+                chip.classList.add('active');
+            }
+            
+            filterPosts();
+        });
+    });
+}
+
+// Initialize
+renderBlogPosts();
+setupFilterChips();  

@@ -145,6 +145,32 @@ form {
   gap: 1em;
 }
 
+.contact-page textarea {
+  min-width: 900px;
+  min-height: 90px;
+  resize: vertical;
+}
+
+.contact-page h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-family: 'Monocraft', monospace;
+}
+
+.contact-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.contact-page form label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 input,
 textarea,
 button,
@@ -155,6 +181,11 @@ select {
   border: 1px solid #ccc;
   border-radius: 0.3em;
   padding: 0.5em;
+}
+
+textarea,
+#submit-button {
+  font-family: 'Monocraft', monospace;
 }
 
 label {
@@ -276,6 +307,15 @@ strong {
   object-fit: cover;
   display: block;
   margin: 0 auto;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.project-img:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px var(--shadow-color);
 }
 
 
@@ -676,6 +716,26 @@ circle.selected {
   border-radius: 20px;
   font-family: inherit;
   margin-bottom: 0.2em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.blog-page .chip:hover {
+  background: var(--color-accent-2);
+  color: var(--background-color);
+}
+
+.blog-page .chip.active {
+  background: var(--color-accent-2);
+  color: var(--background-color);
+}
+
+.blog-page .no-posts {
+  text-align: center;
+  color: var(--text-color-light);
+  font-style: italic;
+  padding: 2rem;
 }
 
 .blog-page hr {
