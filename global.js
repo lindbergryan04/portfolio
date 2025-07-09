@@ -31,33 +31,37 @@ let pages = [
     { url: "https://github.com/lindbergryan04", title: "GitHub", external: true }
 ];
 
-let nav = document.createElement("nav");
-document.body.prepend(nav);
+// Only create navigation if we're not on a blog post page
+// Blog post pages have their own navigation and use the blog-page class
+if (!document.body.classList.contains('blog-page') || !window.location.pathname.includes('/posts/')) {
+    let nav = document.createElement("nav");
+    document.body.prepend(nav);
 
-for (let p of pages) {
-    let url = p.url;
-    let title = p.title;
+    for (let p of pages) {
+        let url = p.url;
+        let title = p.title;
 
-    // Adjust internal URLs using BASE_PATH
-    url = !url.startsWith("http") ? BASE_PATH + url : url;
+        // Adjust internal URLs using BASE_PATH
+        url = !url.startsWith("http") ? BASE_PATH + url : url;
 
-    // Create <a> element
-    let a = document.createElement("a");
-    a.href = url;
-    a.textContent = title;
+        // Create <a> element
+        let a = document.createElement("a");
+        a.href = url;
+        a.textContent = title;
 
-    // Open in new tab if it's external
-    if (url.startsWith("http")) {
-        a.target = "_blank";
-        a.rel = "noopener noreferrer"; // optional security best practice
+        // Open in new tab if it's external
+        if (url.startsWith("http")) {
+            a.target = "_blank";
+            a.rel = "noopener noreferrer"; // optional security best practice
+        }
+
+        // Highlight current page
+        if (a.host === location.host && a.pathname === location.pathname) {
+            a.classList.add("current");
+        }
+
+        nav.appendChild(a);
     }
-
-    // Highlight current page
-    if (a.host === location.host && a.pathname === location.pathname) {
-        a.classList.add("current");
-    }
-
-    nav.appendChild(a);
 }
 
 document.body.insertAdjacentHTML(

@@ -5,7 +5,7 @@
       "genres": ["Data Science", "Machine Learning", "Data Visualization"],
       "created": "2024-01-02",
       "updated": "2024-01-02",
-      "link": "https://github.com/lindbergryan04/RecipeRater/tree/main"
+      "link": "posts/post1.html"
     },
     {
       "title": "Example Blog Post",
@@ -13,6 +13,6 @@
       "genres": ["Data Science", "Machine Learning", "Data Visualization"],
       "created": "2024-01-02",
       "updated": "2024-01-02",
-      "link": "https://github.com/lindbergryan04/RecipeRater/tree/main"
+      "link": "posts/post2.html"
     }
-]
+]   
