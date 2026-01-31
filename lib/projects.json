@@ -7,6 +7,20 @@
     "link": "https://github.com/lindbergryan04/gene-expression-prediction/blob/main/main.ipynb"
   },
   {
+    "title": "Diabetes Risk Dashboard",
+    "image": "/portfolio/images/cgmtimeseries.png",
+    "description": "This project visualizes CGM glucose data over time with interactive tooltips, zooming, and meal-event markers to make glucose patterns easy to explore. Built with D3.js and Python/Pandas preprocessing, it helps users connect dietary events and HbA1c status with real-world glucose fluctuations using data from the BIG IDEAs Lab on PhysioNet.",
+    "year": "2025",
+    "link": "https://lindbergryan04.github.io/cgm-time-series-analysis/index.html"
+  },
+  {
+    "title": "Sleep Quality Analysis",
+    "image": "/portfolio/images/sleeptracker.png",
+    "description": "SleepTracker is an interactive, story-driven visualization that explores what drives sleep quality—going beyond “hours slept” to connect key sleep metrics with hormones, stress/emotion, and daily activity. Built with D3.js using wearable data from 22 participants (PhysioNet), it lets users investigate patterns through interactive charts and a habit-based slider tool that predicts sleep efficiency.",
+    "year": "2025",
+    "link": "https://lindbergryan04.github.io/SleepTracker/"
+  },
+  {
     "title": "User Authentication from Keystroke Data",
     "image": "/portfolio/images/hmm-keystroke.png",
     "description": "Built a continuous user-authentication prototype by training per-user discrete HMMs on CMU keystroke-timing sequences for a fixed strong password and identifying users via log-likelihood scoring (chosen as the exemplar project for the class)",
