@@ -15,7 +15,7 @@
   },
   {
     "title": "Sleep Quality Analysis",
-    "image": "/portfolio/images/sleeptracker.png",
+    "image": "/portfolio/images/sleep_tracker.png",
     "description": "SleepTracker is an interactive, story-driven visualization that explores what drives sleep quality—going beyond “hours slept” to connect key sleep metrics with hormones, stress/emotion, and daily activity. Built with D3.js using wearable data from 22 participants (PhysioNet), it lets users investigate patterns through interactive charts and a habit-based slider tool that predicts sleep efficiency.",
     "year": "2025",
     "link": "https://lindbergryan04.github.io/SleepTracker/"
