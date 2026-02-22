@@ -1,5 +1,12 @@
 [
   {
+    "title": "Pomodoro Timer",
+    "image": "/portfolio/images/demo_2.png",
+    "description": "A minimalistic pomodoro timer built in Python that lets you track your work sessions and breaks. Built for programmers that struggle to focus, command line styled, ascii art, intuitive interface, full of features and customizability.",
+    "year": "2026",
+    "link": "https://github.com/lindbergryan04/cli-pomodoro"
+  },
+  {
     "title": "Gene Expression Analysis",
     "image": "/portfolio/images/geneexpressionanalysis.png",
     "description": "I built a multiclass tumor type classifier that predicts cancer type directly from high-dimensional RNA-Seq gene expression profiles using PCA latent factors and multinomial logistic regression. Trained on TCGA pan-cancer data, the model achieves ~95% test accuracy and highlights how simple, interpretable latent-factor models can capture strong biological signal across 30+ cancer types. ",
