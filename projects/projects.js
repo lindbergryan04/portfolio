@@ -52,7 +52,7 @@ function renderPieChart(projectsGiven) {
     let sliceGenerator = d3.pie().value((d) => d.value);
     let arcData = sliceGenerator(data);
     let arcs = arcData.map((d) => arcGenerator(d));
-    let colors = d3.scaleOrdinal(["#0d0887", "#5302a3", "#8b0aa5", "#b83289", "#db5c68"]); // custom colors 
+    let colors = d3.scaleOrdinal(["#444444", "#666666", "#888888", "#aaaaaa", "#cc0000"]);
 
     // select and clear svg 
     let svg = d3.select('#projects-pie-plot');

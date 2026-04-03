@@ -4,21 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
+    <title>RL:// Projects</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
+    <div class="section-watermark">02</div>
 
-    <h1 class="projects-title">Projects</h1>
-
-    <div class="container">
-        <svg id="projects-pie-plot" viewBox="-50 -50 100 100"></svg>
-        <ul class="legend"></ul>
+    <div class="page-header">
+        <h1 class="projects-title">Projects</h1>
     </div>
 
-    <div class="container">
-        <input class="searchBar" type="search" aria-label="Search projects" placeholder="🔍 Search projects…" />
+    <div class="grid-2col" style="margin-bottom: 16px;">
+        <div class="window">
+            <div class="window-titlebar">
+                <span class="window-controls">
+                    <span class="dot dot-close"></span>
+                    <span class="dot dot-min"></span>
+                    <span class="dot dot-max"></span>
+                </span>
+                <span class="window-title">CATEGORY_BREAKDOWN</span>
+            </div>
+            <div class="window-body">
+                <div class="container" style="flex-direction: column; align-items: center;">
+                    <svg id="projects-pie-plot" viewBox="-50 -50 100 100"></svg>
+                    <ul class="legend"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="window search-window">
+            <div class="window-titlebar">
+                <span class="window-controls">
+                    <span class="dot dot-close"></span>
+                    <span class="dot dot-min"></span>
+                    <span class="dot dot-max"></span>
+                </span>
+                <span class="window-title">SEARCH</span>
+            </div>
+            <div class="window-body">
+                <div class="search-input-wrap">
+                    <span class="search-prompt">&gt;</span>
+                    <input class="searchBar" type="search" aria-label="Search projects" placeholder="Search projects..." />
+                </div>
+            </div>
+            <div class="window-statusbar">QUERY: ACTIVE</div>
+        </div>
     </div>
 
     <div class="projects"></div>

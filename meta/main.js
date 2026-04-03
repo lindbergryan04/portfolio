@@ -440,7 +440,7 @@ let timeScale = d3.scaleTime(
     [0, 100],
 );
 // Use d3.scaleOrdinal to map line types to the specified array of colors.
-let colors = d3.scaleOrdinal(["#51127c","#b73779","#fc8961","#fcfdbf"]); 
+let colors = d3.scaleOrdinal(["#cc0000","#888888","#aaaaaa","#cccccc"]);
 let commitMaxTime = timeScale.invert(commitProgress); // The latest commit datetime to include.
 
 let filteredCommits = []; // Stores commits that are earlier than commitMaxTime.

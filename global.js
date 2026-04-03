@@ -1,25 +1,11 @@
-// global.js
+// global.js — Y2K portfolio navigation, status bar, and shared utilities
+
+import { windowControls } from './icons.js';
 
 const BASE_PATH =
     location.hostname === "localhost" || location.hostname === "127.0.0.1"
-        ? "/portfolio/" // Local dev base path
-        : "/portfolio/"; // GitHub Pages base path (adjust this if your repo name is different)
-
-// Apply saved or system theme ASAP (before rendering)
-function applyInitialTheme() {
-    const saved = localStorage.colorScheme;
-
-    if (saved === "light") {
-        document.documentElement.setAttribute("data-theme", "light");
-    } else if (saved === "dark") {
-        document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-        const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
-    }
-}
-
-applyInitialTheme();
+        ? "/"
+        : "/portfolio/";
 
 let pages = [
     { url: "", title: "Home" },
@@ -32,124 +18,115 @@ let pages = [
 ];
 
 // Only create navigation if we're not on a blog post page
-// Blog post pages have their own navigation and use the blog-page class
 if (!document.body.classList.contains('blog-page') || !window.location.pathname.includes('/posts/')) {
+    // --- Navigation Toolbar ---
     let nav = document.createElement("nav");
     document.body.prepend(nav);
 
+    // Prefix label
+    const prefix = document.createElement("span");
+    prefix.className = "nav-prefix";
+    prefix.textContent = "RL://";
+    nav.appendChild(prefix);
+
     for (let p of pages) {
         let url = p.url;
-        let title = p.title;
-
-        // Adjust internal URLs using BASE_PATH
         url = !url.startsWith("http") ? BASE_PATH + url : url;
 
-        // Create <a> element
         let a = document.createElement("a");
         a.href = url;
-        a.textContent = title;
+        a.textContent = p.title;
 
-        // Open in new tab if it's external
         if (url.startsWith("http")) {
             a.target = "_blank";
-            a.rel = "noopener noreferrer"; // optional security best practice
+            a.rel = "noopener noreferrer";
         }
 
-        // Highlight current page
         if (a.host === location.host && a.pathname === location.pathname) {
             a.classList.add("current");
         }
 
         nav.appendChild(a);
     }
+
+    // Version label
+    const ver = document.createElement("span");
+    ver.className = "nav-version";
+    ver.textContent = "v2.0";
+    nav.appendChild(ver);
+
+    // --- Status Bar Footer ---
+    const statusBar = document.createElement("footer");
+    statusBar.className = "status-bar";
+
+    // Current page name
+    const currentPage = pages.find(p => {
+        const fullUrl = !p.url.startsWith("http") ? BASE_PATH + p.url : p.url;
+        try {
+            const u = new URL(fullUrl, location.origin);
+            return u.pathname === location.pathname;
+        } catch { return false; }
+    });
+    const pageName = currentPage ? currentPage.title.toUpperCase() : "UNKNOWN";
+
+    statusBar.innerHTML = `
+        <span class="status-cell accent">${pageName}</span>
+        <span class="status-cell" id="status-clock">--:--:--</span>
+        <span class="status-cell">VISITORS: ${Math.floor(Math.random() * 9000 + 1000)}</span>
+        <span class="status-spacer"></span>
+        <span class="status-cell">32.8801°N, 117.2340°W</span>
+        <span class="status-cell">SYS:OK</span>
+    `;
+    document.body.appendChild(statusBar);
+
+    // Live clock
+    function updateClock() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        const el = document.getElementById('status-clock');
+        if (el) el.textContent = `${h}:${m}:${s}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
 }
 
-document.body.insertAdjacentHTML(
-    'afterbegin',
-    `
-  <label class="color-scheme">
-    Theme:
-    <select id="theme-select">
-      <option value="light dark">Automatic</option>
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-    </select>
-  </label>
-  `
-);
+// --- Shared Utilities ---
 
-// Grab select element
-const select = document.querySelector('#theme-select');
-
-// On page load: set saved color scheme preference (if exists)
-if ("colorScheme" in localStorage) {
-    const savedScheme = localStorage.colorScheme;
-    select.value = savedScheme;
-
-    if (savedScheme === "light dark") {
-        const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
-    } else {
-        document.documentElement.setAttribute("data-theme", savedScheme);
-    }
-}
-
-// event listener for color scheme switch
-select.addEventListener('input', function (event) {
-    const mode = event.target.value;
-    console.log('color scheme changed to', mode);
-    localStorage.colorScheme = mode;
-
-    if (mode === "light dark") {
-        // Dynamically apply based on system preference
-        const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
-    } else {
-        // Apply manual override
-        document.documentElement.setAttribute("data-theme", mode);
-    }
-});
-
-// Project page:
-
-// Fetch JSON data from a URL
 export async function fetchJSON(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(`Failed to fetch projects: ${response.statusText}`);
+            throw new Error(`Failed to fetch: ${response.statusText}`);
         }
-        const data = await response.json();
-        return data;
+        return await response.json();
     } catch (error) {
         console.error('Error fetching or parsing JSON data:', error);
     }
 }
 
-// Render projects into the container
+// Render projects as Y2K window panels
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
     if (!Array.isArray(projects)) {
         console.error('Projects must be an array');
         return;
     }
-
     if (!(containerElement instanceof Element)) {
         console.error('Invalid container element');
         return;
     }
 
-    // Clear the container before adding new elements
     containerElement.innerHTML = '';
 
     projects.forEach(project => {
-        const article = document.createElement('article');
-
-        // Fallback handling for missing data
         const title = project.title || 'Untitled Project';
         const image = project.image || '';
         const description = project.description || 'No description available.';
         const year = project.year || '';
         const link = project.link || '';
+
+        const article = document.createElement('article');
 
         let imageHTML = '';
         if (image) {
@@ -158,27 +135,24 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
                 : `<img class="project-img" src="${image}" alt="${title}">`;
         }
 
-        let textHTML = `<p>${year ? `<strong>Year:</strong> ${year}<br>${description}` : ''}</p>`;
-
         article.innerHTML = `
-        <${headingLevel}>${title}</${headingLevel}>
-        ${imageHTML}
-        ${textHTML}
+        <div class="window">
+            <div class="window-titlebar">
+                ${windowControls}
+                <span class="window-title">${title}</span>
+            </div>
+            <div class="window-body">
+                ${imageHTML}
+                <p class="project-desc">${description}</p>
+            </div>
+            <div class="window-statusbar">${year ? `YEAR: ${year}` : ''}${link ? ` // <a href="${link}" target="_blank">VIEW PROJECT</a>` : ''}</div>
+        </div>
         `;
 
         containerElement.appendChild(article);
     });
 }
 
-
-// Fetching GitHub data:
 export async function fetchGitHubData(username) {
     return fetchJSON(`https://api.github.com/users/${username}`);
 }
-
-
-
-
-
-
-
