@@ -1,18 +1,10 @@
 [
     {
-      "title": "Example Blog Post",
-      "summary": "Write a summary of the blog post here.",
-      "genres": ["Data Science", "Machine Learning", "Data Visualization"],
-      "created": "2024-01-02",
-      "updated": "2024-01-02",
-      "link": "posts/post1.html"
-    },
-    {
-      "title": "Example Blog Post",
-      "summary": "Write a summary of the blog post here.",
-      "genres": ["Data Science", "Machine Learning", "Data Visualization"],
-      "created": "2024-01-02",
-      "updated": "2024-01-02",
-      "link": "posts/post2.html"
+        "title": "The Decline of the Cognitive Unit",
+        "summary": "We are, perhaps, the last generation for whom thinking feels like an exclusively human act. A reflection on cognitive offloading, algorithmic judgment, and what it means when machines begin to reason for us.",
+        "genres": ["Data Science", "Philosophy"],
+        "created": "2026-04-03",
+        "updated": "2026-04-03",
+        "link": "posts/decline-cognitive-unit.html"
     }
-]   
+]
