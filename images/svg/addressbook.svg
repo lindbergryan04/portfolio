@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <pattern id="grid-ab" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="#111"/>
+  <rect width="600" height="400" fill="url(#grid-ab)"/>
+  <!-- HUD corners -->
+  <path d="M 15 15 L 15 40 M 15 15 L 40 15" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 585 15 L 585 40 M 585 15 L 560 15" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 15 385 L 15 360 M 15 385 L 40 385" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 585 385 L 585 360 M 585 385 L 560 385" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <!-- Title -->
+  <text x="300" y="38" text-anchor="middle" font-family="monospace" font-size="11" fill="#cc0000" opacity="0.5" letter-spacing="6">MEMORY_ALLOCATOR</text>
+  <line x1="190" y1="45" x2="410" y2="45" stroke="#cc0000" stroke-width="0.5" opacity="0.2"/>
+  <!-- Terminal window -->
+  <g transform="translate(50, 60)">
+    <rect x="0" y="0" width="500" height="290" fill="#0a0a0a" stroke="#333" stroke-width="1" rx="2"/>
+    <!-- Terminal title bar -->
+    <rect x="0" y="0" width="500" height="20" fill="#222" rx="2"/>
+    <circle cx="12" cy="10" r="4" fill="#cc0000" opacity="0.7"/>
+    <circle cx="26" cy="10" r="4" fill="#666" opacity="0.5"/>
+    <circle cx="40" cy="10" r="4" fill="#444" opacity="0.5"/>
+    <text x="250" y="14" text-anchor="middle" font-family="monospace" font-size="8" fill="#666">addressbook.c - terminal</text>
+    <!-- Code content -->
+    <text x="12" y="42" font-family="monospace" font-size="10" fill="#555">$</text>
+    <text x="24" y="42" font-family="monospace" font-size="10" fill="#cc0000" opacity="0.8"> ./addressbook</text>
+    <text x="12" y="62" font-family="monospace" font-size="10" fill="#666">=============================</text>
+    <text x="12" y="78" font-family="monospace" font-size="10" fill="#cc0000" opacity="0.7">  ADDRESS BOOK v1.0</text>
+    <text x="12" y="94" font-family="monospace" font-size="10" fill="#666">=============================</text>
+    <text x="12" y="114" font-family="monospace" font-size="10" fill="#888">[1] Add Contact</text>
+    <text x="12" y="130" font-family="monospace" font-size="10" fill="#888">[2] Edit Contact</text>
+    <text x="12" y="146" font-family="monospace" font-size="10" fill="#888">[3] Delete Contact</text>
+    <text x="12" y="162" font-family="monospace" font-size="10" fill="#888">[4] Search</text>
+    <text x="12" y="178" font-family="monospace" font-size="10" fill="#888">[5] Sort Contacts</text>
+    <text x="12" y="194" font-family="monospace" font-size="10" fill="#888">[6] Display All</text>
+    <text x="12" y="210" font-family="monospace" font-size="10" fill="#888">[0] Exit</text>
+    <text x="12" y="236" font-family="monospace" font-size="10" fill="#666">Select option:</text>
+    <text x="132" y="236" font-family="monospace" font-size="10" fill="#cc0000">6</text>
+    <text x="12" y="258" font-family="monospace" font-size="10" fill="#555">Loading contacts from</text>
+    <text x="230" y="258" font-family="monospace" font-size="10" fill="#cc0000" opacity="0.6"> data.csv</text>
+    <text x="12" y="274" font-family="monospace" font-size="10" fill="#555">Entries found:</text>
+    <text x="145" y="274" font-family="monospace" font-size="10" fill="#cc0000"> 47</text>
+    <!-- Blinking cursor -->
+    <rect x="155" y="264" width="7" height="12" fill="#cc0000" opacity="0.7"/>
+    <!-- Memory addresses on the right -->
+    <text x="370" y="114" font-family="monospace" font-size="8" fill="#333">0x7FFE4A20</text>
+    <text x="370" y="130" font-family="monospace" font-size="8" fill="#333">0x7FFE4A38</text>
+    <text x="370" y="146" font-family="monospace" font-size="8" fill="#333">0x7FFE4A50</text>
+    <text x="370" y="162" font-family="monospace" font-size="8" fill="#333">0x7FFE4A68</text>
+    <text x="370" y="178" font-family="monospace" font-size="8" fill="#333">0x7FFE4A80</text>
+    <text x="370" y="194" font-family="monospace" font-size="8" fill="#333">0x7FFE4A98</text>
+    <text x="370" y="210" font-family="monospace" font-size="8" fill="#333">0x7FFE4AB0</text>
+  </g>
+  <!-- Status -->
+  <text x="30" y="375" font-family="monospace" font-size="9" fill="#cc0000" opacity="0.4">LANG:C//LINKED_LIST</text>
+  <text x="570" y="375" text-anchor="end" font-family="monospace" font-size="9" fill="#444">MALLOC//FILE_IO//CSV</text>
+</svg>

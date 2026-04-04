@@ -130,9 +130,10 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
 
         let imageHTML = '';
         if (image) {
+            const imgSrc = image.startsWith('http') ? image : BASE_PATH + image;
             imageHTML = link
-                ? `<a href="${link}" target="_blank"><img class="project-img" src="${image}" alt="${title}"></a>`
-                : `<img class="project-img" src="${image}" alt="${title}">`;
+                ? `<a href="${link}" target="_blank"><img class="project-img" src="${imgSrc}" alt="${title}"></a>`
+                : `<img class="project-img" src="${imgSrc}" alt="${title}">`;
         }
 
         article.innerHTML = `

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <pattern id="grid-rr" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="#111"/>
+  <rect width="600" height="400" fill="url(#grid-rr)"/>
+  <!-- HUD corners -->
+  <path d="M 15 15 L 15 40 M 15 15 L 40 15" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 585 15 L 585 40 M 585 15 L 560 15" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 15 385 L 15 360 M 15 385 L 40 385" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 585 385 L 585 360 M 585 385 L 560 385" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <!-- Title -->
+  <text x="300" y="38" text-anchor="middle" font-family="monospace" font-size="11" fill="#cc0000" opacity="0.5" letter-spacing="6">ML_RATING_PREDICTOR</text>
+  <line x1="170" y1="45" x2="430" y2="45" stroke="#cc0000" stroke-width="0.5" opacity="0.2"/>
+  <!-- Rating distribution bars -->
+  <g transform="translate(60, 75)">
+    <text x="0" y="-8" font-family="monospace" font-size="8" fill="#666">RATING_DISTRIBUTION (N=234,429)</text>
+    <!-- 5 star -->
+    <text x="-5" y="18" text-anchor="end" font-family="monospace" font-size="9" fill="#cc0000">5</text>
+    <rect x="5" y="6" width="350" height="18" fill="#cc0000" opacity="0.7"/>
+    <text x="360" y="18" font-family="monospace" font-size="8" fill="#666">73.2%</text>
+    <!-- 4 star -->
+    <text x="-5" y="44" text-anchor="end" font-family="monospace" font-size="9" fill="#882222">4</text>
+    <rect x="5" y="32" width="110" height="18" fill="#882222" opacity="0.7"/>
+    <text x="120" y="44" font-family="monospace" font-size="8" fill="#666">14.8%</text>
+    <!-- 3 star -->
+    <text x="-5" y="70" text-anchor="end" font-family="monospace" font-size="9" fill="#662222">3</text>
+    <rect x="5" y="58" width="40" height="18" fill="#662222" opacity="0.7"/>
+    <text x="50" y="70" font-family="monospace" font-size="8" fill="#666">4.1%</text>
+    <!-- 2 star -->
+    <text x="-5" y="96" text-anchor="end" font-family="monospace" font-size="9" fill="#441111">2</text>
+    <rect x="5" y="84" width="20" height="18" fill="#441111" opacity="0.7"/>
+    <text x="30" y="96" font-family="monospace" font-size="8" fill="#666">2.3%</text>
+    <!-- 1 star -->
+    <text x="-5" y="122" text-anchor="end" font-family="monospace" font-size="9" fill="#331111">1</text>
+    <rect x="5" y="110" width="28" height="18" fill="#331111" opacity="0.7"/>
+    <text x="38" y="122" font-family="monospace" font-size="8" fill="#666">5.6%</text>
+  </g>
+  <!-- Star icons -->
+  <g transform="translate(440, 80)">
+    <text x="0" y="0" font-family="monospace" font-size="8" fill="#666">PREDICT_OUTPUT</text>
+    <g transform="translate(0, 15)">
+      <polygon points="12,0 15,9 24,9 17,14 19,23 12,18 5,23 7,14 0,9 9,9" fill="#cc0000" opacity="0.8"/>
+      <polygon points="40,0 43,9 52,9 45,14 47,23 40,18 33,23 35,14 28,9 37,9" fill="#cc0000" opacity="0.8"/>
+      <polygon points="68,0 71,9 80,9 73,14 75,23 68,18 61,23 63,14 56,9 65,9" fill="#cc0000" opacity="0.8"/>
+      <polygon points="96,0 99,9 108,9 101,14 103,23 96,18 89,23 91,14 84,9 93,9" fill="#cc0000" opacity="0.8"/>
+      <polygon points="124,0 127,9 136,9 129,14 131,23 124,18 117,23 119,14 112,9 121,9" fill="#333" opacity="0.5"/>
+    </g>
+    <text x="0" y="55" font-family="monospace" font-size="18" fill="#cc0000" font-weight="bold">4.2</text>
+    <text x="40" y="55" font-family="monospace" font-size="10" fill="#555">/5.0</text>
+  </g>
+  <!-- Feature importance -->
+  <g transform="translate(60, 235)">
+    <text x="0" y="0" font-family="monospace" font-size="8" fill="#666">FEATURE_IMPORTANCE</text>
+    <rect x="0" y="10" width="480" height="100" fill="none" stroke="#222" stroke-width="0.5"/>
+    <text x="10" y="30" font-family="monospace" font-size="7" fill="#555">n_steps</text>
+    <rect x="80" y="22" width="180" height="10" fill="#cc0000" opacity="0.6"/>
+    <text x="10" y="46" font-family="monospace" font-size="7" fill="#555">minutes</text>
+    <rect x="80" y="38" width="155" height="10" fill="#cc0000" opacity="0.5"/>
+    <text x="10" y="62" font-family="monospace" font-size="7" fill="#555">n_ingredients</text>
+    <rect x="80" y="54" width="120" height="10" fill="#882222" opacity="0.5"/>
+    <text x="10" y="78" font-family="monospace" font-size="7" fill="#555">calories</text>
+    <rect x="80" y="70" width="90" height="10" fill="#662222" opacity="0.5"/>
+    <text x="10" y="94" font-family="monospace" font-size="7" fill="#555">protein</text>
+    <rect x="80" y="86" width="65" height="10" fill="#441111" opacity="0.5"/>
+  </g>
+  <!-- Status -->
+  <text x="30" y="375" font-family="monospace" font-size="9" fill="#cc0000" opacity="0.4">SRC:FOOD.COM//234K_REVIEWS</text>
+  <text x="570" y="375" text-anchor="end" font-family="monospace" font-size="9" fill="#444">SKLEARN//EDA//ML</text>
+</svg>

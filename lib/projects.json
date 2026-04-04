@@ -1,84 +1,84 @@
 [
   {
     "title": "Pomodoro Timer",
-    "image": "/portfolio/images/demo_2.png",
+    "image": "images/svg/pomodoro.svg",
     "description": "A minimalistic pomodoro timer built in Python that lets you track your work sessions and breaks. Built for programmers that struggle to focus, command line styled, ascii art, intuitive interface, full of features and customizability.",
     "year": "2026",
     "link": "https://github.com/lindbergryan04/cli-pomodoro"
   },
   {
     "title": "Gene Expression Analysis",
-    "image": "/portfolio/images/geneexpressionanalysis.png",
+    "image": "images/svg/gene-expression.svg",
     "description": "I built a multiclass tumor type classifier that predicts cancer type directly from high-dimensional RNA-Seq gene expression profiles using PCA latent factors and multinomial logistic regression. Trained on TCGA pan-cancer data, the model achieves ~95% test accuracy and highlights how simple, interpretable latent-factor models can capture strong biological signal across 30+ cancer types. ",
     "year": "2025",
     "link": "https://github.com/lindbergryan04/gene-expression-prediction/blob/main/main.ipynb"
   },
   {
     "title": "Diabetes Risk Dashboard",
-    "image": "/portfolio/images/cgmtimeseries.png",
+    "image": "images/svg/diabetes-dashboard.svg",
     "description": "This project visualizes CGM glucose data over time with interactive tooltips, zooming, and meal-event markers to make glucose patterns easy to explore. Built with D3.js and Python/Pandas preprocessing, it helps users connect dietary events and HbA1c status with real-world glucose fluctuations using data from the BIG IDEAs Lab on PhysioNet.",
     "year": "2025",
     "link": "https://lindbergryan04.github.io/cgm-time-series-analysis/index.html"
   },
   {
     "title": "Sleep Quality Analysis",
-    "image": "/portfolio/images/sleep_tracker.png",
-    "description": "SleepTracker is an interactive, story-driven visualization that explores what drives sleep quality—going beyond “hours slept” to connect key sleep metrics with hormones, stress/emotion, and daily activity. Built with D3.js using wearable data from 22 participants (PhysioNet), it lets users investigate patterns through interactive charts and a habit-based slider tool that predicts sleep efficiency.",
+    "image": "images/svg/sleep-analysis.svg",
+    "description": "SleepTracker is an interactive, story-driven visualization that explores what drives sleep quality—going beyond "hours slept" to connect key sleep metrics with hormones, stress/emotion, and daily activity. Built with D3.js using wearable data from 22 participants (PhysioNet), it lets users investigate patterns through interactive charts and a habit-based slider tool that predicts sleep efficiency.",
     "year": "2025",
     "link": "https://lindbergryan04.github.io/SleepTracker/"
   },
   {
     "title": "User Authentication from Keystroke Data",
-    "image": "/portfolio/images/hmm-keystroke.png",
+    "image": "images/svg/keystroke-auth.svg",
     "description": "Built a continuous user-authentication prototype by training per-user discrete HMMs on CMU keystroke-timing sequences for a fixed strong password and identifying users via log-likelihood scoring (chosen as the exemplar project for the class)",
     "year": "2025",
     "link": "https://github.com/lindbergryan04/keystroke-dynamics-hmm/blob/main/report.pdf"
   },
   {
     "title": "Recipe Rater",
-    "image": "/portfolio/images/reciperater.png",
+    "image": "images/svg/recipe-rater.svg",
     "description": "Analyzed a dataset of 234,429 recipe reviews from Food.com with 15 features and built a machine learning model to predict how highly a recipe will be rated (out of 5 stars). This project utilizes EDA, feature engineering, statistical hypothesis testing, and machine learning to develop a practical tool for smarter recipe selection.",
     "year": "2024",
     "link": "https://github.com/lindbergryan04/RecipeRater/tree/main"
   },
   {
     "title": "Recipe Rater Report",
-    "image": "/portfolio/images/reciperaterreport.png",
+    "image": "images/svg/recipe-report.svg",
     "description": "In depth report of Recipe Rater project.",
     "year": "2024",
     "link": "https://lindbergryan04.github.io/RecipeRater_report/"
   },
   {
     "title": "Deceptive vs Non-deceptive Visualizations",
-    "image": "/portfolio/images/v1.png",
+    "image": "images/svg/deceptive-vis.svg",
     "description": "Visualized abortion access across U.S. states through both truthful and deceptive designs, critically exploring how small visual choices can dramatically alter public interpretation.",
     "year": "2025",
     "link": "https://lindbergryan04.github.io/opposing-data-vis/"
   },
   {
     "title": "Amazon Inflation Analysis",
-    "image": "/portfolio/images/amazoninflationanalysis.png",
-    "description": "Analyzed Amazon price trends from 2021–2024 and compared them with Consumer Price Index (CPI) data to evaluate how closely Amazon’s pricing aligns with inflation. Leveraged Keepa and BLS data using statistical testing and data visualization to uncover sector-specific patterns and pricing behaviors.",
+    "image": "images/svg/amazon-inflation.svg",
+    "description": "Analyzed Amazon price trends from 2021–2024 and compared them with Consumer Price Index (CPI) data to evaluate how closely Amazon's pricing aligns with inflation. Leveraged Keepa and BLS data using statistical testing and data visualization to uncover sector-specific patterns and pricing behaviors.",
     "year": "2024",
     "link": "https://github.com/lindbergryan04/AmazonInflationAnalysisPublic/blob/main/AmazonAnalysis.ipynb"
   },
   {
     "title": "Address Book in C",
-    "image": "/portfolio/images/addressbook.png",
+    "image": "images/svg/addressbook.svg",
     "description": "A command-line address book written in C, this project showcases core concepts like dynamic memory allocation, linked lists, and file I/O. Users can add, edit, delete, sort, and persist contacts in a clean, CSV-based format.",
     "year": "2023",
     "link": "https://github.com/lindbergryan04/address-book"
   },
   {
     "title": "Apple Quality Prediction Model",
-    "image": "/portfolio/images/appleprediction.png",
+    "image": "images/svg/apple-prediction.svg",
     "description": "Explored various basic SKLearn models, predicted apple quality using Kaggle Dataset.",
     "year": "2022",
     "link": "https://github.com/lindbergryan04/apple-prediction-models/blob/main/ApplePredictionModel.ipynb"
   },
   {
     "title": "Cipher Suite",
-    "image": "/portfolio/images/cipher.png",
+    "image": "images/svg/cipher-suite.svg",
     "description": "A classic cipher tool built in Python that lets you encrypt and decrypt messages using Caesar and Vigenère ciphers. Originally created in 2022 for my AP Computer Science Principles class.",
     "year": "2022",
     "link": "https://github.com/lindbergryan04/text-ciphers"

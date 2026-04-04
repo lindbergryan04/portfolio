@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <pattern id="grid-key" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="#111"/>
+  <rect width="600" height="400" fill="url(#grid-key)"/>
+  <!-- HUD corners -->
+  <path d="M 15 15 L 15 40 M 15 15 L 40 15" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 585 15 L 585 40 M 585 15 L 560 15" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 15 385 L 15 360 M 15 385 L 40 385" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 585 385 L 585 360 M 585 385 L 560 385" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <!-- Title -->
+  <text x="300" y="38" text-anchor="middle" font-family="monospace" font-size="11" fill="#cc0000" opacity="0.5" letter-spacing="6">AUTH_VERIFY_HMM</text>
+  <line x1="190" y1="45" x2="410" y2="45" stroke="#cc0000" stroke-width="0.5" opacity="0.2"/>
+  <!-- Keyboard layout (simplified top 2 rows) -->
+  <g transform="translate(80, 220)">
+    <!-- Row 1: QWERTY -->
+    <rect x="0" y="0" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="18" y="20" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">Q</text>
+    <rect x="40" y="0" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="58" y="20" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">W</text>
+    <rect x="80" y="0" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#cc0000" stroke-width="1" opacity="0.8"/>
+    <text x="98" y="20" text-anchor="middle" font-family="monospace" font-size="12" fill="#cc0000">E</text>
+    <rect x="120" y="0" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="138" y="20" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">R</text>
+    <rect x="160" y="0" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="178" y="20" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">T</text>
+    <rect x="200" y="0" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#cc0000" stroke-width="1" opacity="0.6"/>
+    <text x="218" y="20" text-anchor="middle" font-family="monospace" font-size="12" fill="#cc0000" opacity="0.7">Y</text>
+    <rect x="240" y="0" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="258" y="20" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">U</text>
+    <rect x="280" y="0" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="298" y="20" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">I</text>
+    <rect x="320" y="0" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#cc0000" stroke-width="1" opacity="0.4"/>
+    <text x="338" y="20" text-anchor="middle" font-family="monospace" font-size="12" fill="#cc0000" opacity="0.5">O</text>
+    <rect x="360" y="0" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="378" y="20" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">P</text>
+    <!-- Row 2: ASDF -->
+    <rect x="18" y="36" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#cc0000" stroke-width="1" opacity="0.9"/>
+    <text x="36" y="56" text-anchor="middle" font-family="monospace" font-size="12" fill="#cc0000">A</text>
+    <rect x="58" y="36" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="76" y="56" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">S</text>
+    <rect x="98" y="36" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="116" y="56" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">D</text>
+    <rect x="138" y="36" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#cc0000" stroke-width="1" opacity="0.5"/>
+    <text x="156" y="56" text-anchor="middle" font-family="monospace" font-size="12" fill="#cc0000" opacity="0.6">F</text>
+    <rect x="178" y="36" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="196" y="56" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">G</text>
+    <rect x="218" y="36" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="236" y="56" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">H</text>
+    <rect x="258" y="36" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="276" y="56" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">J</text>
+    <rect x="298" y="36" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+    <text x="316" y="56" text-anchor="middle" font-family="monospace" font-size="12" fill="#555">K</text>
+    <rect x="338" y="36" width="36" height="32" rx="2" fill="#1a1a1a" stroke="#cc0000" stroke-width="1" opacity="0.3"/>
+    <text x="356" y="56" text-anchor="middle" font-family="monospace" font-size="12" fill="#cc0000" opacity="0.4">L</text>
+    <!-- Timing bars between keys -->
+    <rect x="82" y="-8" width="34" height="3" fill="#cc0000" opacity="0.7" rx="1"/>
+    <rect x="202" y="-8" width="18" height="3" fill="#cc0000" opacity="0.5" rx="1"/>
+    <rect x="322" y="-8" width="26" height="3" fill="#cc0000" opacity="0.3" rx="1"/>
+    <rect x="20" y="28" width="30" height="3" fill="#cc0000" opacity="0.8" rx="1"/>
+    <rect x="140" y="28" width="22" height="3" fill="#cc0000" opacity="0.4" rx="1"/>
+  </g>
+  <!-- Keystroke timing waveform -->
+  <g transform="translate(60, 80)">
+    <text x="0" y="-8" font-family="monospace" font-size="8" fill="#666">DWELL_TIME (ms)</text>
+    <rect x="0" y="0" width="480" height="50" fill="none" stroke="#222" stroke-width="0.5"/>
+    <!-- Timing bars -->
+    <rect x="10" y="12" width="8" height="28" fill="#cc0000" opacity="0.8"/>
+    <rect x="30" y="18" width="8" height="22" fill="#cc0000" opacity="0.6"/>
+    <rect x="50" y="8" width="8" height="32" fill="#cc0000" opacity="0.9"/>
+    <rect x="70" y="20" width="8" height="20" fill="#cc0000" opacity="0.5"/>
+    <rect x="90" y="15" width="8" height="25" fill="#cc0000" opacity="0.7"/>
+    <rect x="110" y="22" width="8" height="18" fill="#cc0000" opacity="0.4"/>
+    <rect x="130" y="10" width="8" height="30" fill="#cc0000" opacity="0.8"/>
+    <rect x="150" y="16" width="8" height="24" fill="#cc0000" opacity="0.6"/>
+    <rect x="170" y="25" width="8" height="15" fill="#cc0000" opacity="0.3"/>
+    <rect x="190" y="12" width="8" height="28" fill="#cc0000" opacity="0.7"/>
+    <rect x="210" y="18" width="8" height="22" fill="#888" opacity="0.5"/>
+    <rect x="230" y="8" width="8" height="32" fill="#888" opacity="0.6"/>
+    <rect x="250" y="22" width="8" height="18" fill="#888" opacity="0.4"/>
+    <rect x="270" y="14" width="8" height="26" fill="#888" opacity="0.5"/>
+    <rect x="290" y="20" width="8" height="20" fill="#888" opacity="0.4"/>
+    <rect x="310" y="10" width="8" height="30" fill="#888" opacity="0.6"/>
+    <rect x="330" y="24" width="8" height="16" fill="#888" opacity="0.3"/>
+    <text x="100" y="48" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc0000" opacity="0.5">USER_A (MATCH)</text>
+    <text x="280" y="48" text-anchor="middle" font-family="monospace" font-size="7" fill="#666">USER_B (REJECT)</text>
+  </g>
+  <!-- Log-likelihood score -->
+  <g transform="translate(60, 155)">
+    <text x="0" y="0" font-family="monospace" font-size="8" fill="#666">LOG_LIKELIHOOD_SCORE</text>
+    <rect x="0" y="8" width="480" height="30" fill="none" stroke="#222" stroke-width="0.5"/>
+    <rect x="5" y="13" width="320" height="20" fill="#cc0000" opacity="0.15"/>
+    <rect x="5" y="13" width="320" height="20" fill="none" stroke="#cc0000" stroke-width="0.5" opacity="0.4"/>
+    <text x="165" y="27" text-anchor="middle" font-family="monospace" font-size="9" fill="#cc0000">-142.7 // AUTHENTICATED</text>
+  </g>
+  <!-- Status -->
+  <text x="30" y="375" font-family="monospace" font-size="9" fill="#cc0000" opacity="0.4">MODEL:DISCRETE_HMM</text>
+  <text x="570" y="375" text-anchor="end" font-family="monospace" font-size="9" fill="#444">CMU_DATASET//SECURITY</text>
+  <!-- Lock icon -->
+  <g transform="translate(505, 165)">
+    <rect x="0" y="12" width="24" height="18" rx="2" fill="none" stroke="#cc0000" stroke-width="1.5" opacity="0.6"/>
+    <path d="M 5 12 L 5 6 A 7 7 0 0 1 19 6 L 19 12" fill="none" stroke="#cc0000" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="12" cy="22" r="2" fill="#cc0000" opacity="0.6"/>
+  </g>
+  <text x="517" y="200" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc0000" opacity="0.4">VERIFIED</text>
+</svg>

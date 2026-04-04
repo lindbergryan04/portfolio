@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <pattern id="grid-rpt" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="#111"/>
+  <rect width="600" height="400" fill="url(#grid-rpt)"/>
+  <!-- HUD corners -->
+  <path d="M 15 15 L 15 40 M 15 15 L 40 15" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 585 15 L 585 40 M 585 15 L 560 15" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 15 385 L 15 360 M 15 385 L 40 385" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 585 385 L 585 360 M 585 385 L 560 385" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <!-- Title -->
+  <text x="300" y="38" text-anchor="middle" font-family="monospace" font-size="11" fill="#cc0000" opacity="0.5" letter-spacing="6">ANALYSIS_REPORT</text>
+  <line x1="200" y1="45" x2="400" y2="45" stroke="#cc0000" stroke-width="0.5" opacity="0.2"/>
+  <!-- Document layout -->
+  <g transform="translate(80, 65)">
+    <!-- Page outline -->
+    <rect x="0" y="0" width="440" height="280" fill="#151515" stroke="#333" stroke-width="1"/>
+    <!-- Header bar -->
+    <rect x="0" y="0" width="440" height="24" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+    <text x="12" y="16" font-family="monospace" font-size="9" fill="#cc0000" opacity="0.7">REPORT_v2.4 // RECIPE_RATER_ANALYSIS.pdf</text>
+    <!-- Title block -->
+    <rect x="20" y="38" width="250" height="8" fill="#cc0000" opacity="0.4" rx="1"/>
+    <rect x="20" y="52" width="180" height="6" fill="#555" opacity="0.3" rx="1"/>
+    <!-- Text lines -->
+    <rect x="20" y="72" width="400" height="4" fill="#333" opacity="0.5" rx="1"/>
+    <rect x="20" y="82" width="380" height="4" fill="#333" opacity="0.4" rx="1"/>
+    <rect x="20" y="92" width="400" height="4" fill="#333" opacity="0.5" rx="1"/>
+    <rect x="20" y="102" width="340" height="4" fill="#333" opacity="0.3" rx="1"/>
+    <!-- Embedded chart 1: scatter plot -->
+    <rect x="20" y="120" width="190" height="110" fill="#111" stroke="#333" stroke-width="0.5"/>
+    <text x="115" y="135" text-anchor="middle" font-family="monospace" font-size="7" fill="#666">CORRELATION_PLOT</text>
+    <circle cx="50" cy="200" r="2" fill="#cc0000" opacity="0.5"/>
+    <circle cx="70" cy="185" r="2" fill="#cc0000" opacity="0.6"/>
+    <circle cx="55" cy="190" r="2" fill="#cc0000" opacity="0.4"/>
+    <circle cx="90" cy="170" r="2" fill="#cc0000" opacity="0.7"/>
+    <circle cx="85" cy="180" r="2" fill="#cc0000" opacity="0.5"/>
+    <circle cx="110" cy="165" r="2" fill="#cc0000" opacity="0.6"/>
+    <circle cx="100" cy="175" r="2" fill="#cc0000" opacity="0.4"/>
+    <circle cx="130" cy="155" r="2" fill="#cc0000" opacity="0.7"/>
+    <circle cx="120" cy="160" r="2" fill="#cc0000" opacity="0.5"/>
+    <circle cx="145" cy="150" r="2" fill="#cc0000" opacity="0.6"/>
+    <circle cx="160" cy="145" r="2" fill="#cc0000" opacity="0.5"/>
+    <circle cx="175" cy="148" r="2" fill="#cc0000" opacity="0.4"/>
+    <circle cx="190" cy="140" r="2" fill="#cc0000" opacity="0.7"/>
+    <line x="35" y1="205" x2="35" y2="138" stroke="#444" stroke-width="0.5"/>
+    <line x1="35" y1="205" x2="200" y2="205" stroke="#444" stroke-width="0.5"/>
+    <!-- Embedded chart 2: confusion matrix -->
+    <rect x="230" y="120" width="190" height="110" fill="#111" stroke="#333" stroke-width="0.5"/>
+    <text x="325" y="135" text-anchor="middle" font-family="monospace" font-size="7" fill="#666">CONFUSION_MATRIX</text>
+    <rect x="260" y="145" width="35" height="35" fill="#cc0000" opacity="0.7"/>
+    <rect x="297" y="145" width="35" height="35" fill="#441111" opacity="0.5"/>
+    <rect x="334" y="145" width="35" height="35" fill="#221111" opacity="0.4"/>
+    <rect x="260" y="182" width="35" height="35" fill="#331111" opacity="0.4"/>
+    <rect x="297" y="182" width="35" height="35" fill="#cc0000" opacity="0.6"/>
+    <rect x="334" y="182" width="35" height="35" fill="#441111" opacity="0.5"/>
+    <text x="278" y="167" text-anchor="middle" font-family="monospace" font-size="8" fill="#fff" opacity="0.7">847</text>
+    <text x="315" y="167" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">52</text>
+    <text x="352" y="167" text-anchor="middle" font-family="monospace" font-size="8" fill="#666">11</text>
+    <text x="278" y="204" text-anchor="middle" font-family="monospace" font-size="8" fill="#666">38</text>
+    <text x="315" y="204" text-anchor="middle" font-family="monospace" font-size="8" fill="#fff" opacity="0.6">621</text>
+    <text x="352" y="204" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">94</text>
+    <!-- More text lines -->
+    <rect x="20" y="245" width="400" height="4" fill="#333" opacity="0.5" rx="1"/>
+    <rect x="20" y="255" width="350" height="4" fill="#333" opacity="0.4" rx="1"/>
+    <rect x="20" y="265" width="400" height="4" fill="#333" opacity="0.5" rx="1"/>
+  </g>
+  <!-- Status -->
+  <text x="30" y="375" font-family="monospace" font-size="9" fill="#cc0000" opacity="0.4">PAGES:12 // FIGURES:8</text>
+  <text x="570" y="375" text-anchor="end" font-family="monospace" font-size="9" fill="#444">STATISTICAL_ANALYSIS</text>
+</svg>
