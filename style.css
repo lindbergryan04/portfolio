@@ -55,9 +55,10 @@ body {
   background-color: var(--bg);
   margin: 0;
   padding: 24px 40px 60px 40px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin-inline: auto;
   position: relative;
+  zoom: 1.15;
 }
 
 /* ===== CRT SCANLINE OVERLAY ===== */

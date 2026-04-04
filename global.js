@@ -74,7 +74,7 @@ if (!document.body.classList.contains('blog-page') || !window.location.pathname.
         <span class="status-cell" id="status-clock">--:--:--</span>
         <span class="status-cell">VISITORS: ${Math.floor(Math.random() * 9000 + 1000)}</span>
         <span class="status-spacer"></span>
-        <span class="status-cell">32.8801°N, 117.2340°W</span>
+        <span class="status-cell">33.8688°S, 149.5780°E</span>
         <span class="status-cell">SYS:OK</span>
     `;
     document.body.appendChild(statusBar);
