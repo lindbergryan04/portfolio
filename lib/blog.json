@@ -1,5 +1,13 @@
 [
     {
+        "title": "The Fear of Mediocrity",
+        "summary": "Turning 22 in my fourth year at UCSD, I reflect on losing the intense drive I once had, how my baseline shifted toward 'normal,' and what it takes to fear mediocrity again.",
+        "genres": ["Philosophy", "Relationships"],
+        "created": "2026-04-27",
+        "updated": "2026-04-27",
+        "link": "posts/fear-of-mediocrity.html"
+    },
+    {
         "title": "The Decline of the Cognitive Unit",
         "summary": "We are, perhaps, the last generation for whom thinking feels like an exclusively human act. A reflection on cognitive offloading, and the reality of being a student in 2026.",
         "genres": ["Data Science", "Philosophy"],
