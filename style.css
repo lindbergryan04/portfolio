@@ -1449,6 +1449,13 @@ label {
   border-bottom: 1px solid var(--border-light);
 }
 
+.post-page .post-content b,
+.post-page .post-content strong {
+  font-weight: 900;
+  font-size: 15px;
+  color: #000000;
+}
+
 .post-page .post-content blockquote {
   border-left: 2px solid var(--accent);
   margin: 18px 0;
