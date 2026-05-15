@@ -1,5 +1,13 @@
 [
     {
+        "title": "Avionics Computer (Phase 1)",
+        "summary": "An Arduino-based avionics data logger that reads pressure, temperature, and altitude to a microSD card. A first test, a parts list, and what's next.",
+        "genres": ["Hardware", "Data Science"],
+        "created": "2026-05-15",
+        "updated": "2026-05-15",
+        "link": "posts/avionics-computer.html"
+    },
+    {
         "title": "The Fear of Mediocrity",
         "summary": "Turning 22 in my fourth year at UCSD, I reflect on losing the intense drive I once had, how my baseline shifted toward 'normal,' and what it takes to fear mediocrity again.",
         "genres": ["Philosophy", "Relationships"],
