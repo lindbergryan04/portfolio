@@ -4,40 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>RL:// Blog</title>
     <link rel="stylesheet" href="../style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="../global.js" type="module"></script>
     <script src="blog.js" type="module"></script>
+    <script type="module" src="../decorations.js"></script>
 </head>
 
 <body class="blog-page">
+    <div class="section-watermark">05</div>
 
-    <!-- Category Filters (Top) -->
-    <div class="section-chips">
-        <div class="section-chips-group">
-            <div class="section-chips-title">Tech</div>
-            <div class="chips">
-                <span class="chip">Data Science</span>
-                <span class="chip">Machine Learning</span>
-                <span class="chip">Data Visualization</span>
-            </div>
+    <div class="page-header">
+        <h1>Blog</h1>
+        <div class="subtitle">TRANSMISSIONS & THOUGHTS</div>
+    </div>
+
+    <div class="window">
+        <div class="window-titlebar">
+            <span class="window-controls">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-min"></span>
+                <span class="dot dot-max"></span>
+            </span>
+            <span class="window-title">FILTER_BY_CATEGORY</span>
         </div>
-        <div class="section-chips-group">
-            <div class="section-chips-title">Life</div>
-            <div class="chips">
-                <span class="chip">Philosophy</span>
-                <span class="chip">Relationships</span>
+        <div class="window-body">
+            <div class="section-chips">
+                <div class="section-chips-group">
+                    <div class="section-chips-title">Tech</div>
+                    <div class="chips">
+                        <span class="chip">Data Science</span>
+                        <span class="chip">Machine Learning</span>
+                        <span class="chip">Data Visualization</span>
+                        <span class="chip">Hardware</span>
+                    </div>
+                </div>
+                <div class="section-chips-group">
+                    <div class="section-chips-title">Life</div>
+                    <div class="chips">
+                        <span class="chip">Philosophy</span>
+                        <span class="chip">Relationships</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <hr>
+    <div class="dashed-line"></div>
 
-    <!-- Blog posts will be populated here by blog.js -->
-    <div class="blog-posts">
-        <!-- Posts will be dynamically inserted here -->
+    <div class="window">
+        <div class="window-titlebar">
+            <span class="window-controls">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-min"></span>
+                <span class="dot dot-max"></span>
+            </span>
+            <span class="window-title">POSTS</span>
+        </div>
+        <div class="window-body">
+            <div class="blog-posts">
+                <!-- Posts will be dynamically inserted here -->
+            </div>
+        </div>
+        <div class="window-statusbar">BLOG ENGINE v1.0</div>
     </div>
 </body>
 
-</html> 
+</html>

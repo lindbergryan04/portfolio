@@ -4,27 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
+    <title>RL:// Contact</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 
 <body class="contact-page">
-    <h1>Contact me</h1>
+    <div class="section-watermark">04</div>
 
-    <form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="c03621b8-cbc4-4cf4-9b07-25d2211a17fb">
-        <label>
-            
-            <textarea name="message" required></textarea>
-        </label>
-        <!-- Honeypot: -->
-        <input type="text" name="website" style="display:none">
-        <input type="hidden" name="redirect" value="https://web3forms.com/success">
-        <button type="submit" id="submit-button">Submit Form</button>
-    </form>
+    <div class="page-header">
+        <h1>Contact</h1>
+        <div class="subtitle">SEND A TRANSMISSION</div>
+    </div>
+
+    <div class="window" style="max-width: 560px;">
+        <div class="window-titlebar">
+            <span class="window-controls">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-min"></span>
+                <span class="dot dot-max"></span>
+            </span>
+            <span class="window-title">SEND_MESSAGE</span>
+        </div>
+        <div class="window-body">
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="c03621b8-cbc4-4cf4-9b07-25d2211a17fb">
+
+                <label>
+                    NAME:
+                    <input type="text" name="name" placeholder="Your name..." required>
+                </label>
+
+                <label>
+                    EMAIL:
+                    <input type="email" name="email" placeholder="your@email.com..." required>
+                </label>
+
+                <label>
+                    MESSAGE:
+                    <textarea name="message" placeholder="Type your message here..." required></textarea>
+                </label>
+
+                <!-- Honeypot -->
+                <input type="text" name="website" style="display:none">
+                <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
+                <button type="submit" id="submit-button">[ SEND ]</button>
+            </form>
+        </div>
+        <div class="window-statusbar">WEB3FORMS.COM // ENCRYPTED</div>
+    </div>
 
     <script type="module" src="../global.js"></script>
-
+    <script type="module" src="../decorations.js"></script>
 </body>
 
 </html>

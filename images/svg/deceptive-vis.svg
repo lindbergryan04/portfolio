@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <pattern id="grid-dv" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="#111"/>
+  <rect width="600" height="400" fill="url(#grid-dv)"/>
+  <!-- HUD corners -->
+  <path d="M 15 15 L 15 40 M 15 15 L 40 15" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 585 15 L 585 40 M 585 15 L 560 15" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 15 385 L 15 360 M 15 385 L 40 385" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <path d="M 585 385 L 585 360 M 585 385 L 560 385" stroke="#cc0000" stroke-width="1" opacity="0.4" fill="none"/>
+  <!-- Title -->
+  <text x="300" y="38" text-anchor="middle" font-family="monospace" font-size="11" fill="#cc0000" opacity="0.5" letter-spacing="6">TRUTH//DECEPTION</text>
+  <line x1="200" y1="45" x2="400" y2="45" stroke="#cc0000" stroke-width="0.5" opacity="0.2"/>
+  <!-- Divider line -->
+  <line x1="300" y1="55" x2="300" y2="360" stroke="#cc0000" stroke-width="1" stroke-dasharray="4 4" opacity="0.3"/>
+  <!-- LEFT: Truthful -->
+  <g transform="translate(40, 70)">
+    <text x="110" y="0" text-anchor="middle" font-family="monospace" font-size="10" fill="#888" letter-spacing="2">TRUTHFUL</text>
+    <rect x="0" y="12" width="220" height="150" fill="#151515" stroke="#333" stroke-width="0.5"/>
+    <!-- Proper bar chart with baseline at 0 -->
+    <line x1="20" y1="145" x2="200" y2="145" stroke="#444" stroke-width="0.5"/>
+    <line x1="20" y1="30" x2="20" y2="145" stroke="#444" stroke-width="0.5"/>
+    <!-- Y labels -->
+    <text x="16" y="35" text-anchor="end" font-family="monospace" font-size="6" fill="#555">100</text>
+    <text x="16" y="90" text-anchor="end" font-family="monospace" font-size="6" fill="#555">50</text>
+    <text x="16" y="148" text-anchor="end" font-family="monospace" font-size="6" fill="#555">0</text>
+    <!-- Bars (honest proportions) -->
+    <rect x="35" y="38" width="28" height="107" fill="#cc0000" opacity="0.6"/>
+    <rect x="75" y="50" width="28" height="95" fill="#882222" opacity="0.6"/>
+    <rect x="115" y="58" width="28" height="87" fill="#662222" opacity="0.6"/>
+    <rect x="155" y="42" width="28" height="103" fill="#882222" opacity="0.6"/>
+    <!-- X labels -->
+    <text x="49" y="156" text-anchor="middle" font-family="monospace" font-size="6" fill="#555">A</text>
+    <text x="89" y="156" text-anchor="middle" font-family="monospace" font-size="6" fill="#555">B</text>
+    <text x="129" y="156" text-anchor="middle" font-family="monospace" font-size="6" fill="#555">C</text>
+    <text x="169" y="156" text-anchor="middle" font-family="monospace" font-size="6" fill="#555">D</text>
+    <!-- Checkmark -->
+    <text x="110" y="180" text-anchor="middle" font-family="monospace" font-size="9" fill="#888">BASELINE: 0</text>
+    <text x="110" y="195" text-anchor="middle" font-family="monospace" font-size="9" fill="#888">SCALE: LINEAR</text>
+    <text x="110" y="215" text-anchor="middle" font-family="monospace" font-size="14" fill="#888" opacity="0.4">ACCURATE</text>
+  </g>
+  <!-- RIGHT: Deceptive -->
+  <g transform="translate(320, 70)">
+    <text x="110" y="0" text-anchor="middle" font-family="monospace" font-size="10" fill="#cc0000" letter-spacing="2">DECEPTIVE</text>
+    <rect x="0" y="12" width="220" height="150" fill="#151515" stroke="#cc0000" stroke-width="0.5" opacity="0.4"/>
+    <!-- Truncated bar chart (Y starts at 80) -->
+    <line x1="20" y1="145" x2="200" y2="145" stroke="#444" stroke-width="0.5"/>
+    <line x1="20" y1="30" x2="20" y2="145" stroke="#444" stroke-width="0.5"/>
+    <!-- Y labels (truncated) -->
+    <text x="16" y="35" text-anchor="end" font-family="monospace" font-size="6" fill="#cc0000" opacity="0.6">100</text>
+    <text x="16" y="90" text-anchor="end" font-family="monospace" font-size="6" fill="#cc0000" opacity="0.6">90</text>
+    <text x="16" y="148" text-anchor="end" font-family="monospace" font-size="6" fill="#cc0000" opacity="0.6">80</text>
+    <!-- Bars (same data, exaggerated by truncated axis) -->
+    <rect x="35" y="28" width="28" height="117" fill="#cc0000" opacity="0.8"/>
+    <rect x="75" y="60" width="28" height="85" fill="#cc0000" opacity="0.6"/>
+    <rect x="115" y="82" width="28" height="63" fill="#cc0000" opacity="0.4"/>
+    <rect x="155" y="38" width="28" height="107" fill="#cc0000" opacity="0.7"/>
+    <!-- X labels -->
+    <text x="49" y="156" text-anchor="middle" font-family="monospace" font-size="6" fill="#555">A</text>
+    <text x="89" y="156" text-anchor="middle" font-family="monospace" font-size="6" fill="#555">B</text>
+    <text x="129" y="156" text-anchor="middle" font-family="monospace" font-size="6" fill="#555">C</text>
+    <text x="169" y="156" text-anchor="middle" font-family="monospace" font-size="6" fill="#555">D</text>
+    <!-- Warning -->
+    <text x="110" y="180" text-anchor="middle" font-family="monospace" font-size="9" fill="#cc0000" opacity="0.7">BASELINE: 80</text>
+    <text x="110" y="195" text-anchor="middle" font-family="monospace" font-size="9" fill="#cc0000" opacity="0.7">SCALE: TRUNCATED</text>
+    <text x="110" y="215" text-anchor="middle" font-family="monospace" font-size="14" fill="#cc0000" opacity="0.6">MISLEADING</text>
+  </g>
+  <!-- Zigzag break indicator on right chart y-axis -->
+  <g transform="translate(340, 210)">
+    <polyline points="0,0 5,-3 0,-6 5,-9 0,-12" fill="none" stroke="#cc0000" stroke-width="1" opacity="0.5"/>
+  </g>
+  <!-- Status -->
+  <text x="30" y="375" font-family="monospace" font-size="9" fill="#cc0000" opacity="0.4">TOPIC:ABORTION_ACCESS_US</text>
+  <text x="570" y="375" text-anchor="end" font-family="monospace" font-size="9" fill="#444">DATA_ETHICS//VIS_DESIGN</text>
+</svg>

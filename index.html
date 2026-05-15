@@ -4,36 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryan's Portfolio</title>
+    <title>RL:// Ryan Lindberg</title>
     <link rel="stylesheet" href="style.css">
-    <link
-    rel="icon"
-    type="image/svg+xml"
-    href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐼</text></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐼</text></svg>">
 </head>
 
 <body>
-    <h1 class='home' id='name'>Ryan Lindberg</h1>
-    <p class='bio'>Hello! I'm Ryan, a senior at UC San Diego studying Data Science. I always loved math and computers as a kid and began
-        playing around with programming at the age of 17. I'm especially interested in the aspects of data science that we can use to 
-        make a positive impact in society. I am very passionate about the cyber security and privacy/ethics 
-        side of data, as well as the intersection of data science with biology in bioinformatics.
-        These two fields have been at the forefront of my interests for a while now, and I'm excited to see where they take me.
-        Recently, I've been diving into bioinformatics with my most recent project and I feel incredibly lucky and grateful to be pursuing
-        something I love. I made this website myself, no template!</p>
-    <p class='bio' id="caption">A photo of me at Blacks Beach in Santa Cruz, CA.</p>
-    <img id="bio-img" src='images/portrait.jpg'
-        alt='A photo of Ryan looking whimsical at Blacks Beach in Santa Cruz, CA.'
-        style="width: 50%; max-width: 500px; height: auto;">
+    <div class="section-watermark">01</div>
 
-    <h2 class='home'>Latest Projects</h2>
-    <div class="projects"></div>
+    <div class="page-header">
+        <div class="home-header">
+            <h1>Ryan Lindberg</h1>
+            <div class="tagline">DATA SCIENCE // UCSD // 2026</div>
+        </div>
+    </div>
 
-    <h2 class='home'>My GitHub Stats:</h2>
-    <div class="home" id="profile-stats"></div>
+    <div class="grid-2col">
+        <div>
+            <div class="window">
+                <div class="window-titlebar">
+                    <span class="window-controls">
+                        <span class="dot dot-close"></span>
+                        <span class="dot dot-min"></span>
+                        <span class="dot dot-max"></span>
+                    </span>
+                    <span class="window-title">ABOUT</span>
+                </div>
+                <div class="window-body">
+                    <p class="bio">Hello! I'm Ryan, a senior at UC San Diego studying Data Science. Math and computers
+                        were always my thing growing up, and I started writing actual code at 17. The defining moment came a bit
+                        earlier though. As a teenager I saw an one of those early AI demos, a genetic algorithm, and I remember being in complete
+                        disbelief at what came out the other side. That feeling has driven a lot of what I do since:
+                        a deep curiosity for hard, novel problems, and the belief that computing is going to shape the
+                        next century in ways we can't fully imagine yet.</p>
+                    <p class="bio" style="margin-top: 8px;">What I love most about data science is the versatility.
+                        Sitting with a messy problem and producing an actionable answer that didn't exist before. Providing answers for people that they couldnt have obtained otherwise. The feeling of clearing a path through the decision space by squeezing every last drop of signal out of data. Its a feeling you cant get anywhere else. The
+                        fields I keep gravitating toward are AI and the work behind teaching machines to think, healthcare
+                        and drug discovery (my latest project trains a multiclass tumor classifier directly on RNA-Seq
+                        gene expression data), and the space industry, where rapid iteration and infrastructure-scale
+                        problems feel like some of the most important challenges of our time. In my career, I hope to
+                        wake up every day and help with a difficult problem alongside like-minded people who want to build a
+                        better future.</p>
+                    <p class="bio" style="margin-top: 8px;">Outside of school, I volunteer with the Humanitarian
+                        OpenStreetMap Team contributing maps for disaster-impacted regions, I follow markets closely, and I lift, cook, and travel whenever I get the chance. I love talking about nerdy stuff with my friends. Right now were planning a niche local social event for strangers! Stick around to find out more! When back home in Central Oregon, I always try to maximize my time outdoors. I go fly fishing, hike mountains, golf, play with my awesome dogs Slinky and Stanley. This last summer I built a huge 14x14ft deck for my neighbors dream house in the 100 degree heat, quite a challenge. I also climbed the South Sister with my brother. 5000 feet elevation gain and 13 miles round trip. Very fun! Need to find a bigger mountain next time. </p>
+                </div>
+                <div class="window-statusbar">STATUS: ONLINE // SAN DIEGO, CA</div>
+            </div>
+        </div>
+
+        <div>
+            <div class="window">
+                <div class="window-titlebar">
+                    <span class="window-controls">
+                        <span class="dot dot-close"></span>
+                        <span class="dot dot-min"></span>
+                        <span class="dot dot-max"></span>
+                    </span>
+                    <span class="window-title">PROFILE_IMG.JPG</span>
+                </div>
+                <div class="window-body" style="padding: 0;">
+                    <img id="bio-img" src="images/portrait.jpg"
+                        alt="A photo of Ryan looking whimsical at Blacks Beach in Santa Cruz, CA.">
+                </div>
+                <div class="window-statusbar">
+                    <span id="caption">BLACKS BEACH // SANTA CRUZ, CA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashed-line"></div>
+
+    <div class="window">
+        <div class="window-titlebar">
+            <span class="window-controls">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-min"></span>
+                <span class="dot dot-max"></span>
+            </span>
+            <span class="window-title">LATEST_PROJECTS</span>
+        </div>
+        <div class="window-body">
+            <div class="projects"></div>
+        </div>
+        <div class="window-statusbar">SHOWING 3 OF 12 // <a href="projects/">VIEW ALL PROJECTS →</a></div>
+    </div>
+
+    <div class="dashed-line"></div>
+
+    <div class="window">
+        <div class="window-titlebar">
+            <span class="window-controls">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-min"></span>
+                <span class="dot dot-max"></span>
+            </span>
+            <span class="window-title">SYSTEM_STATS // GITHUB</span>
+        </div>
+        <div class="window-body">
+            <div id="profile-stats"></div>
+        </div>
+        <div class="window-statusbar">API: GITHUB.COM/LINDBERGRYAN04</div>
+    </div>
 
     <script type="module" src="global.js"></script>
     <script src="index.js" type="module" defer></script>
+    <script type="module" src="decorations.js"></script>
 </body>
 
-</html>
+</html>                                    

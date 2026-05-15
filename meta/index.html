@@ -4,57 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta</title>
+    <title>RL:// Meta</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
-    <h1>Meta Statistics</h1>
-    <h2>Website Commits by Time of Day</h2>
-    <div id="slider-container">
-        <label>Show commits until:</label>
-        <input type="range" min="0" max="100" value="100" id="commit-slider" class="slider" />
-        <time id="selectedTime"></time>
+    <div class="section-watermark">06</div>
+
+    <div class="page-header">
+        <h1>Meta Statistics</h1>
+        <div class="subtitle">WEBSITE ANALYTICS & COMMIT DATA</div>
     </div>
-    <div id="chart"></div>
 
-    <p id="selection-count">No commits selected</p>
-    <dl id="language-breakdown" class="stats"></dl>
-
-    <dl id="commit-tooltip" class="info tooltip" hidden>
-        <dt>Commit</dt>
-        <dd>
-            <a href="" id="commit-link" target="_blank"></a>
-        </dd>
-
-        <dt>Date</dt>
-        <dd id="commit-date"></dd>
-
-        <dt>Time</dt>
-        <dd id="commit-time"></dd>
-
-        <dt>Author</dt>
-        <dd id="commit-author"></dd>
-
-        <dt>Lines edited</dt>
-        <dd id="commit-lines"></dd>
-    </dl>
-
-    <h2>Website Stats</h2>
-    <div id="stats">
-    </div>
-    <dl id="files">
-        <!-- we want the following structure for each file:
-        <div>
-          <dt>
-            <code>{file.name}</code>
-          </dt>
-          <dd>{file.lines.length} lines</dd>
+    <div class="window">
+        <div class="window-titlebar">
+            <span class="window-controls">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-min"></span>
+                <span class="dot dot-max"></span>
+            </span>
+            <span class="window-title">WEBSITE_STATS</span>
         </div>
-        -->
-    </dl>
+        <div class="window-body">
+            <div id="stats"></div>
+        </div>
+    </div>
+
+    <div class="window">
+        <div class="window-titlebar">
+            <span class="window-controls">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-min"></span>
+                <span class="dot dot-max"></span>
+            </span>
+            <span class="window-title">FILE_BREAKDOWN</span>
+        </div>
+        <div class="window-body">
+            <dl id="files"></dl>
+        </div>
+    </div>
+
     <script src="../global.js" type="module"></script>
     <script src="main.js" type="module"></script>
+    <script type="module" src="../decorations.js"></script>
 </body>
 
 </html>
