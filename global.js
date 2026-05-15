@@ -2,8 +2,8 @@
 
 const BASE_PATH =
     location.hostname === "localhost" || location.hostname === "127.0.0.1"
-        ? "/portfolio/" // Local dev base path
-        : "/portfolio/"; // GitHub Pages base path (adjust this if your repo name is different)
+        ? "/" // Local dev base path
+        : "/"; // Custom domain (ryanlindberg.dev) serves from root
 
 // Apply saved or system theme ASAP (before rendering)
 function applyInitialTheme() {
