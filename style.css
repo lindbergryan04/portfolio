@@ -1479,3 +1479,23 @@ label {
   color: var(--accent-hover);
   text-decoration: underline;
 }
+
+.post-page .post-content .post-photo {
+  max-width: 40%;
+  margin: 18px auto 24px auto;
+}
+
+.post-page .post-content .post-photo .window-body {
+  padding: 0;
+}
+
+.post-page .post-content .post-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--border);
+}
+
+.post-page .post-content .post-photo-wide {
+  max-width: 100%;
+}
