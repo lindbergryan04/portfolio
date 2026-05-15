@@ -5,7 +5,7 @@ import { windowControls } from './icons.js';
 const BASE_PATH =
     location.hostname === "localhost" || location.hostname === "127.0.0.1"
         ? "/"
-        : "/portfolio/";
+        : "/";
 
 let pages = [
     { url: "", title: "Home" },
