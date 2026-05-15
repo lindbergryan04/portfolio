@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <pattern id="grid-pom" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="scan-pom" width="4" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="600" y2="0" stroke="#ffffff" stroke-width="0.3" opacity="0.03"/>
+    </pattern>
+    <radialGradient id="glow-pom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#cc0000" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#111" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="600" height="400" fill="#111"/>
+  <rect width="600" height="400" fill="url(#grid-pom)"/>
+  <rect width="600" height="400" fill="url(#scan-pom)"/>
+  <rect width="600" height="400" fill="url(#glow-pom)"/>
+  <!-- HUD corners -->
+  <path d="M 15 15 L 15 40" stroke="#cc0000" stroke-width="1" opacity="0.4"/>
+  <path d="M 15 15 L 40 15" stroke="#cc0000" stroke-width="1" opacity="0.4"/>
+  <path d="M 585 15 L 585 40" stroke="#cc0000" stroke-width="1" opacity="0.4"/>
+  <path d="M 585 15 L 560 15" stroke="#cc0000" stroke-width="1" opacity="0.4"/>
+  <path d="M 15 385 L 15 360" stroke="#cc0000" stroke-width="1" opacity="0.4"/>
+  <path d="M 15 385 L 40 385" stroke="#cc0000" stroke-width="1" opacity="0.4"/>
+  <path d="M 585 385 L 585 360" stroke="#cc0000" stroke-width="1" opacity="0.4"/>
+  <path d="M 585 385 L 560 385" stroke="#cc0000" stroke-width="1" opacity="0.4"/>
+  <!-- Timer ring -->
+  <circle cx="300" cy="190" r="110" fill="none" stroke="#333" stroke-width="2"/>
+  <circle cx="300" cy="190" r="110" fill="none" stroke="#cc0000" stroke-width="3" stroke-dasharray="520 172" stroke-linecap="butt" opacity="0.9" transform="rotate(-90 300 190)"/>
+  <circle cx="300" cy="190" r="95" fill="none" stroke="#cc0000" stroke-width="0.5" opacity="0.2"/>
+  <circle cx="300" cy="190" r="125" fill="none" stroke="#cc0000" stroke-width="0.5" opacity="0.15"/>
+  <!-- Tick marks -->
+  <g opacity="0.3" stroke="#cc0000" stroke-width="1">
+    <line x1="300" y1="70" x2="300" y2="78"/>
+    <line x1="355" y1="74" x2="352" y2="82"/>
+    <line x1="402" y1="93" x2="396" y2="99"/>
+    <line x1="420" y1="135" x2="412" y2="138"/>
+    <line x1="420" y1="190" x2="412" y2="190"/>
+    <line x1="420" y1="245" x2="412" y2="242"/>
+    <line x1="402" y1="287" x2="396" y2="281"/>
+    <line x1="355" y1="306" x2="352" y2="298"/>
+    <line x1="300" y1="310" x2="300" y2="302"/>
+    <line x1="245" y1="306" x2="248" y2="298"/>
+    <line x1="198" y1="287" x2="204" y2="281"/>
+    <line x1="180" y1="245" x2="188" y2="242"/>
+    <line x1="180" y1="190" x2="188" y2="190"/>
+    <line x1="180" y1="135" x2="188" y2="138"/>
+    <line x1="198" y1="93" x2="204" y2="99"/>
+    <line x1="245" y1="74" x2="248" y2="82"/>
+  </g>
+  <!-- Digital display -->
+  <text x="300" y="185" text-anchor="middle" font-family="monospace" font-size="42" fill="#cc0000" font-weight="bold">25:00</text>
+  <text x="300" y="210" text-anchor="middle" font-family="monospace" font-size="10" fill="#666" letter-spacing="4">FOCUS CYCLE</text>
+  <!-- Status readouts -->
+  <text x="30" y="370" font-family="monospace" font-size="9" fill="#cc0000" opacity="0.4">SYS:POMODORO_v2.1</text>
+  <text x="30" y="382" font-family="monospace" font-size="9" fill="#444" opacity="0.5">SESSION:04 // BREAK:00</text>
+  <text x="570" y="370" text-anchor="end" font-family="monospace" font-size="9" fill="#444" opacity="0.5">CLI_MODE:ACTIVE</text>
+  <text x="570" y="382" text-anchor="end" font-family="monospace" font-size="9" fill="#cc0000" opacity="0.3">PYTHON//ASCII</text>
+  <!-- Top label -->
+  <text x="300" y="38" text-anchor="middle" font-family="monospace" font-size="11" fill="#cc0000" opacity="0.5" letter-spacing="6">TIMER_INTERFACE</text>
+  <line x1="200" y1="45" x2="400" y2="45" stroke="#cc0000" stroke-width="0.5" opacity="0.2"/>
+</svg>
