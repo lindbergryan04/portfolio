@@ -41,7 +41,7 @@
 
                 <h3>Intro</h3>
                 <p>
-                It's 2:30am. I have a quiz tomorrow morning. I had an exam yesterday. I just finished my first real hardware project. I've messed with arduinos before, but only the kind of stuff where you blink an LED. Nothing with actual sensors.
+                It's 2:30am. I have a quiz tomorrow morning. I just finished my first real hardware project. I've messed with arduinos before, but only the kind of stuff where you blink an LED. Nothing with actual sensors.
                 </p>
                 <p>
                 This one is different. As a data scientist, I've always wanted to build my own little breadboard data-collecting computer, and tonight I finally pulled it off. And it's totally awesome: an avionics computer.
@@ -49,9 +49,20 @@
                 <p>
                 Right now all it does is measure humidity, pressure, and altitude, so I'm not sure "avionics" is really fair yet. But this is just phase 1 of many. By the end I want something worthy of a model rocket.
                 </p>
-                <p>
-                <img src="../photos/close_up_computer.png" alt="The Arduino Uno wired up to a microSD card module on a breadboard" style="max-width: 100%; height: auto; display: block; margin: 18px auto;" />
-                </p>
+                <div class="window post-photo">
+                    <div class="window-titlebar">
+                        <span class="window-controls">
+                            <span class="dot dot-close"></span>
+                            <span class="dot dot-min"></span>
+                            <span class="dot dot-max"></span>
+                        </span>
+                        <span class="window-title">CLOSE_UP.PNG</span>
+                    </div>
+                    <div class="window-body">
+                        <img src="../photos/close_up_computer.png" alt="The Arduino Uno wired up to a microSD card module on a breadboard" />
+                    </div>
+                    <div class="window-statusbar">BREADBOARD // V1.0</div>
+                </div>
 
                 <h3>What's Next</h3>
                 <p>
@@ -70,29 +81,51 @@
                 <p>
                 I'll keep the 0 readers of this forsaken blog updated.
                 </p>
-                <p>
-                <img src="../photos/v1_computer.png" alt="The full workspace: laptop running Arduino IDE, breadboard, Arduino, and parts case" style="max-width: 100%; height: auto; display: block; margin: 18px auto;" />
-                </p>
+                <div class="window post-photo">
+                    <div class="window-titlebar">
+                        <span class="window-controls">
+                            <span class="dot dot-close"></span>
+                            <span class="dot dot-min"></span>
+                            <span class="dot dot-max"></span>
+                        </span>
+                        <span class="window-title">V1_COMPUTER.PNG</span>
+                    </div>
+                    <div class="window-body">
+                        <img src="../photos/v1_computer.png" alt="The full workspace: laptop running Arduino IDE, breadboard, Arduino, and parts case" />
+                    </div>
+                    <div class="window-statusbar">WORKBENCH // V1.0</div>
+                </div>
 
                 <h3>Parts List</h3>
                 <p>
                 Here is everything that went into v1:
                 </p>
                 <ul>
-                    <li><b>Arduino Uno R3</b> — the microcontroller, the brain of the operation</li>
-                    <li><b>BME280 module</b> — pressure / temperature / humidity sensor (I2C)</li>
-                    <li><b>MPU6050 / GY-521 module</b> — 6-DoF IMU (3-axis accel + 3-axis gyro), not yet wired in because the header pins need to be soldered</li>
-                    <li><b>WWZMDiB microSD module</b> — SPI card reader, this is what makes the data persistent</li>
-                    <li><b>32GB SanDisk microSDHC card</b> — stores the CSV logs</li>
-                    <li><b>1 breadboard</b> — 400-point half size</li>
-                    <li><b>Jumper wire kit</b> — assorted lengths and ends (male-to-male, male-to-female, female-to-female)</li>
-                    <li><b>USB-B to USB-C cable</b> — Uno to MacBook for programming and tethered power</li>
-                    <li><b>USB-C to DC 9V PD cable</b> — eventually for portable power from a USB-C PD battery bank</li>
-                    <li><b>microSD to USB adapter</b> — for reading the logs on my laptop</li>
+                    <li>Arduino Uno R3: the microcontroller, the brain of the operation</li>
+                    <li>BME280 module: pressure / temperature / humidity sensor (I2C)</li>
+                    <li>MPU6050 / GY-521 module: 6-DoF IMU (3-axis accel + 3-axis gyro), not yet wired in because the header pins need to be soldered</li>
+                    <li>WWZMDiB microSD module: SPI card reader, this is what makes the data persistent</li>
+                    <li>32GB SanDisk microSDHC card: stores the CSV logs</li>
+                    <li>1 breadboard: 400-point half size</li>
+                    <li>Jumper wire kit: assorted lengths and ends (male-to-male, male-to-female, female-to-female)</li>
+                    <li>USB-B to USB-C cable: Uno to MacBook for programming and tethered power</li>
+                    <li>USB-C to DC 9V PD cable: eventually for portable power from a USB-C PD battery bank</li>
+                    <li>microSD to USB adapter: for reading the logs on my laptop</li>
                 </ul>
-                <p>
-                <img src="../photos/toolbox.png" alt="The parts organizer holding breadboards, jumper wires, and modules" style="max-width: 100%; height: auto; display: block; margin: 18px auto;" />
-                </p>
+                <div class="window post-photo">
+                    <div class="window-titlebar">
+                        <span class="window-controls">
+                            <span class="dot dot-close"></span>
+                            <span class="dot dot-min"></span>
+                            <span class="dot dot-max"></span>
+                        </span>
+                        <span class="window-title">TOOLBOX.PNG</span>
+                    </div>
+                    <div class="window-body">
+                        <img src="../photos/toolbox.png" alt="The parts organizer holding breadboards, jumper wires, and modules" />
+                    </div>
+                    <div class="window-statusbar">PARTS_TRAY // V1.0</div>
+                </div>
 
                 <h3>Test from My Room</h3>
                 <p>
@@ -107,11 +140,22 @@
                 <p>
                 Then I pulled the microSD card, opened the CSV on my laptop, and plotted altitude vs. time:
                 </p>
+                <div class="window post-photo post-photo-wide">
+                    <div class="window-titlebar">
+                        <span class="window-controls">
+                            <span class="dot dot-close"></span>
+                            <span class="dot dot-min"></span>
+                            <span class="dot dot-max"></span>
+                        </span>
+                        <span class="window-title">LOG0001_ALTITUDE.PNG</span>
+                    </div>
+                    <div class="window-body">
+                        <img src="../photos/log0001_altitude.png" alt="Altitude vs time plot showing the four phases of the test" />
+                    </div>
+                    <div class="window-statusbar">ALTITUDE // LOG_0001</div>
+                </div>
                 <p>
-                <img src="../photos/log0001_altitude.png" alt="Altitude vs time plot showing the four phases of the test" style="max-width: 100%; height: auto; display: block; margin: 18px auto;" />
-                </p>
-                <p>
-                The shape matches the choreography exactly — flat on the desk, rising during the lift, holding higher at the top of the room, dropping for the floor segment, and climbing back at the end. The full swing was <b>about 2.66 meters peak-to-trough</b>, which is roughly the difference between my overhead reach and the floor. So I think the sensor is being honest.
+                The shape matches the choreography exactly: flat on the desk, rising during the lift, holding higher at the top of the room, dropping for the floor segment, and climbing back at the end. The full swing was about 2.66 meters peak-to-trough, which is roughly the difference between my overhead reach and the floor. So I think the sensor is being honest.
                 </p>
                 <p>
                 When it sat still on the desk, the altitude reading drifted by about 12 cm (one standard deviation). Compared to a 2.6-meter swing, that's a signal-to-noise ratio of about 13×. Good enough to see the real motion in the raw data without any filtering or smoothing. For something like an elevator ride, or a model rocket flight, the signal is going to dwarf the noise. But I would like to see what kind of tuning I can do with the sensors. 
