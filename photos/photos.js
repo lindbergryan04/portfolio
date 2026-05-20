@@ -11,6 +11,7 @@ const lbMeta = lightbox.querySelector('[data-meta]');
 
 let activePost = null;
 let activeIndex = 0;
+let activeMedia = [];
 
 function escapeHtml(str = '') {
     return String(str)
@@ -57,14 +58,17 @@ function renderGrid() {
     posts.forEach((post, i) => {
         const title = escapeHtml(post.title || post.slug || 'Untitled');
         const cover = escapeHtml(resolveAsset(post.cover || ''));
-        const count = Array.isArray(post.media) ? post.media.length : 0;
+        const mediaList = Array.isArray(post.media) ? post.media : [];
+        const total = post.cover
+            ? 1 + mediaList.filter((m) => m !== post.cover).length
+            : mediaList.length;
         const date = formatDate(post.date);
         const location = escapeHtml(post.location || '');
 
         const statusBits = [];
         if (location) statusBits.push(location);
         if (date) statusBits.push(date);
-        if (count) statusBits.push(`${count} ITEMS`);
+        if (total) statusBits.push(`${total} ITEMS`);
 
         const card = document.createElement('article');
         card.className = 'photo-card';
@@ -94,15 +98,14 @@ function renderGrid() {
 
 function renderActiveMedia() {
     if (!activePost) return;
-    const media = activePost.media || [];
-    if (media.length === 0) {
+    if (activeMedia.length === 0) {
         lbMedia.innerHTML = '<p class="photo-lightbox-empty">No media in this post yet.</p>';
         lbCounter.textContent = '0 / 0';
         return;
     }
 
-    activeIndex = ((activeIndex % media.length) + media.length) % media.length;
-    const src = resolveAsset(media[activeIndex]);
+    activeIndex = ((activeIndex % activeMedia.length) + activeMedia.length) % activeMedia.length;
+    const src = resolveAsset(activeMedia[activeIndex]);
 
     if (isVideo(src)) {
         lbMedia.innerHTML = `<video class="photo-lightbox-video" src="${escapeHtml(src)}" controls playsinline preload="metadata"></video>`;
@@ -110,12 +113,14 @@ function renderActiveMedia() {
         lbMedia.innerHTML = `<img class="photo-lightbox-image" src="${escapeHtml(src)}" alt="">`;
     }
 
-    lbCounter.textContent = `${activeIndex + 1} / ${media.length}`;
+    lbCounter.textContent = `${activeIndex + 1} / ${activeMedia.length}`;
 }
 
 function openLightbox(post) {
     activePost = post;
     activeIndex = 0;
+    const media = Array.isArray(post.media) ? post.media : [];
+    activeMedia = post.cover ? [post.cover, ...media.filter((m) => m !== post.cover)] : media;
     lbTitle.textContent = (post.title || post.slug || 'Post').toUpperCase();
     lbCaption.innerHTML = post.caption
         ? escapeHtml(post.caption).replace(/\n\n/g, '</p><p>').replace(/^/, '<p>') + '</p>'
@@ -138,10 +143,11 @@ function closeLightbox() {
     document.body.classList.remove('lightbox-open');
     lbMedia.innerHTML = '';
     activePost = null;
+    activeMedia = [];
 }
 
 function step(delta) {
-    if (!activePost || !activePost.media || activePost.media.length === 0) return;
+    if (!activePost || activeMedia.length === 0) return;
     activeIndex += delta;
     renderActiveMedia();
 }

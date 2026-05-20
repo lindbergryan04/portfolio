@@ -1565,57 +1565,48 @@ body.lightbox-open {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 32px;
 }
 
 .photo-lightbox-backdrop {
   position: absolute;
   inset: 0;
   background: rgba(20, 20, 20, 0.55);
-  backdrop-filter: blur(18px) saturate(120%);
-  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
 }
 
 .photo-lightbox-window {
   position: relative;
-  width: min(1100px, 95vw);
-  max-height: 92vh;
+  width: min(960px, 92vw);
+  max-height: min(78vh, 720px);
   margin: 0;
   display: flex;
   flex-direction: column;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-.photo-lightbox-window .window-titlebar,
-.photo-lightbox-window .window-statusbar {
-  background: rgba(20, 20, 20, 0.85);
-  color: var(--text-titlebar);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.photo-lightbox-window .window-statusbar {
-  border-top: none;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  box-shadow:
+    4px 4px 0 var(--bevel-dark),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .photo-lightbox-body {
   flex: 1;
   padding: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   min-height: 0;
   overflow: hidden;
-  background: transparent;
 }
 
 .photo-lightbox-stage {
   position: relative;
   flex: 1;
-  background: transparent;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
   min-height: 0;
 }
 
@@ -1630,10 +1621,9 @@ body.lightbox-open {
 .photo-lightbox-image,
 .photo-lightbox-video {
   max-width: 100%;
-  max-height: 65vh;
+  max-height: 100%;
   display: block;
   object-fit: contain;
-  background: #000;
 }
 
 .photo-lightbox-video {
@@ -1644,17 +1634,16 @@ body.lightbox-open {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: #000;
+  background: rgba(0, 0, 0, 0.85);
   color: #fff;
-  border: 1px solid #fff;
-  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  padding: 10px 12px;
   font-family: 'Monocraft', monospace;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1;
   cursor: pointer;
   z-index: 2;
   letter-spacing: 0;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
 }
 
 .lightbox-nav:hover {
@@ -1664,11 +1653,10 @@ body.lightbox-open {
 
 .lightbox-nav:active {
   transform: translateY(-50%) translate(1px, 1px);
-  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.6);
 }
 
-.lightbox-prev { left: 16px; }
-.lightbox-next { right: 16px; }
+.lightbox-prev { left: 10px; }
+.lightbox-next { right: 10px; }
 
 .lightbox-close {
   background: transparent;
@@ -1688,25 +1676,57 @@ body.lightbox-open {
   background: transparent;
 }
 
+.photo-lightbox-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border);
+  background: var(--bg-panel);
+  min-height: 0;
+}
+
+.photo-lightbox-meta {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-toolbar);
+}
+
+.photo-lightbox-meta:empty {
+  display: none;
+}
+
 .photo-lightbox-caption {
-  padding: 14px 18px;
+  flex: 1;
+  padding: 14px 16px;
   font-size: 12px;
   line-height: 1.7;
   color: var(--text);
-  max-height: 28vh;
   overflow-y: auto;
-  background: var(--bg-panel);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-top: none;
+  min-height: 0;
 }
 
 .photo-lightbox-caption p {
   margin: 0 0 10px 0;
-  max-width: 75ch;
+  max-width: none;
 }
 
 .photo-lightbox-caption p:last-child {
   margin-bottom: 0;
+}
+
+.photo-lightbox-counter {
+  padding: 6px 14px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-toolbar);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 
 .photo-caption-empty {
@@ -1726,22 +1746,33 @@ body.lightbox-open {
   }
 
   .photo-lightbox {
-    padding: 8px;
+    padding: 12px;
   }
 
-  .photo-lightbox-image,
-  .photo-lightbox-video {
+  .photo-lightbox-window {
+    max-height: 92vh;
+    width: 100%;
+  }
+
+  .photo-lightbox-body {
+    flex-direction: column;
+  }
+
+  .photo-lightbox-stage {
+    min-height: 280px;
+    flex: 0 0 auto;
     max-height: 55vh;
   }
 
-  .photo-lightbox-caption {
-    max-height: 30vh;
-    font-size: 11px;
-    padding: 10px 12px;
+  .photo-lightbox-sidebar {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    max-height: 35vh;
   }
 
   .lightbox-nav {
-    padding: 6px 9px;
-    font-size: 12px;
+    padding: 8px 10px;
+    font-size: 14px;
   }
 }
