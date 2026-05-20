@@ -58,7 +58,6 @@ function renderGrid() {
         const title = escapeHtml(post.title || post.slug || 'Untitled');
         const cover = escapeHtml(resolveAsset(post.cover || ''));
         const count = Array.isArray(post.media) ? post.media.length : 0;
-        const hasVideo = Array.isArray(post.media) && post.media.some(isVideo);
         const date = formatDate(post.date);
         const location = escapeHtml(post.location || '');
 
@@ -85,7 +84,6 @@ function renderGrid() {
                 </div>
                 <div class="window-body photo-card-body">
                     <img class="photo-cover" src="${cover}" alt="${title}" loading="lazy">
-                    ${hasVideo ? '<span class="photo-badge">VIDEO</span>' : ''}
                 </div>
                 <div class="window-statusbar">${statusBits.join(' // ') || '—'}</div>
             </div>
