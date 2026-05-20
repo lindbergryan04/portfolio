@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RL:// Photos</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="photos-page">
+    <div class="section-watermark">07</div>
+
+    <div class="page-header">
+        <h1>Photos</h1>
+        <div class="subtitle">SNAPSHOTS & STORIES</div>
+    </div>
+
+    <div class="photo-grid"></div>
+
+    <div class="photo-lightbox" hidden aria-hidden="true">
+        <div class="photo-lightbox-backdrop" data-close></div>
+        <div class="window photo-lightbox-window" role="dialog" aria-modal="true" aria-label="Photo viewer">
+            <div class="window-titlebar">
+                <span class="window-controls">
+                    <span class="dot dot-close" data-close title="Close"></span>
+                    <span class="dot dot-min"></span>
+                    <span class="dot dot-max"></span>
+                </span>
+                <span class="window-title" data-lightbox-title>POST</span>
+                <button class="lightbox-close" data-close aria-label="Close">[ X ]</button>
+            </div>
+            <div class="window-body photo-lightbox-body">
+                <div class="photo-lightbox-stage">
+                    <button class="lightbox-nav lightbox-prev" data-prev aria-label="Previous">◄</button>
+                    <div class="photo-lightbox-media" data-media></div>
+                    <button class="lightbox-nav lightbox-next" data-next aria-label="Next">►</button>
+                </div>
+                <aside class="photo-lightbox-sidebar">
+                    <div class="photo-lightbox-meta" data-meta></div>
+                    <div class="photo-lightbox-caption" data-caption></div>
+                    <div class="photo-lightbox-counter" data-counter>1 / 1</div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <script src="../global.js" type="module"></script>
+    <script src="photos.js" type="module"></script>
+    <script type="module" src="../decorations.js"></script>
+</body>
+
+</html>
