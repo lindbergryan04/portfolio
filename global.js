@@ -157,3 +157,17 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
 export async function fetchGitHubData(username) {
     return fetchJSON(`https://api.github.com/users/${username}`);
 }
+
+export async function fetchGitHubCommitCount(username) {
+    try {
+        const response = await fetch(
+            `https://api.github.com/search/commits?q=author:${username}&per_page=1`
+        );
+        if (!response.ok) return null;
+        const data = await response.json();
+        return data.total_count;
+    } catch (error) {
+        console.error('Error fetching commit count:', error);
+        return null;
+    }
+}
