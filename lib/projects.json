@@ -1,5 +1,12 @@
 [
   {
+    "title": "Costco Australia Synthetic Control",
+    "image": "images/costco-australia-sc.png",
+    "description": "A causal study of whether Costco gas-station entry lowers nearby competitor fuel prices in Australian local markets. Using state fuel-price registry data from NSW, QLD, and WA plus hand-collected Costco opening dates, I fit a separate synthetic control for each treated Costco against same-state donor postcodes. Built an end-to-end pipeline in Python and R to estimate the competitive price effect and translate it into an ACCC policy recommendation. <a href=\"https://github.com/lindbergryan04/costco-australia-sc\" target=\"_blank\" rel=\"noopener\">View the code on GitHub &rarr;</a>",
+    "year": "2026",
+    "link": "https://github.com/lindbergryan04/costco-australia-sc/blob/main/analysis/costco_australia_sc.pdf"
+  },
+  {
     "title": "Pomodoro Timer",
     "image": "images/demo_2.png",
     "description": "A minimalistic pomodoro timer built in Python that lets you track your work sessions and breaks. Built for programmers that struggle to focus, command line styled, ascii art, intuitive interface, full of features and customizability.",
