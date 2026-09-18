@@ -14,6 +14,13 @@
     "link": "https://github.com/lindbergryan04/cli-pomodoro"
   },
   {
+    "title": "Costco Retail Entry & Competitor Pricing",
+    "image": "images/costco.png",
+    "description": "A causal study of whether Costco fuel-station entry lowers nearby competitor prices, using state fuel-price registry data across three Australian states combined with hand-collected store opening dates. I fit synthetic-control models per store against a 196-postcode donor pool and translated the estimated price effects into a clear pricing recommendation for a regulatory stakeholder.",
+    "year": "2025",
+    "link": "https://github.com/lindbergryan04/costco-australia-sc"
+  },
+  {
     "title": "Gene Expression Analysis",
     "image": "images/geneexpressionanalysis.png",
     "description": "I built a multiclass tumor type classifier that predicts cancer type directly from high-dimensional RNA-Seq gene expression profiles using PCA latent factors and multinomial logistic regression. Trained on TCGA pan-cancer data, the model achieves ~95% test accuracy and highlights how simple, interpretable latent-factor models can capture strong biological signal across 30+ cancer types. ",
