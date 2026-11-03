@@ -139,6 +139,7 @@ nav {
   border-left-color: var(--bevel-light);
   display: flex;
   align-items: stretch;
+  flex-wrap: wrap;
   margin-bottom: 20px;
   padding: 0;
   gap: 0;
@@ -357,6 +358,10 @@ nav .nav-version {
 
 /* ===== HOME PAGE ===== */
 .home-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
   text-align: left;
   margin-bottom: 20px;
   position: relative;
@@ -375,6 +380,35 @@ nav .nav-version {
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.2em;
+}
+
+.home-now-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 14px;
+  background: var(--bg-toolbar);
+  border: 2px outset var(--bevel-light);
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.home-now-link:hover {
+  background: var(--hover-bg);
+  color: var(--accent-hover);
+  text-decoration: none;
+}
+
+.home-now-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.home-now-link:active {
+  border-style: inset;
 }
 
 #bio-img {
@@ -411,7 +445,7 @@ nav .nav-version {
   gap: 16px;
 }
 
-article {
+.projects > article {
   display: contents;
 }
 

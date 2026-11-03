@@ -9,6 +9,7 @@ const BASE_PATH =
 
 let pages = [
     { url: "", title: "Home" },
+    { url: "now/", title: "Now" },
     { url: "projects/", title: "Projects" },
     { url: "contact/", title: "Contact" },
     { url: "CV/", title: "CV" },
@@ -18,10 +19,14 @@ let pages = [
     { url: "https://github.com/lindbergryan04", title: "GitHub", external: true }
 ];
 
+// Treat directory URLs and their index.html files as the same page.
+const normalizePath = path => path.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
+
 // Only create navigation if we're not on a blog post page
 if (!document.body.classList.contains('blog-page') || !window.location.pathname.includes('/posts/')) {
     // --- Navigation Toolbar ---
     let nav = document.createElement("nav");
+    nav.setAttribute('aria-label', 'Main navigation');
     document.body.prepend(nav);
 
     // Prefix label
@@ -43,8 +48,9 @@ if (!document.body.classList.contains('blog-page') || !window.location.pathname.
             a.rel = "noopener noreferrer";
         }
 
-        if (a.host === location.host && a.pathname === location.pathname) {
+        if (a.host === location.host && normalizePath(a.pathname) === normalizePath(location.pathname)) {
             a.classList.add("current");
+            a.setAttribute('aria-current', 'page');
         }
 
         nav.appendChild(a);
@@ -65,7 +71,7 @@ if (!document.body.classList.contains('blog-page') || !window.location.pathname.
         const fullUrl = !p.url.startsWith("http") ? BASE_PATH + p.url : p.url;
         try {
             const u = new URL(fullUrl, location.origin);
-            return u.pathname === location.pathname;
+            return u.host === location.host && normalizePath(u.pathname) === normalizePath(location.pathname);
         } catch { return false; }
     });
     const pageName = currentPage ? currentPage.title.toUpperCase() : "UNKNOWN";

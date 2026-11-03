@@ -1,0 +1,323 @@
+/* A personal note using the site's existing desktop window components. */
+.now-page .section-watermark {
+  font-size: clamp(60px, 8vw, 110px);
+}
+
+.now-layout {
+  display: grid;
+  grid-template-columns: 215px minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  position: relative;
+}
+
+.now-sidebar {
+  position: sticky;
+  top: 24px;
+}
+
+.now-snapshot {
+  margin-bottom: 24px;
+}
+
+.now-date {
+  display: grid;
+  justify-items: center;
+  padding: 20px 16px 18px;
+  background: var(--bg-input);
+  border-bottom: 1px dashed var(--border);
+}
+
+.now-date-month {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+
+.now-date-day {
+  color: var(--accent);
+  font-size: 72px;
+  line-height: 1.2;
+  margin: 6px 0;
+}
+
+.now-date-year {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.25em;
+}
+
+.now-location {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  font-size: 12px;
+}
+
+.now-label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.now-contents h2 {
+  margin: 0 0 10px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.now-index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.now-index a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text);
+  font-size: 12px;
+}
+
+.now-index a > span:first-child {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.now-index-arrow {
+  margin-left: auto;
+  color: var(--accent);
+}
+
+.now-index a:hover {
+  background: var(--bg-panel);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.now-page a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.now-note {
+  margin: 0;
+  min-width: 0;
+}
+
+.now-note .window-titlebar {
+  padding-block: 6px;
+}
+
+.now-file-label {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  font-weight: normal;
+}
+
+.now-note-intro {
+  padding: 26px 30px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-input);
+}
+
+.now-note-intro h2 {
+  margin: 12px 0;
+  color: var(--text);
+  font-size: 21px;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-transform: none;
+}
+
+.now-note p {
+  max-width: 68ch;
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+.now-note p:last-child {
+  margin-bottom: 0;
+}
+
+.now-entry {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 18px;
+  padding: 26px 30px;
+  scroll-margin-top: 20px;
+  border-bottom: 1px dashed var(--border-light);
+}
+
+.now-entry:last-of-type {
+  border-bottom: none;
+}
+
+.now-entry:target,
+.now-entry:focus-visible {
+  background: var(--bg-input);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.now-entry:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.now-entry-number {
+  color: var(--accent);
+  border: 1px solid var(--border-light);
+  background: var(--bg-input);
+  align-self: start;
+  text-align: center;
+  padding: 3px 0;
+  font-size: 11px;
+}
+
+.now-entry h2 {
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  margin: 6px 0 12px;
+}
+
+.now-note-status {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 6px 12px;
+}
+
+.now-note-status a {
+  padding-block: 5px;
+}
+
+.now-colophon {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 24px 0 0 239px;
+  padding: 16px 0;
+  border-top: 1px dashed var(--border);
+}
+
+.now-colophon-mark {
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.now-colophon p {
+  margin: 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+@media (max-width: 1000px) {
+  .now-layout {
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .now-note-intro,
+  .now-entry {
+    padding: 22px;
+  }
+
+  .now-colophon {
+    margin-left: 198px;
+  }
+}
+
+@media (max-width: 768px) {
+  .now-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .now-sidebar {
+    position: static;
+  }
+
+  .now-snapshot {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    margin-bottom: 18px;
+  }
+
+  .now-snapshot .window-titlebar,
+  .now-snapshot .window-statusbar {
+    grid-column: 1 / -1;
+  }
+
+  .now-date {
+    padding: 12px 8px;
+    border-bottom: none;
+    border-right: 1px dashed var(--border);
+  }
+
+  .now-date-month {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .now-date-day {
+    font-size: 38px;
+    margin: 2px 0;
+  }
+
+  .now-date-year {
+    font-size: 9px;
+  }
+
+  .now-location {
+    align-content: center;
+  }
+
+  .now-index {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .now-index li:nth-child(odd) {
+    border-right: 1px solid var(--border-light);
+  }
+
+  .now-index a {
+    padding-inline: 10px;
+  }
+
+  .now-note-intro,
+  .now-entry {
+    padding: 20px 16px;
+  }
+
+  .now-note-intro h2 {
+    font-size: 18px;
+  }
+
+  .now-entry {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .now-file-label {
+    display: none;
+  }
+
+  .now-colophon {
+    margin-left: 0;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* Keep the shared fixed footer within a narrow screen. */
+  .now-page .status-bar .status-cell:nth-last-child(2) {
+    display: none;
+  }
+}
